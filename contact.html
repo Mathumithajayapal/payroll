@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - Payroll Processing Service</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><path fill='%232563eb' d='M64 32C28.7 32 0 60.7 0 96v320c0 35.3 28.7 64 64 64h384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm96 192a48 48 0 1 1 0-96 48 48 0 1 1 0 96zm176-48a48 48 0 1 1-96 0 48 48 0 1 1 96 0zm-80 144a48 48 0 1 1 0-96 48 48 0 1 1 0 96zm176-48a48 48 0 1 1-96 0 48 48 0 1 1 96 0z'/></svg>" type="image/svg+xml">
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+          }
+        }
+      }
+    };
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    body { font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important; }
+    /* Dark Mode Global Styles */
+    html.dark body { background-color: #0b1120 !important; color: #f1f5f9 !important; }
+    html.dark header { background-color: rgba(15, 23, 42, 0.95) !important; border-color: #1e293b !important; }
+    html.dark .bg-white { background-color: #1e293b !important; color: #f1f5f9 !important; border-color: #334155 !important; }
+    html.dark [class*="bg-white/"] { background-color: rgba(15, 23, 42, 0.92) !important; border-color: #334155 !important; }
+    html.dark .border-white { border-color: #1e293b !important; }
+    html.dark .bg-slate-50 { background-color: #0f172a !important; }
+    html.dark .bg-slate-100 { background-color: #1e293b !important; }
+    html.dark .bg-blue-50 { background-color: #1e293b !important; border-color: #334155 !important; }
+    html.dark .text-slate-900, html.dark .text-slate-800 { color: #f8fafc !important; }
+    html.dark .text-slate-700, html.dark .text-slate-600 { color: #cbd5e1 !important; }
+    html.dark .text-slate-500, html.dark .text-slate-400 { color: #94a3b8 !important; }
+    html.dark .border-slate-200, html.dark .border-slate-100, html.dark .border-slate-300 { border-color: #334155 !important; }
+    html.dark .divide-slate-200 > :not([hidden]) ~ :not([hidden]) { border-color: #334155 !important; }
+    html.dark #mobile-menu { background-color: #0f172a !important; border-color: #3b82f6 !important; color: #f1f5f9 !important; }
+    html.dark .dropdown-menu .bg-white { background-color: #1e293b !important; border-color: #334155 !important; }
+    html.dark .dropdown-menu a { color: #e2e8f0 !important; }
+    html.dark .dropdown-menu a:hover { background-color: #2563eb !important; color: #ffffff !important; }
+    html.dark footer { background-color: #0f172a !important; border-color: #1e293b !important; }
+    html.dark input, html.dark select, html.dark textarea { background-color: #0f172a !important; color: #f8fafc !important; border-color: #334155 !important; }
+    html.dark input:focus, html.dark select:focus, html.dark textarea:focus { background-color: #0f172a !important; color: #f8fafc !important; }
+    html.dark select option { background-color: #0f172a !important; color: #f8fafc !important; }
+
+    /* RTL Direction Styles */
+    html[dir="rtl"] { direction: rtl; text-align: right; }
+    html[dir="rtl"] .dropdown-menu.left-0 { left: auto !important; right: 0 !important; }
+    html[dir="rtl"] .dropdown-menu.right-0 { right: auto !important; left: 0 !important; }
+    html[dir="rtl"] .mr-1, html[dir="rtl"] .mr-2, html[dir="rtl"] .mr-3 { margin-right: 0 !important; margin-left: 0.5rem !important; }
+    html[dir="rtl"] .ml-1, html[dir="rtl"] .ml-2, html[dir="rtl"] .ml-3 { margin-left: 0 !important; margin-right: 0.5rem !important; }
+
+    /* Smooth Page Transitions & Scroll Reveal */
+    html { scroll-behavior: smooth; }
+    body {
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out !important;
+    }
+    body.page-loaded {
+      opacity: 1 !important;
+    }
+    body.page-fading-out {
+      opacity: 0 !important;
+    }
+    .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+    .reveal-on-scroll.is-revealed {
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans flex flex-col min-h-screen dark">
+
+  <!-- Navbar -->
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
+      <a href="index.html" class="flex items-center gap-2 text-2xl font-bold text-blue-700 dark:text-blue-400">
+        <i class="fas fa-file-invoice-dollar text-blue-600 dark:text-blue-400"></i>
+        <span>PayrollPro</span>
+      </a>
+      
+      <!-- Desktop Nav -->
+      <nav class="hidden xl:flex items-center gap-1 font-medium text-sm">
+        <div class="relative group">
+          <button type="button" class="dropdown-btn px-3 py-2 rounded-full hover:bg-blue-50 hover:text-blue-700 transition flex items-center">Home <i class="fas fa-caret-down ml-1 text-xs"></i></button>
+          <div class="dropdown-menu absolute left-0 top-full pt-1.5 hidden group-hover:block w-40 z-50">
+            <div class="bg-white border border-slate-200 rounded-xl shadow-xl overflow-hidden py-1">
+            <a href="index.html" class="block px-4 py-2 hover:bg-blue-600 hover:text-white text-slate-700 transition text-sm">Home1</a>
+            <a href="home2.html" class="block px-4 py-2 hover:bg-blue-600 hover:text-white text-slate-700 transition text-sm">Home2</a>
+          </div>
+          </div>
+        </div>
+        <a href="about.html" class="px-3 py-2 rounded-full hover:bg-blue-50 hover:text-blue-700 transition">About</a>
+        <a href="service.html" class="px-3 py-2 rounded-full hover:bg-blue-50 hover:text-blue-700 transition">Service</a>
+        <a href="blog.html" class="px-3 py-2 rounded-full hover:bg-blue-50 hover:text-blue-700 transition">Blog</a>
+        <a href="pricing.html" class="px-3 py-2 rounded-full hover:bg-blue-50 hover:text-blue-700 transition">Pricing</a>
+        <a href="resources.html" class="px-3 py-2 rounded-full hover:bg-blue-50 hover:text-blue-700 transition">Resource</a>
+        <a href="faq.html" class="px-3 py-2 rounded-full hover:bg-blue-50 hover:text-blue-700 transition">FAQ</a>
+        <a href="contact.html" class="px-3 py-2 rounded-full bg-blue-50 text-blue-700 font-semibold transition">Contact</a>
+        <div class="relative group">
+          <button type="button" class="dropdown-btn px-3 py-2 rounded-full hover:bg-blue-50 hover:text-blue-700 transition flex items-center">Dashboard <i class="fas fa-caret-down ml-1 text-xs"></i></button>
+          <div class="dropdown-menu absolute right-0 top-full pt-1.5 hidden group-hover:block w-44 z-50">
+            <div class="bg-white border border-slate-200 rounded-xl shadow-xl overflow-hidden py-1">
+              <a href="user.html" class="block px-4 py-2 hover:bg-blue-600 hover:text-white text-slate-700 transition text-sm">User Dashboard</a>
+
+
+              <a href="admin.html" class="block px-4 py-2 hover:bg-blue-600 hover:text-white text-slate-700 transition text-sm">Admin Dashboard</a>
+            </div>
+
+
+          </div>
+        </div>
+      </nav>
+
+      <!-- Actions -->
+      <div class="flex items-center gap-4">
+        <button id="dark-mode-toggle" title="Toggle Dark/Light Mode" class="w-9 h-9 rounded-full flex items-center justify-center text-slate-600 hover:text-blue-700 hover:bg-blue-50 transition text-lg"><i class="fas fa-sun text-amber-400"></i></button>
+        <button id="rtl-toggle" title="Toggle RTL/LTR" class="px-2.5 py-1 rounded-full border border-slate-300 text-slate-600 hover:text-blue-700 hover:border-blue-600 transition text-xs font-bold tracking-wider">RTL</button>
+        <a href="signin.html" class="hidden sm:inline-flex items-center justify-center px-5 py-2 border-2 border-blue-600 text-blue-600 font-bold rounded-full hover:bg-blue-600 hover:text-white transition">Log in</a>
+        <button id="hamburger-btn" class="xl:hidden text-2xl text-slate-700 hover:text-blue-700 transition">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Hamburger Menu Overlay -->
+  <div id="mobile-menu" class="fixed inset-y-0 right-0 w-4/5 max-w-sm bg-white shadow-2xl z-[100] transform translate-x-full transition-transform duration-300 flex flex-col border-l-4 border-blue-600">
+    <div class="p-6 flex justify-between items-center border-b border-slate-100">
+      <a href="index.html" class="flex items-center gap-2 text-xl font-bold text-blue-700 dark:text-blue-400">
+        <i class="fas fa-file-invoice-dollar text-blue-600 dark:text-blue-400"></i>
+        <span>PayrollPro</span>
+      </a>
+      <button id="close-menu-btn" class="text-2xl text-slate-500 hover:text-red-500"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="p-6 overflow-y-auto flex-grow flex flex-col gap-2">
+      <!-- Mobile Appearance Controls -->
+      <div class="flex items-center justify-between pb-4 mb-2 border-b border-slate-100">
+        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Appearance</span>
+        <div class="flex items-center gap-2">
+          <button class="mobile-dark-toggle px-3 py-1.5 rounded-xl border border-slate-200 text-xs font-semibold text-slate-700 flex items-center gap-1.5 hover:bg-slate-50 transition">
+            <i class="fas fa-sun text-amber-400"></i> <span>Light</span>
+          </button>
+          <button class="mobile-rtl-toggle px-3 py-1.5 rounded-xl border border-slate-200 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition">
+            RTL
+          </button>
+        </div>
+      </div>
+      <a href="index.html" class="px-4 py-3 rounded-xl border-2 border-slate-100 font-semibold text-slate-700 hover:bg-blue-50 hover:border-blue-600 transition">Home1</a>
+      <a href="home2.html" class="px-4 py-3 rounded-xl border-2 border-slate-100 font-semibold text-slate-700 hover:bg-blue-50 hover:border-blue-600 transition">Home2</a>
+      <a href="about.html" class="px-4 py-3 rounded-xl border-2 border-slate-100 font-semibold text-slate-700 hover:bg-blue-50 hover:border-blue-600 transition">About</a>
+      <a href="service.html" class="px-4 py-3 rounded-xl border-2 border-slate-100 font-semibold text-slate-700 hover:bg-blue-50 hover:border-blue-600 transition">Service</a>
+      <a href="blog.html" class="px-4 py-3 rounded-xl border-2 border-slate-100 font-semibold text-slate-700 hover:bg-blue-50 hover:border-blue-600 transition">Blog</a>
+      <a href="pricing.html" class="px-4 py-3 rounded-xl border-2 border-slate-100 font-semibold text-slate-700 hover:bg-blue-50 hover:border-blue-600 transition">Pricing</a>
+      <a href="resources.html" class="px-4 py-3 rounded-xl border-2 border-slate-100 font-semibold text-slate-700 hover:bg-blue-50 hover:border-blue-600 transition">Resource</a>
+      <a href="faq.html" class="px-4 py-3 rounded-xl border-2 border-slate-100 font-semibold text-slate-700 hover:bg-blue-50 hover:border-blue-600 transition">FAQ</a>
+      <a href="contact.html" class="px-4 py-3 rounded-xl bg-blue-50 border-2 border-blue-600 font-bold text-blue-700 transition">Contact</a>
+      <div class="mt-2 pt-2 border-t border-slate-200 flex flex-col gap-1">
+        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider px-2 py-1">Dashboards</span>
+        <a href="user.html" class="px-4 py-3 rounded-xl border-2 border-slate-100 font-semibold text-slate-700 hover:bg-blue-50 hover:border-blue-600 transition">User Dashboard</a>
+
+
+        <a href="admin.html" class="px-4 py-3 rounded-xl border-2 border-slate-100 font-semibold text-slate-700 hover:bg-blue-50 hover:border-blue-600 transition">Admin Dashboard</a>
+
+
+      </div>
+      <a href="signin.html" class="px-4 py-3 rounded-xl bg-blue-600 text-white font-bold mt-4 text-center hover:bg-blue-700 transition">Log In</a>
+    </div>
+  </div>
+  <div id="mobile-overlay" class="fixed inset-0 bg-black/60 z-[90] hidden opacity-0 transition-opacity duration-300"></div>
+
+  <!-- Hero Banner -->
+  <main class="flex-grow">
+    <section class="relative w-full min-h-[60vh] flex items-center bg-fixed bg-cover bg-center bg-no-repeat border-b-4 border-blue-600 py-20 sm:py-24 lg:py-28" style="background-image: url('images/payroll (8).jpg');">
+      <div class="absolute inset-0 bg-gradient-to-br from-blue-900/85 to-slate-900/90 z-10"></div>
+      <div class="relative z-20 max-w-4xl mx-auto text-center px-4 sm:px-6">
+        <span class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-blue-500/20 text-blue-200 border border-blue-400/30 font-bold text-sm mb-6 backdrop-blur-sm">
+          <i class="fas fa-headset"></i> We're Here to Help
+        </span>
+        <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight mb-6 drop-shadow-lg">
+          Get in Touch
+        </h1>
+        <p class="text-lg md:text-xl text-blue-100 mb-10 leading-relaxed max-w-2xl mx-auto drop-shadow-md">
+          Have questions about our payroll solutions, pricing, or compliance? Our team of HR and payroll experts is ready to assist you. Let's talk!
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
+          <a href="#contact-form" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-3.5 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-full shadow-lg shadow-blue-600/30 transition transform hover:-translate-y-1">
+            <i class="fas fa-paper-plane mr-2"></i> Send a Message
+          </a>
+          <a href="#contact-form" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-3.5 bg-transparent border-2 border-white text-white font-bold rounded-full hover:bg-white hover:text-slate-900 transition transform hover:-translate-y-1">
+            <i class="fas fa-calendar-check mr-2"></i> Book a Demo
+          </a>
+        </div>
+      </div>
+    </section>
+    
+    <!-- SECTION 1: Contact Information Cards -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-slate-900 mb-4">Direct Communication Lines</h2>
+        <p class="text-slate-500 text-lg max-w-2xl mx-auto">Choose the method that works best for you and our team will respond promptly.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 pt-4 items-stretch">
+        <!-- Card 1 -->
+        <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-200 text-center hover:shadow-lg transition-all duration-300 flex flex-col justify-between">
+          <div>
+            <div class="w-16 h-16 bg-blue-50 dark:bg-blue-900/40 rounded-full flex items-center justify-center mx-auto mb-6">
+              <i class="fas fa-phone-alt text-2xl text-blue-600 dark:text-blue-400"  style="transform: rotate(90deg);"
+></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-800 mb-3">Call Support</h3>
+            <p class="text-slate-500 mb-6 leading-relaxed">Available Monday to Friday, 9:00 AM - 6:00 PM IST for immediate assistance.</p>
+          </div>
+          <div>
+            <a href="tel:+9118001234567" class="inline-block px-6 py-2.5 bg-slate-50 dark:bg-slate-800 text-blue-700 dark:text-blue-400 font-semibold rounded-full border border-blue-100 dark:border-slate-700 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 dark:hover:text-white transition">
+              +91 1800 123 4567
+            </a>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-200 text-center hover:shadow-lg transition-all duration-300 relative transform md:-translate-y-4 flex flex-col justify-between">
+          <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-blue-600 text-white text-xs font-bold px-4 py-1 rounded-full uppercase tracking-wider shadow-md">Fastest</div>
+          <div>
+            <div class="w-16 h-16 bg-blue-50 dark:bg-blue-900/40 rounded-full flex items-center justify-center mx-auto mb-6 mt-2">
+              <i class="fas fa-envelope-open-text text-2xl text-blue-600 dark:text-blue-400"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-800 mb-3">Email Us</h3>
+            <p class="text-slate-500 mb-6 leading-relaxed">Send us your queries securely. We typically respond within 2-4 hours.</p>
+          </div>
+          <div>
+            <a href="mailto:support@payrollpro.in" class="inline-block px-6 py-2.5 bg-blue-600 text-white font-semibold rounded-full hover:bg-blue-700 transition shadow-md shadow-blue-600/20">
+              support@payrollpro.in
+            </a>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-200 text-center hover:shadow-lg transition-all duration-300 flex flex-col justify-between">
+          <div>
+            <div class="w-16 h-16 bg-blue-50 dark:bg-blue-900/40 rounded-full flex items-center justify-center mx-auto mb-6">
+              <i class="fas fa-building text-2xl text-blue-600 dark:text-blue-400"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-800 mb-3">Visit HQ</h3>
+            <p class="text-slate-500 mb-6 leading-relaxed">Schedule an in-person meeting with our payroll transition specialists.</p>
+          </div>
+          <div>
+            <a href="#map-section" class="inline-block px-6 py-2.5 bg-slate-50 dark:bg-slate-800 text-blue-700 dark:text-blue-400 font-semibold rounded-full border border-blue-100 dark:border-slate-700 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 dark:hover:text-white transition">
+              Get Directions
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: Contact Form -->
+    <section id="contact-form" class="bg-slate-900 py-20 relative overflow-hidden">
+      <div class="absolute top-0 right-0 -mr-20 -mt-20 w-72 h-72 rounded-full bg-blue-600 opacity-20 blur-3xl pointer-events-none"></div>
+      <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-72 h-72 rounded-full bg-blue-400 opacity-20 blur-3xl pointer-events-none"></div>
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="bg-white rounded-3xl p-8 md:p-12 shadow-2xl border border-slate-200">
+          <div class="text-center mb-10">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">Send Us a Message</h2>
+            <p class="text-slate-500">Fill out the form below and a representative will be in touch shortly.</p>
+          </div>
+          <form class="space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label class="block text-sm font-semibold text-slate-700 mb-2">Full Name <span class="text-red-500">*</span></label>
+                <input type="text" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition bg-slate-50 focus:bg-white" placeholder="e.g. Rahul Sharma" required>
+              </div>
+              <div>
+                <label class="block text-sm font-semibold text-slate-700 mb-2">Work Email <span class="text-red-500">*</span></label>
+                <input type="email" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition bg-slate-50 focus:bg-white" placeholder="rahul@company.com" required>
+              </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label class="block text-sm font-semibold text-slate-700 mb-2">Company Name</label>
+                <input type="text" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition bg-slate-50 focus:bg-white" placeholder="Your Organization">
+              </div>
+              <div>
+                <label class="block text-sm font-semibold text-slate-700 mb-2">Employee Count</label>
+                <select class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition bg-slate-50 focus:bg-white text-slate-600">
+                  <option value="">Select an option...</option>
+                  <option value="1-50">1 - 50 Employees</option>
+                  <option value="51-200">51 - 200 Employees</option>
+                  <option value="201+">201+ Employees</option>
+                </select>
+              </div>
+            </div>
+            <div>
+              <label class="block text-sm font-semibold text-slate-700 mb-2">How can we help? <span class="text-red-500">*</span></label>
+              <textarea rows="4" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition bg-slate-50 focus:bg-white resize-none" placeholder="Tell us about your payroll challenges..." required></textarea>
+            </div>
+            <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl shadow-lg shadow-blue-600/30 transition transform hover:-translate-y-1 text-lg flex justify-center items-center gap-2">
+              <span>Submit Inquiry</span> <i class="fas fa-paper-plane"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: Google Map Location -->
+    <section id="map-section" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div class="lg:col-span-5 space-y-8">
+          <div>
+            <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">Our Headquarters</h2>
+            <p class="text-slate-600 text-lg leading-relaxed">
+              We operate out of the primary tech hub, giving us the perfect base to support businesses nationwide with top-tier payroll technology.
+            </p>
+          </div>
+          <div class="bg-blue-50 dark:bg-slate-800/80 p-6 rounded-2xl border border-blue-100 dark:border-slate-700">
+            <div class="flex items-start gap-4 mb-4">
+              <i class="fas fa-map-marker-alt text-xl text-blue-600 dark:text-blue-400 mt-1"></i>
+              <div>
+                <h4 class="font-bold text-slate-900 dark:text-slate-100 text-lg">PayrollPro Tech Park</h4>
+                <p class="text-slate-600 dark:text-slate-300 mt-1">Tower B, 4th Floor, Electronic City Phase 1,<br>Bangalore, Karnataka 560100</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <i class="fas fa-clock text-xl text-blue-600 dark:text-blue-400 mt-1"></i>
+              <div>
+                <h4 class="font-bold text-slate-900 dark:text-slate-100 text-lg">Operating Hours</h4>
+                <p class="text-slate-600 dark:text-slate-300 mt-1">Monday - Friday: 9:00 AM - 6:00 PM<br>Saturday - Sunday: Closed</p>
+              </div>
+            </div>
+          </div>
+          <div>
+            <a href="https://maps.google.com/?q=Electronic+City+Phase+1+Bangalore" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-blue-600 dark:text-blue-400 font-bold hover:text-blue-800 dark:hover:text-blue-300 transition">
+              <span>Open in Google Maps</span> <i class="fas fa-external-link-alt text-sm"></i>
+            </a>
+          </div>
+        </div>
+        <div class="lg:col-span-7 h-[380px] sm:h-[450px] lg:h-[500px] w-full rounded-3xl overflow-hidden shadow-2xl border-4 border-white dark:border-slate-700 relative z-10">
+          <!-- Embedded map matching the dummy Bangalore address -->
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3889.314995955092!2d77.66270631482121!3d12.844917990938361!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae6c8a77b50033%3A0x8660a38d826a7e!2sElectronic%20City%20Phase%20I%2C%20Electronic%20City%2C%20Bengaluru%2C%20Karnataka!5e0!3m2!1sen!2sin!4v1680000000000!5m2!1sen!2sin" 
+            width="100%" 
+            height="100%" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: Quick FAQ -->
+    <section class="bg-blue-600 dark:bg-slate-900 py-20 text-white transition-colors duration-300">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <span class="bg-blue-500 dark:bg-blue-900/60 dark:border dark:border-blue-500/30 px-4 py-1 rounded-full text-sm font-bold tracking-wide uppercase shadow-sm">Quick Answers</span>
+          <h2 class="text-3xl md:text-4xl font-extrabold mt-6 mb-4">Before you reach out...</h2>
+          <p class="text-blue-100 dark:text-slate-400 text-lg">Here are some of the most common questions our team gets asked.</p>
+        </div>
+        <div class="space-y-4">
+          <div class="faq-item bg-blue-700/50 dark:bg-slate-800/80 rounded-2xl p-6 border border-blue-500/60 dark:border-slate-700 hover:bg-blue-700/70 dark:hover:bg-slate-800 transition cursor-pointer">
+            <h3 class="font-bold text-xl flex justify-between items-center text-white">Do you offer custom pricing for large enterprises? <i class="fas fa-plus text-blue-200 dark:text-blue-400 text-sm"></i></h3>
+            <p class="text-blue-100 dark:text-slate-300 mt-3 leading-relaxed hidden">Yes, for organizations with over 500 employees, we create bespoke pricing models that scale efficiently with your workforce.</p>
+          </div>
+          <div class="faq-item bg-blue-700/50 dark:bg-slate-800/80 rounded-2xl p-6 border border-blue-500/60 dark:border-slate-700 hover:bg-blue-700/70 dark:hover:bg-slate-800 transition cursor-pointer">
+            <h3 class="font-bold text-xl flex justify-between items-center text-white">How long does the onboarding process take? <i class="fas fa-plus text-blue-200 dark:text-blue-400 text-sm"></i></h3>
+            <p class="text-blue-100 dark:text-slate-300 mt-3 leading-relaxed hidden">Typically, full transition and data migration from your legacy system takes between 2 to 4 weeks depending on data complexity.</p>
+          </div>
+          <div class="faq-item bg-blue-700/50 dark:bg-slate-800/80 rounded-2xl p-6 border border-blue-500/60 dark:border-slate-700 hover:bg-blue-700/70 dark:hover:bg-slate-800 transition cursor-pointer">
+            <h3 class="font-bold text-xl flex justify-between items-center text-white">Is my company data secure with PayrollPro? <i class="fas fa-plus text-blue-200 dark:text-blue-400 text-sm"></i></h3>
+            <p class="text-blue-100 dark:text-slate-300 mt-3 leading-relaxed hidden">Absolutely. We use bank-level AES-256 encryption and are fully compliant with SOC 2 Type II and GDPR data privacy standards.</p>
+          </div>
+          <div class="text-center mt-8 pt-4">
+            <a href="faq.html" class="inline-flex items-center gap-2 text-white font-bold hover:text-blue-200 dark:hover:text-blue-400 transition">View all FAQs <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: Support SLA & Social Proof -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div class="bg-white rounded-[3rem] p-10 md:p-16 shadow-xl border border-slate-100 dark:border-slate-800 text-center relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-400 via-blue-600 to-blue-800"></div>
+        <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-6">Our Support Guarantee</h2>
+        <p class="text-slate-600 text-lg max-w-3xl mx-auto mb-12 leading-relaxed">
+          When you partner with us, you're never left in the dark. We pride ourselves on offering enterprise-grade support SLAs to keep your payroll running flawlessly.
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center divide-y sm:divide-y-0 sm:divide-x divide-slate-200 dark:divide-slate-700">
+          <div class="pt-6 sm:pt-0 sm:px-6">
+            <div class="text-4xl font-extrabold text-blue-600 dark:text-blue-400 mb-2">99.9%</div>
+            <h4 class="font-bold text-slate-800 text-lg mb-1">Uptime SLA</h4>
+            <p class="text-slate-500 text-sm">Guaranteed platform stability during peak payroll cycles.</p>
+          </div>
+          <div class="pt-6 sm:pt-0 sm:px-6">
+            <div class="text-4xl font-extrabold text-blue-600 dark:text-blue-400 mb-2">&lt; 1 Hr</div>
+            <h4 class="font-bold text-slate-800 text-lg mb-1">Response Time</h4>
+            <p class="text-slate-500 text-sm">Average ticket response time during standard business hours.</p>
+          </div>
+          <div class="pt-6 sm:pt-0 sm:px-6">
+            <div class="text-4xl font-extrabold text-blue-600 dark:text-blue-400 mb-2">24/7</div>
+            <h4 class="font-bold text-slate-800 text-lg mb-1">Emergency Support</h4>
+            <p class="text-slate-500 text-sm">Round-the-clock technical assistance for critical issues.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t border-slate-200 pt-16 pb-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+        <div>
+          <a href="index.html" class="flex items-center gap-2 text-2xl font-bold text-blue-700 dark:text-blue-400 mb-4">
+            <i class="fas fa-file-invoice-dollar text-blue-600 dark:text-blue-400"></i>
+            <span>PayrollPro</span>
+          </a>
+  
+          <p class="text-slate-500 text-sm leading-relaxed">
+            Reliable and automated payroll processing service ensuring your team gets paid accurately and on time, every time.
+          </p>
+        </div>
+        <div>
+          <h4 class="font-bold text-slate-800 uppercase tracking-wide mb-4 border-b-2 border-blue-600 inline-block pb-1">Quick Links</h4>
+          <ul class="space-y-3 text-sm text-slate-500">
+            <li><a href="service.html" class="hover:text-blue-600 transition">Our Services</a></li>
+            <li><a href="pricing.html" class="hover:text-blue-600 transition">Pricing Plans</a></li>
+            <li><a href="about.html" class="hover:text-blue-600 transition">About Us</a></li>
+            <li><a href="contact.html" class="hover:text-blue-600 transition">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-bold text-slate-800 uppercase tracking-wide mb-4 border-b-2 border-blue-600 inline-block pb-1">Resources</h4>
+          <ul class="space-y-3 text-sm text-slate-500">
+            <li><a href="faq.html" class="hover:text-blue-600 transition">Help & FAQ</a></li>
+            <li><a href="blog.html" class="hover:text-blue-600 transition">Company Blog</a></li>
+            <li><a href="#" class="hover:text-blue-600 transition">Terms of Service</a></li>
+            <li><a href="#" class="hover:text-blue-600 transition">Privacy Policy</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-bold text-slate-800 uppercase tracking-wide mb-4 border-b-2 border-blue-600 inline-block pb-1">Connect</h4>
+          <ul class="space-y-3 text-sm text-slate-500">
+            <li><a href="#" class="hover:text-blue-600 transition"><i class="fab fa-linkedin mr-2"></i> LinkedIn</a></li>
+            <li><a href="#" class="hover:text-blue-600 transition"><i class="fa-brands fa-x-twitter mr-2"></i> X</a></li>
+            <li><a href="#" class="hover:text-blue-600 transition"><i class="fab fa-facebook-f mr-2"></i> Facebook</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="text-center pt-8 border-t border-slate-100 text-sm text-slate-400">
+        © 2026 Payroll Processing Service. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <!-- JS for Hamburger Menu & FAQ Toggle -->
+  <script>
+    const menuBtn = document.getElementById('hamburger-btn');
+    const closeBtn = document.getElementById('close-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const overlay = document.getElementById('mobile-overlay');
+
+    function openMenu() {
+      mobileMenu.classList.remove('translate-x-full');
+      overlay.classList.remove('hidden');
+      setTimeout(() => overlay.classList.remove('opacity-0'), 10);
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+      mobileMenu.classList.add('translate-x-full');
+      overlay.classList.add('opacity-0');
+      setTimeout(() => overlay.classList.add('hidden'), 300);
+      document.body.style.overflow = '';
+    }
+
+    menuBtn.addEventListener('click', openMenu);
+    closeBtn.addEventListener('click', closeMenu);
+    overlay.addEventListener('click', closeMenu);
+
+    // Dropdown toggle logic
+    document.querySelectorAll('.dropdown-btn').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const menu = this.nextElementSibling;
+        const isBlock = menu.classList.contains('!block');
+        document.querySelectorAll('.dropdown-menu').forEach(m => m.classList.remove('!block'));
+        if (!isBlock) {
+          menu.classList.add('!block');
+        }
+      });
+    });
+    document.addEventListener('click', function() {
+      document.querySelectorAll('.dropdown-menu').forEach(m => m.classList.remove('!block'));
+    });
+
+    // Dark Mode and RTL Toggle System
+    let isDark = localStorage.getItem('payroll_theme') !== 'light';
+    let isRTL = localStorage.getItem('payroll_rtl') === 'enabled';
+
+    function applyDarkMode(enabled) {
+      if (enabled) {
+        document.documentElement.classList.add('dark');
+        document.body.classList.add('dark');
+        document.querySelectorAll('#dark-mode-toggle i, .mobile-dark-toggle i').forEach(icon => {
+          icon.className = 'fas fa-sun text-amber-400';
+        });
+        document.querySelectorAll('.mobile-dark-toggle span').forEach(s => s.textContent = 'Light');
+      } else {
+        document.documentElement.classList.remove('dark');
+        document.body.classList.remove('dark');
+        document.querySelectorAll('#dark-mode-toggle i, .mobile-dark-toggle i').forEach(icon => {
+          icon.className = 'fas fa-moon';
+        });
+        document.querySelectorAll('.mobile-dark-toggle span').forEach(s => s.textContent = 'Dark');
+      }
+      localStorage.setItem('payroll_theme', enabled ? 'dark' : 'light');
+      localStorage.setItem('payroll_dark', enabled ? 'enabled' : 'disabled');
+    }
+
+    function applyRTL(enabled) {
+      if (enabled) {
+        document.documentElement.setAttribute('dir', 'rtl');
+        document.body.classList.add('rtl');
+        document.querySelectorAll('#rtl-toggle, .mobile-rtl-toggle').forEach(btn => btn.textContent = 'LTR');
+      } else {
+        document.documentElement.setAttribute('dir', 'ltr');
+        document.body.classList.remove('rtl');
+        document.querySelectorAll('#rtl-toggle, .mobile-rtl-toggle').forEach(btn => btn.textContent = 'RTL');
+      }
+      localStorage.setItem('payroll_rtl', enabled ? 'enabled' : 'disabled');
+    }
+
+    applyDarkMode(isDark);
+    applyRTL(isRTL);
+
+    document.querySelectorAll('#dark-mode-toggle, .mobile-dark-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        isDark = !isDark;
+        applyDarkMode(isDark);
+      });
+    });
+
+    document.querySelectorAll('#rtl-toggle, .mobile-rtl-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        isRTL = !isRTL;
+        applyRTL(isRTL);
+      });
+    });
+    
+    // Quick inline logic for FAQ Accordion
+    document.querySelectorAll('.faq-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const text = item.querySelector('p');
+        const icon = item.querySelector('i');
+        text.classList.toggle('hidden');
+        if(text.classList.contains('hidden')) {
+          icon.classList.remove('fa-minus');
+          icon.classList.add('fa-plus');
+        } else {
+          icon.classList.remove('fa-plus');
+          icon.classList.add('fa-minus');
+        }
+      });
+    });
+
+    // Smooth Page Transitions & Scroll Reveal Animations
+    document.body.classList.add('page-loaded');
+
+    window.addEventListener('pageshow', () => {
+      document.body.classList.remove('page-fading-out');
+      document.body.classList.add('page-loaded');
+    });
+
+    // Intercept internal page link clicks for smooth fade-out
+    document.addEventListener('click', (e) => {
+      const link = e.target.closest('a');
+      if (!link) return;
+      const href = link.getAttribute('href');
+      if (!href) return;
+
+      if (
+        href.startsWith('#') ||
+        href.startsWith('javascript:') ||
+        href.startsWith('mailto:') ||
+        href.startsWith('tel:') ||
+        link.getAttribute('target') === '_blank' ||
+        link.hasAttribute('download') ||
+        href.startsWith('http://') ||
+        href.startsWith('https://')
+      ) {
+        return;
+      }
+
+      if (href.endsWith('.html') || (!href.includes(':') && !href.startsWith('#'))) {
+        e.preventDefault();
+        document.body.classList.remove('page-loaded');
+        document.body.classList.add('page-fading-out');
+        setTimeout(() => {
+          window.location.href = href;
+        }, 250);
+      }
+    });
+
+    // Scroll reveal for sections
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-revealed');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+      document.querySelectorAll('main > section, .reveal-on-scroll').forEach(sec => {
+        sec.classList.add('reveal-on-scroll');
+        observer.observe(sec);
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payroll Processing Service</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><path fill='%232563eb' d='M64 32C28.7 32 0 60.7 0 96v320c0 35.3 28.7 64 64 64h384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm96 192a48 48 0 1 1 0-96 48 48 0 1 1 0 96zm176-48a48 48 0 1 1-96 0 48 48 0 1 1 96 0zm-80 144a48 48 0 1 1 0-96 48 48 0 1 1 0 96zm176-48a48 48 0 1 1-96 0 48 48 0 1 1 96 0z'/></svg>" type="image/svg+xml">
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+          }
+        }
+      }
+    };
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    body { font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important; }
+    /* Dark Mode Global Styles */
+    html.dark body { background-color: #0b1120 !important; color: #f1f5f9 !important; }
+    html.dark header { background-color: rgba(15, 23, 42, 0.95) !important; border-color: #1e293b !important; }
+    html.dark .bg-white { background-color: #1e293b !important; color: #f1f5f9 !important; border-color: #334155 !important; }
+    html.dark [class*="bg-white/"] { background-color: rgba(15, 23, 42, 0.92) !important; border-color: #334155 !important; }
+    html.dark .border-white { border-color: #1e293b !important; }
+    html.dark .bg-slate-50 { background-color: #0f172a !important; }
+    html.dark .bg-slate-100 { background-color: #1e293b !important; }
+    html.dark .text-slate-900, html.dark .text-slate-800 { color: #f8fafc !important; }
+    html.dark .text-slate-700, html.dark .text-slate-600 { color: #cbd5e1 !important; }
+    html.dark .text-slate-500, html.dark .text-slate-400 { color: #94a3b8 !important; }
+    html.dark .border-slate-200, html.dark .border-slate-100, html.dark .border-slate-300 { border-color: #334155 !important; }
+    html.dark #mobile-menu { background-color: #0f172a !important; border-color: #3b82f6 !important; color: #f1f5f9 !important; }
+    html.dark .dropdown-menu .bg-white { background-color: #1e293b !important; border-color: #334155 !important; }
+    html.dark .dropdown-menu a { color: #e2e8f0 !important; }
+    html.dark .dropdown-menu a:hover { background-color: #2563eb !important; color: #ffffff !important; }
+    html.dark footer { background-color: #0f172a !important; border-color: #1e293b !important; }
+    html.dark input, html.dark select, html.dark textarea { background-color: #0f172a !important; color: #f8fafc !important; border-color: #334155 !important; }
+
+    /* RTL Direction Styles */
+    html[dir="rtl"] { direction: rtl; text-align: right; }
+    html[dir="rtl"] .dropdown-menu.left-0 { left: auto !important; right: 0 !important; }
+    html[dir="rtl"] .dropdown-menu.right-0 { right: auto !important; left: 0 !important; }
+    html[dir="rtl"] .mr-1, html[dir="rtl"] .mr-2, html[dir="rtl"] .mr-3 { margin-right: 0 !important; margin-left: 0.5rem !important; }
+    html[dir="rtl"] .ml-1, html[dir="rtl"] .ml-2, html[dir="rtl"] .ml-3 { margin-left: 0 !important; margin-right: 0.5rem !important; }
+
+    /* Smooth Page Transitions & Scroll Reveal */
+    html { scroll-behavior: smooth; }
+    body {
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out !important;
+    }
+    body.page-loaded {
+      opacity: 1 !important;
+    }
+    body.page-fading-out {
+      opacity: 0 !important;
+    }
+    .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+    .reveal-on-scroll.is-revealed {
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans flex flex-col min-h-screen dark">
+
+  <!-- Navbar -->
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
+      <a href="index.html" class="flex items-center gap-2 text-2xl font-bold text-blue-700 dark:text-blue-400">
+        <i class="fas fa-file-invoice-dollar text-blue-600 dark:text-blue-400"></i>
+        <span>PayrollPro</span>
+      </a>
+      
+      <!-- Desktop Nav -->
+      <nav class="hidden xl:flex items-center gap-1 font-medium text-sm">
+        <div class="relative group">
+          <button type="button" class="dropdown-btn px-3 py-2 rounded-full hover:bg-blue-50 hover:text-blue-700 transition flex items-center">Home <i class="fas fa-caret-down ml-1 text-xs"></i></button>
+          <div class="dropdown-menu absolute left-0 top-full pt-1.5 hidden group-hover:block w-40 z-50">
+            <div class="bg-white border border-slate-200 rounded-xl shadow-xl overflow-hidden py-1">
+              <a href="index.html" class="block px-4 py-2 hover:bg-blue-600 hover:text-white text-slate-700 transition text-sm">Home1</a>
+              <a href="home2.html" class="block px-4 py-2 hover:bg-blue-600 hover:text-white text-slate-700 transition text-sm">Home2</a>
+            </div>
+          </div>
+        </div>
+        <a href="about.html" class="px-3 py-2 rounded-full hover:bg-blue-50 hover:text-blue-700 transition">About</a>
+        <a href="service.html" class="px-3 py-2 rounded-full hover:bg-blue-50 hover:text-blue-700 transition">Service</a>
+        <a href="Blog.html" class="px-3 py-2 rounded-full hover:bg-blue-50 hover:text-blue-700 transition">Blog</a>
+        <a href="pricing.html" class="px-3 py-2 rounded-full hover:bg-blue-50 hover:text-blue-700 transition">Pricing</a>
+        <a href="resources.html" class="px-3 py-2 rounded-full hover:bg-blue-50 hover:text-blue-700 transition">Resource</a>
+        <a href="faq.html" class="px-3 py-2 rounded-full hover:bg-blue-50 hover:text-blue-700 transition">FAQ</a>
+        <a href="contact.html" class="px-3 py-2 rounded-full hover:bg-blue-50 hover:text-blue-700 transition">Contact</a>
+        <div class="relative group">
+          <button type="button" class="dropdown-btn px-3 py-2 rounded-full hover:bg-blue-50 hover:text-blue-700 transition flex items-center">Dashboard <i class="fas fa-caret-down ml-1 text-xs"></i></button>
+          <div class="dropdown-menu absolute right-0 top-full pt-1.5 hidden group-hover:block w-44 z-50">
+            <div class="bg-white border border-slate-200 rounded-xl shadow-xl overflow-hidden py-1">
+              <a href="user.html" class="block px-4 py-2 hover:bg-blue-600 hover:text-white text-slate-700 transition text-sm">User Dashboard</a>
+              <a href="admin.html" class="block px-4 py-2 hover:bg-blue-600 hover:text-white text-slate-700 transition text-sm">Admin Dashboard</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Actions -->
+      <div class="flex items-center gap-3">
+        <button id="dark-mode-toggle" title="Toggle Dark/Light Mode" class="w-9 h-9 rounded-full flex items-center justify-center text-slate-600 hover:text-blue-700 hover:bg-blue-50 transition text-lg">
+          <i class="fas fa-sun text-amber-400"></i>
+        </button>
+        <button id="rtl-toggle" title="Toggle RTL/LTR" class="px-2.5 py-1 rounded-full border border-slate-300 text-slate-600 hover:text-blue-700 hover:border-blue-600 transition text-xs font-bold tracking-wider">
+          RTL
+        </button>
+        <a href="signin.html" class="hidden sm:inline-flex items-center justify-center px-5 py-2 border-2 border-blue-600 text-blue-600 font-bold rounded-full hover:bg-blue-600 hover:text-white transition">Log in</a>
+        <button id="hamburger-btn" class="xl:hidden text-2xl text-slate-700 hover:text-blue-700 transition">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Hamburger Menu Overlay -->
+  <div id="mobile-menu" class="fixed inset-y-0 right-0 w-4/5 max-w-sm bg-white shadow-2xl z-[100] transform translate-x-full transition-transform duration-300 flex flex-col border-l-4 border-blue-600">
+    <div class="p-6 flex justify-between items-center border-b border-slate-100">
+      <a href="index.html" class="flex items-center gap-2 text-xl font-bold text-blue-700 dark:text-blue-400">
+        <i class="fas fa-file-invoice-dollar text-blue-600 dark:text-blue-400"></i>
+        <span>PayrollPro</span>
+      </a>
+      <button id="close-menu-btn" class="text-2xl text-slate-500 hover:text-red-500"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="p-6 overflow-y-auto flex-grow flex flex-col gap-2">
+      <!-- Mobile Appearance Controls -->
+      <div class="flex items-center justify-between pb-4 mb-2 border-b border-slate-100">
+        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Appearance</span>
+        <div class="flex items-center gap-2">
+          <button class="mobile-dark-toggle px-3 py-1.5 rounded-xl border border-slate-200 text-xs font-semibold text-slate-700 flex items-center gap-1.5 hover:bg-slate-50 transition">
+            <i class="fas fa-sun text-amber-400"></i> <span>Light</span>
+          </button>
+          <button class="mobile-rtl-toggle px-3 py-1.5 rounded-xl border border-slate-200 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition">
+            RTL
+          </button>
+        </div>
+      </div>
+      <a href="index.html" class="px-4 py-3 rounded-xl border-2 border-slate-100 font-semibold text-slate-700 hover:bg-blue-50 hover:border-blue-600 transition">Home1</a>
+      <a href="home2.html" class="px-4 py-3 rounded-xl border-2 border-slate-100 font-semibold text-slate-700 hover:bg-blue-50 hover:border-blue-600 transition">Home2</a>
+      <a href="about.html" class="px-4 py-3 rounded-xl border-2 border-slate-100 font-semibold text-slate-700 hover:bg-blue-50 hover:border-blue-600 transition">About</a>
+      <a href="service.html" class="px-4 py-3 rounded-xl border-2 border-slate-100 font-semibold text-slate-700 hover:bg-blue-50 hover:border-blue-600 transition">Service</a>
+      <a href="Blog.html" class="px-4 py-3 rounded-xl border-2 border-slate-100 font-semibold text-slate-700 hover:bg-blue-50 hover:border-blue-600 transition">Blog</a>
+      <a href="pricing.html" class="px-4 py-3 rounded-xl border-2 border-slate-100 font-semibold text-slate-700 hover:bg-blue-50 hover:border-blue-600 transition">Pricing</a>
+      <a href="resources.html" class="px-4 py-3 rounded-xl border-2 border-slate-100 font-semibold text-slate-700 hover:bg-blue-50 hover:border-blue-600 transition">Resource</a>
+      <a href="faq.html" class="px-4 py-3 rounded-xl border-2 border-slate-100 font-semibold text-slate-700 hover:bg-blue-50 hover:border-blue-600 transition">FAQ</a>
+      <a href="contact.html" class="px-4 py-3 rounded-xl border-2 border-slate-100 font-semibold text-slate-700 hover:bg-blue-50 hover:border-blue-600 transition">Contact</a>
+      <div class="mt-2 pt-2 border-t border-slate-200 flex flex-col gap-1">
+        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider px-2 py-1">Dashboards</span>
+        <a href="user.html" class="px-4 py-3 rounded-xl border-2 border-slate-100 font-semibold text-slate-700 hover:bg-blue-50 hover:border-blue-600 transition">User Dashboard</a>
+        <a href="admin.html" class="px-4 py-3 rounded-xl border-2 border-slate-100 font-semibold text-slate-700 hover:bg-blue-50 hover:border-blue-600 transition">Admin Dashboard</a>
+      </div>
+      <a href="signin.html" class="px-4 py-3 rounded-xl bg-blue-600 text-white font-bold mt-4 text-center hover:bg-blue-700 transition">Log In</a>
+    </div>
+  </div>
+  <div id="mobile-overlay" class="fixed inset-0 bg-black/60 z-[90] hidden opacity-0 transition-opacity duration-300"></div>
+
+  <!-- Hero Banner -->
+  <main class="flex-grow">
+    <!-- Hero section with bg-fixed for the parallax effect -->
+    <section class="relative w-full min-h-[80vh] flex items-center bg-fixed bg-cover bg-center bg-no-repeat border-b-4 border-blue-600 py-20 sm:py-24 lg:py-28" style="background-image: url('images/payroll (1).jpg');">
+      <div class="absolute inset-0 bg-gradient-to-br from-blue-900/85 to-slate-900/90 z-10"></div>
+      <div class="relative z-20 max-w-4xl mx-auto text-center px-4 sm:px-6">
+        <span class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-blue-500/20 text-blue-200 border border-blue-400/30 font-bold text-sm mb-6 backdrop-blur-sm">
+          <i class="fas fa-check-circle"></i> Seamless Salary Management
+        </span>
+        <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight mb-6 drop-shadow-lg">
+          Automated Payroll Processing Service
+        </h1>
+        <p class="text-lg md:text-xl text-blue-100 mb-10 leading-relaxed max-w-2xl mx-auto drop-shadow-md">
+          Simplify your HR workflow with secure, tax-compliant, and on-time salary disbursements. Manage employee benefits and compliance instantly from your dashboard.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
+          <a href="#services-grid" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-3.5 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-full shadow-lg shadow-blue-600/30 transition transform hover:-translate-y-1">
+            <i class="fas fa-rocket mr-2"></i> Get Started
+          </a>
+          <a href="contact.html" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-3.5 bg-transparent border-2 border-white text-white font-bold rounded-full hover:bg-white hover:text-slate-900 transition transform hover:-translate-y-1">
+            <i class="fas fa-calendar-alt mr-2"></i> Book a Demo
+          </a>
+        </div>
+      </div>
+    </section>
+    <!-- SECTION 1: Core Payroll Features -->
+    <section id="services-grid" class="py-20 bg-slate-50 border-b border-slate-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <span class="text-blue-600 font-bold text-sm uppercase tracking-wider bg-blue-50 px-4 py-1.5 rounded-full border border-blue-200 inline-block mb-3">
+            Core Capabilities
+          </span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-4">
+            Everything You Need for Effortless Payroll
+          </h2>
+          <p class="text-slate-600 text-base sm:text-lg leading-relaxed">
+            Eliminate spreadsheets and manual errors with our all-in-one automated payroll engine built for modern businesses.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Feature Card 1 -->
+          <div class="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm hover:shadow-xl hover:border-blue-400 transition-all duration-300 group">
+            <div class="w-14 h-14 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center text-2xl mb-6 group-hover:bg-blue-600 group-hover:text-white transition duration-300">
+              <i class="fas fa-calculator"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition">
+              Automated Salary Calculations
+            </h3>
+            <p class="text-slate-500 text-sm leading-relaxed mb-4">
+              Instantly compute gross-to-net pay including basic salary, HRA, bonuses, overtime, custom allowances, and deductions.
+            </p>
+            <div class="flex items-center text-blue-600 font-semibold text-sm">
+              <span>Zero Calculation Errors</span>
+              <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition"></i>
+            </div>
+          </div>
+
+          <!-- Feature Card 2 -->
+          <div class="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm hover:shadow-xl hover:border-blue-400 transition-all duration-300 group">
+            <div class="w-14 h-14 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-2xl mb-6 group-hover:bg-indigo-600 group-hover:text-white transition duration-300">
+              <i class="fas fa-file-invoice-dollar"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-indigo-600 transition">
+              Statutory Tax Compliance
+            </h3>
+            <p class="text-slate-500 text-sm leading-relaxed mb-4">
+              Automated deductions for Provident Fund (PF), ESI, Professional Tax (PT), and TDS with pre-filled challan generation.
+            </p>
+            <div class="flex items-center text-indigo-600 font-semibold text-sm">
+              <span>100% Legal Compliance</span>
+              <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition"></i>
+            </div>
+          </div>
+
+          <!-- Feature Card 3 -->
+          <div class="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm hover:shadow-xl hover:border-blue-400 transition-all duration-300 group">
+            <div class="w-14 h-14 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-2xl mb-6 group-hover:bg-emerald-600 group-hover:text-white transition duration-300">
+              <i class="fas fa-money-check-alt"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-emerald-600 transition">
+              One-Click Direct Deposits
+            </h3>
+            <p class="text-slate-500 text-sm leading-relaxed mb-4">
+              Batch pay your entire team directly to their accounts across all major banks with automatic NEFT/RTGS transaction tracking.
+            </p>
+            <div class="flex items-center text-emerald-600 font-semibold text-sm">
+              <span>Instant Bank Transfers</span>
+              <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition"></i>
+            </div>
+          </div>
+
+          <!-- Feature Card 4 -->
+          <div class="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm hover:shadow-xl hover:border-blue-400 transition-all duration-300 group">
+            <div class="w-14 h-14 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center text-2xl mb-6 group-hover:bg-amber-600 group-hover:text-white transition duration-300">
+              <i class="fas fa-user-shield"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-amber-600 transition">
+              Employee Self-Service (ESS)
+            </h3>
+            <p class="text-slate-500 text-sm leading-relaxed mb-4">
+              Empower employees to download encrypted PDF payslips, submit tax declarations and track reimbursement claims.
+            </p>
+            <div class="flex items-center text-amber-600 font-semibold text-sm">
+              <span>24/7 Mobile & Web Portal</span>
+              <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition"></i>
+            </div>
+          </div>
+
+          <!-- Feature Card 5 -->
+          <div class="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm hover:shadow-xl hover:border-blue-400 transition-all duration-300 group">
+            <div class="w-14 h-14 rounded-2xl bg-cyan-50 text-cyan-600 flex items-center justify-center text-2xl mb-6 group-hover:bg-cyan-600 group-hover:text-white transition duration-300">
+              <i class="fas fa-clock"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-cyan-600 transition">
+              Time & Attendance Sync
+            </h3>
+            <p class="text-slate-500 text-sm leading-relaxed mb-4">
+              Directly synchronize biometric logs, leave requests, shift rosters, and holidays with zero manual attendance entry required.
+            </p>
+            <div class="flex items-center text-cyan-600 font-semibold text-sm">
+              <span>Biometric API Integration</span>
+              <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition"></i>
+            </div>
+          </div>
+
+          <!-- Feature Card 6 -->
+          <div class="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm hover:shadow-xl hover:border-blue-400 transition-all duration-300 group">
+            <div class="w-14 h-14 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center text-2xl mb-6 group-hover:bg-rose-600 group-hover:text-white transition duration-300">
+              <i class="fas fa-chart-pie"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-rose-600 transition">
+              Audit Trails & Analytics
+            </h3>
+            <p class="text-slate-500 text-sm leading-relaxed mb-4">
+              Export deep financial reports, CTC variance analyses, and general ledger files compatible with Tally, QuickBooks, and Zoho Books.
+            </p>
+            <div class="flex items-center text-rose-600 font-semibold text-sm">
+              <span>Instant Ledger Exports</span>
+              <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: Interactive Analytics & Live Dashboard Showcase (IMAGE SECTION 1) -->
+    <section class="py-20 bg-white overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <!-- Text column -->
+          <div class="lg:col-span-6 space-y-6">
+            <span class="text-blue-600 font-bold text-sm uppercase tracking-wider bg-blue-50 px-4 py-1.5 rounded-full border border-blue-200 inline-block">
+              Interactive Dashboard
+            </span>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
+              Real-Time Visibility Into Every Dollar Disbursed
+            </h2>
+            <p class="text-slate-600 text-base sm:text-lg leading-relaxed">
+              Gain complete transparency across departments, salary grades, and regional tax brackets. Monitor compensation trends, overtime surges, and compliance filings from a unified central console.
+            </p>
+
+            <div class="space-y-4 pt-2">
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center flex-shrink-0 mt-1">
+                  <i class="fas fa-bolt text-lg"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-slate-900 text-base">Instant Pre-Run Validation</h4>
+                  <p class="text-slate-500 text-sm">Automated reconciliation highlights anomalies before bank disbursements are finalized.</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center flex-shrink-0 mt-1">
+                  <i class="fas fa-sliders-h text-lg"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-slate-900 text-base">Flexible Pay Schedules</h4>
+                  <p class="text-slate-500 text-sm">Support weekly, bi-weekly, and monthly payroll schedules with custom bonus incentives.</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center flex-shrink-0 mt-1">
+                  <i class="fas fa-file-export text-lg"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-slate-900 text-base">One-Click Accounting Sync</h4>
+                  <p class="text-slate-500 text-sm">Automatic journal entries directly pushed into your enterprise ERP and accounting software.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="pt-4 flex flex-wrap gap-4">
+              <a href="service.html" class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-full shadow-md shadow-blue-600/20 transition">
+                Explore All Features
+              </a>
+              <a href="pricing.html" class="px-6 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-full transition">
+                View Pricing Plans
+              </a>
+            </div>
+          </div>
+
+          <!-- Image & Mockup column -->
+          <div class="lg:col-span-6 relative">
+            <div class="relative mx-auto rounded-3xl overflow-hidden shadow-2xl border-4 border-slate-100 group">
+              <!-- High resolution image showing financial dashboard & modern business analytics -->
+              <img 
+                src="images/payroll (7).jpg" 
+                alt="PayrollPro Analytics Dashboard" 
+                class="w-full h-[420px] object-cover group-hover:scale-105 transition-transform duration-700"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent"></div>
+              
+              <!-- Floating Pill 1 -->
+              <div class="absolute top-6 left-6 bg-white/95 backdrop-blur-md px-4 py-3 rounded-2xl shadow-xl border border-slate-100 flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-emerald-500 text-white flex items-center justify-center font-bold">
+                  <i class="fas fa-check"></i>
+                </div>
+                <div>
+                  <div class="text-xs text-slate-400 font-medium">Monthly Disbursed</div>
+                  <div class="text-sm font-extrabold text-slate-800">₹48,250,000 • 100% On-Time</div>
+                </div>
+              </div>
+
+              <!-- Floating Pill 2 -->
+              <div class="absolute bottom-6 right-6 bg-white/95 backdrop-blur-md px-5 py-3 rounded-2xl shadow-xl border border-slate-100 flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center">
+                  <i class="fas fa-shield-alt text-base"></i>
+                </div>
+                <div>
+                  <div class="text-xs text-slate-400 font-medium">Compliance Score</div>
+                  <div class="text-sm font-extrabold text-slate-800">99.98% Tax Accuracy</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: 4-Step Simplified Workflow -->
+    <section class="py-20 bg-slate-900 text-white relative overflow-hidden">
+      <div class="absolute top-0 right-0 -mr-20 -mt-20 w-80 h-80 rounded-full bg-blue-600 opacity-20 blur-3xl pointer-events-none"></div>
+      <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-blue-400 opacity-20 blur-3xl pointer-events-none"></div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <span class="text-blue-400 font-bold text-sm uppercase tracking-wider bg-blue-900/60 border border-blue-500/30 px-4 py-1.5 rounded-full inline-block mb-3">
+            Simple 4-Step Process
+          </span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-4">
+            How PayrollPro Works in 4 Simple Steps
+          </h2>
+          <p class="text-slate-300 text-base sm:text-lg">
+            Say goodbye to month-end chaos. Complete your organization's entire payroll cycle in under 15 minutes.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <!-- Step 1 -->
+          <div class="bg-slate-800/80 backdrop-blur-sm border border-slate-700/60 rounded-3xl p-6 relative hover:border-blue-500 transition duration-300">
+            <div class="text-4xl font-black text-blue-500/30 mb-4">01</div>
+            <div class="w-12 h-12 rounded-xl bg-blue-600 text-white flex items-center justify-center text-xl mb-4 shadow-lg shadow-blue-600/30">
+              <i class="fas fa-file-import"></i>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-2">Sync Attendance Data</h3>
+            <p class="text-slate-400 text-sm leading-relaxed">
+              Auto-fetch biometric entries, approved leave requests, and overtime hours directly from your HR systems.
+            </p>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="bg-slate-800/80 backdrop-blur-sm border border-slate-700/60 rounded-3xl p-6 relative hover:border-blue-500 transition duration-300">
+            <div class="text-4xl font-black text-blue-500/30 mb-4">02</div>
+            <div class="w-12 h-12 rounded-xl bg-blue-600 text-white flex items-center justify-center text-xl mb-4 shadow-lg shadow-blue-600/30">
+              <i class="fas fa-cogs"></i>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-2">Automated Computation</h3>
+            <p class="text-slate-400 text-sm leading-relaxed">
+              Our smart algorithms compute earnings, statutory deductions, tax withholdings, and loans with zero manual formulas.
+            </p>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="bg-slate-800/80 backdrop-blur-sm border border-slate-700/60 rounded-3xl p-6 relative hover:border-blue-500 transition duration-300">
+            <div class="text-4xl font-black text-blue-500/30 mb-4">03</div>
+            <div class="w-12 h-12 rounded-xl bg-blue-600 text-white flex items-center justify-center text-xl mb-4 shadow-lg shadow-blue-600/30">
+              <i class="fas fa-search-dollar"></i>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-2">Audit & Dual Approval</h3>
+            <p class="text-slate-400 text-sm leading-relaxed">
+              Automated anomaly detection alerts you to discrepancies. Review summary registers and authorize with multi-tier approval.
+            </p>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="bg-slate-800/80 backdrop-blur-sm border border-slate-700/60 rounded-3xl p-6 relative hover:border-blue-500 transition duration-300">
+            <div class="text-4xl font-black text-blue-500/30 mb-4">04</div>
+            <div class="w-12 h-12 rounded-xl bg-blue-600 text-white flex items-center justify-center text-xl mb-4 shadow-lg shadow-blue-600/30">
+              <i class="fas fa-paper-plane"></i>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-2">Disburse & Notify</h3>
+            <p class="text-slate-400 text-sm leading-relaxed">
+              Initiate direct batch payouts with your partner bank. Encrypted payslips are instantly dispatched via email and mobile app.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: Security & Compliance Spotlight (IMAGE SECTION 2) -->
+    <section class="py-20 bg-slate-50 border-b border-slate-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <!-- Image column on the left -->
+          <div class="lg:col-span-6 order-2 lg:order-1 relative">
+            <div class="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white group">
+              <!-- High-resolution corporate finance / enterprise security image -->
+              <img 
+                src="images/payroll (2).jpg" 
+                alt="Enterprise Security and Compliance" 
+                class="w-full h-[440px] object-cover group-hover:scale-105 transition-transform duration-700"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent"></div>
+
+              <!-- Security Badges inside Image -->
+              <div class="absolute bottom-6 left-6 right-6 p-4 rounded-2xl bg-white/95 backdrop-blur-md shadow-lg border border-slate-100 flex flex-wrap items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold">
+                    <i class="fas fa-lock"></i>
+                  </div>
+                  <div>
+                    <div class="text-xs text-slate-400 font-semibold uppercase">Security Standard</div>
+                    <div class="text-sm font-extrabold text-slate-900">256-Bit SSL/TLS Encryption</div>
+                  </div>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="px-3 py-1 rounded-full bg-emerald-100 text-emerald-700 font-bold text-xs">
+                    <i class="fas fa-certificate mr-1"></i> ISO 27001
+                  </span>
+                  <span class="px-3 py-1 rounded-full bg-blue-100 text-blue-700 font-bold text-xs">
+                    <i class="fas fa-shield-alt mr-1"></i> SOC-2 Type II
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Content on the right -->
+          <div class="lg:col-span-6 order-1 lg:order-2 space-y-6">
+            <span class="text-blue-600 font-bold text-sm uppercase tracking-wider bg-blue-50 px-4 py-1.5 rounded-full border border-blue-200 inline-block">
+              Bank-Grade Security
+            </span>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
+              Uncompromising Security & 100% Regulatory Protection
+            </h2>
+            <p class="text-slate-600 text-base sm:text-lg leading-relaxed">
+              We understand that payroll involves your company's most sensitive financial data. Our platform adheres to rigorous international security standards and labor law regulations.
+            </p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-2">
+              <div class="p-5 bg-white rounded-2xl border border-slate-200 shadow-sm">
+                <i class="fas fa-user-lock text-2xl text-blue-600 mb-3 block"></i>
+                <h4 class="font-bold text-slate-800 text-base mb-1">Role-Based Access</h4>
+                <p class="text-slate-500 text-xs leading-relaxed">Granular permissions ensure HR, accountants, and executives see only what is permitted.</p>
+              </div>
+
+              <div class="p-5 bg-white rounded-2xl border border-slate-200 shadow-sm">
+                <i class="fas fa-balance-scale text-2xl text-blue-600 mb-3 block"></i>
+                <h4 class="font-bold text-slate-800 text-base mb-1">Labor Law Updates</h4>
+                <p class="text-slate-500 text-xs leading-relaxed">Statutory slabs and compliance requirements auto-update as soon as laws are gazetted.</p>
+              </div>
+
+              <div class="p-5 bg-white rounded-2xl border border-slate-200 shadow-sm">
+                <i class="fas fa-history text-2xl text-blue-600 mb-3 block"></i>
+                <h4 class="font-bold text-slate-800 text-base mb-1">Immutable Audit Trails</h4>
+                <p class="text-slate-500 text-xs leading-relaxed">Every modification, edit, and disbursement approval is timestamped and recorded.</p>
+              </div>
+
+              <div class="p-5 bg-white rounded-2xl border border-slate-200 shadow-sm">
+                <i class="fas fa-server text-2xl text-blue-600 mb-3 block"></i>
+                <h4 class="font-bold text-slate-800 text-base mb-1">Automated Backups</h4>
+                <p class="text-slate-500 text-xs leading-relaxed">Continuous encrypted off-site cloud backups ensure 99.99% uptime and zero data loss.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: Client Testimonials & High-Impact CTA (IMAGE SECTION 3) -->
+    <section class="py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Section Header -->
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <span class="text-blue-600 font-bold text-sm uppercase tracking-wider bg-blue-50 px-4 py-1.5 rounded-full border border-blue-200 inline-block mb-3">
+            Social Proof
+          </span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-4">
+            Trusted by 2,500+ Fast-Growing Organizations
+          </h2>
+          <p class="text-slate-600 text-base sm:text-lg">
+            See how HR teams, payroll executives, and CFOs have revolutionized their pay cycles with PayrollPro.
+          </p>
+        </div>
+
+        <!-- Testimonial Cards Grid with Real Client Photos -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+          <!-- Testimonial 1 -->
+          <div class="bg-slate-50 rounded-3xl p-8 border border-slate-200 shadow-sm flex flex-col justify-between hover:shadow-lg transition">
+            <div>
+              <div class="flex text-amber-400 mb-4 gap-1 text-sm">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+              </div>
+              <p class="text-slate-700 text-sm leading-relaxed mb-6 italic">
+                "PayrollPro reduced our month-end payroll cycle from 4 days to literally 25 minutes. The automated PF, ESI, and TDS calculations give us complete confidence."
+              </p>
+            </div>
+            <div class="flex items-center gap-4 pt-4 border-t border-slate-200">
+              <img 
+                src="images/about3.jpg" 
+                alt="Ananya Roy" 
+                class="w-12 h-12 rounded-full object-cover border-2 border-blue-600"
+              />
+              <div>
+                <div class="font-bold text-slate-900 text-sm">Ananya Roy</div>
+                <div class="text-xs text-slate-500">VP of People • FinPulse Tech</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimonial 2 -->
+          <div class="bg-slate-50 rounded-3xl p-8 border border-slate-200 shadow-sm flex flex-col justify-between hover:shadow-lg transition">
+            <div>
+              <div class="flex text-amber-400 mb-4 gap-1 text-sm">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+              </div>
+              <p class="text-slate-700 text-sm leading-relaxed mb-6 italic">
+                "Managing salaries for over 500 team members across 5 branches used to be prone to discrepancies. With PayrollPro, we have had zero compliance penalties."
+              </p>
+            </div>
+            <div class="flex items-center gap-4 pt-4 border-t border-slate-200">
+              <img 
+                src="images/about4.jpg" 
+                alt="Vikram Sethi" 
+                class="w-12 h-12 rounded-full object-cover border-2 border-blue-600"
+              />
+              <div>
+                <div class="font-bold text-slate-900 text-sm">Vikram Sethi</div>
+                <div class="text-xs text-slate-500">Chief Financial Officer • Nexa Retail</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimonial 3 -->
+          <div class="bg-slate-50 rounded-3xl p-8 border border-slate-200 shadow-sm flex flex-col justify-between hover:shadow-lg transition">
+            <div>
+              <div class="flex text-amber-400 mb-4 gap-1 text-sm">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+              </div>
+              <p class="text-slate-700 text-sm leading-relaxed mb-6 italic">
+                "Our employees love the self-service mobile portal. They can download Form 16, submit investment proofs, and access payslips anytime without messaging HR."
+              </p>
+            </div>
+            <div class="flex items-center gap-4 pt-4 border-t border-slate-200">
+              <img 
+                src="images/about5.jpg" 
+                alt="Priya Menon" 
+                class="w-12 h-12 rounded-full object-cover border-2 border-blue-600"
+              />
+              <div>
+                <div class="font-bold text-slate-900 text-sm">Priya Menon</div>
+                <div class="text-xs text-slate-500">HR Operations Director • ScaleUp Global</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- High Conversion Call-To-Action Banner -->
+        <div class="relative bg-gradient-to-r from-blue-700 to-indigo-800 rounded-3xl p-8 sm:p-14 text-white text-center overflow-hidden shadow-2xl">
+          <div class="absolute -top-10 -right-10 w-64 h-64 bg-white/10 rounded-full blur-2xl pointer-events-none"></div>
+          <div class="absolute -bottom-10 -left-10 w-64 h-64 bg-blue-500/20 rounded-full blur-2xl pointer-events-none"></div>
+          
+          <div class="relative z-10 max-w-2xl mx-auto space-y-6">
+            <h3 class="text-3xl sm:text-4xl font-extrabold tracking-tight">
+              Ready to Upgrade Your Payroll Experience?
+            </h3>
+            <p class="text-blue-100 text-base sm:text-lg">
+              Start your 14-day free trial today. No setup fees, no credit card required. Experience flawless automated salary processing.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4 pt-2">
+              <a href="signup.html" class="px-8 py-3.5 bg-white text-blue-700 font-extrabold rounded-full shadow-lg hover:bg-blue-50 transition transform hover:-translate-y-0.5">
+                Start Free 14-Day Trial
+              </a>
+              <a href="contact.html" class="px-8 py-3.5 bg-blue-600/40 border-2 border-white/80 text-white font-extrabold rounded-full hover:bg-white hover:text-blue-700 transition transform hover:-translate-y-0.5">
+                Talk to an Expert
+              </a>
+            </div>
+            <div class="text-xs text-blue-200 flex flex-wrap justify-center items-center gap-6 pt-3">
+              <span><i class="fas fa-check-circle mr-1"></i> Quick 5-minute setup</span>
+              <span><i class="fas fa-check-circle mr-1"></i> Cancel anytime</span>
+              <span><i class="fas fa-check-circle mr-1"></i> Free expert migration</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t border-slate-200 pt-16 pb-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+        <div>
+          <a href="index.html" class="flex items-center gap-2 text-2xl font-bold text-blue-700 dark:text-blue-400 mb-4">
+            <i class="fas fa-file-invoice-dollar text-blue-600 dark:text-blue-400"></i>
+            <span>PayrollPro</span>
+          </a>
+          <p class="text-slate-500 text-sm leading-relaxed">
+            Reliable and automated payroll processing service ensuring your team gets paid accurately and on time, every time.
+          </p>
+        </div>
+        <div>
+          <h4 class="font-bold text-slate-800 uppercase tracking-wide mb-4 border-b-2 border-blue-600 inline-block pb-1">Quick Links</h4>
+          <ul class="space-y-3 text-sm text-slate-500">
+            <li><a href="service.html" class="hover:text-blue-600 transition">Our Services</a></li>
+            <li><a href="pricing.html" class="hover:text-blue-600 transition">Pricing Plans</a></li>
+            <li><a href="about.html" class="hover:text-blue-600 transition">About Us</a></li>
+            <li><a href="contact.html" class="hover:text-blue-600 transition">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-bold text-slate-800 uppercase tracking-wide mb-4 border-b-2 border-blue-600 inline-block pb-1">Resources</h4>
+          <ul class="space-y-3 text-sm text-slate-500">
+            <li><a href="faq.html" class="hover:text-blue-600 transition">Help & FAQ</a></li>
+            <li><a href="Blog.html" class="hover:text-blue-600 transition">Company Blog</a></li>
+            <li><a href="#" class="hover:text-blue-600 transition">Terms of Service</a></li>
+            <li><a href="#" class="hover:text-blue-600 transition">Privacy Policy</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-bold text-slate-800 uppercase tracking-wide mb-4 border-b-2 border-blue-600 inline-block pb-1">Connect</h4>
+          <ul class="space-y-3 text-sm text-slate-500">
+            <li><a href="#" class="hover:text-blue-600 transition"><i class="fab fa-linkedin mr-2"></i> LinkedIn</a></li>
+            <li><a href="#" class="hover:text-blue-600 transition"><i class="fa-brands fa-x-twitter mr-2"></i> X</a></li>
+            <li><a href="#" class="hover:text-blue-600 transition"><i class="fab fa-facebook-f mr-2"></i> Facebook</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="text-center pt-8 border-t border-slate-100 text-sm text-slate-400">
+        © 2026 Payroll Processing Service. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <!-- JS for Hamburger Menu -->
+  <script>
+    const menuBtn = document.getElementById('hamburger-btn');
+    const closeBtn = document.getElementById('close-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const overlay = document.getElementById('mobile-overlay');
+
+    function openMenu() {
+      mobileMenu.classList.remove('translate-x-full');
+      overlay.classList.remove('hidden');
+      setTimeout(() => overlay.classList.remove('opacity-0'), 10);
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+      mobileMenu.classList.add('translate-x-full');
+      overlay.classList.add('opacity-0');
+      setTimeout(() => overlay.classList.add('hidden'), 300);
+      document.body.style.overflow = '';
+    }
+
+    menuBtn.addEventListener('click', openMenu);
+    closeBtn.addEventListener('click', closeMenu);
+    overlay.addEventListener('click', closeMenu);
+
+    // Dropdown toggle logic
+    document.querySelectorAll('.dropdown-btn').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const menu = this.nextElementSibling;
+        const isBlock = menu.classList.contains('!block');
+        document.querySelectorAll('.dropdown-menu').forEach(m => m.classList.remove('!block'));
+        if (!isBlock) {
+          menu.classList.add('!block');
+        }
+      });
+    });
+    document.addEventListener('click', function() {
+      document.querySelectorAll('.dropdown-menu').forEach(m => m.classList.remove('!block'));
+    });
+
+    // Dark Mode and RTL Toggle System
+    let isDark = localStorage.getItem('payroll_theme') !== 'light';
+    let isRTL = localStorage.getItem('payroll_rtl') === 'enabled';
+
+    function applyDarkMode(enabled) {
+      if (enabled) {
+        document.documentElement.classList.add('dark');
+        document.body.classList.add('dark');
+        document.querySelectorAll('#dark-mode-toggle i, .mobile-dark-toggle i').forEach(icon => {
+          icon.className = 'fas fa-sun text-amber-400';
+        });
+        document.querySelectorAll('.mobile-dark-toggle span').forEach(s => s.textContent = 'Light');
+      } else {
+        document.documentElement.classList.remove('dark');
+        document.body.classList.remove('dark');
+        document.querySelectorAll('#dark-mode-toggle i, .mobile-dark-toggle i').forEach(icon => {
+          icon.className = 'fas fa-moon';
+        });
+        document.querySelectorAll('.mobile-dark-toggle span').forEach(s => s.textContent = 'Dark');
+      }
+      localStorage.setItem('payroll_theme', enabled ? 'dark' : 'light');
+      localStorage.setItem('payroll_dark', enabled ? 'enabled' : 'disabled');
+    }
+
+    function applyRTL(enabled) {
+      if (enabled) {
+        document.documentElement.setAttribute('dir', 'rtl');
+        document.body.classList.add('rtl');
+        document.querySelectorAll('#rtl-toggle, .mobile-rtl-toggle').forEach(btn => btn.textContent = 'LTR');
+      } else {
+        document.documentElement.setAttribute('dir', 'ltr');
+        document.body.classList.remove('rtl');
+        document.querySelectorAll('#rtl-toggle, .mobile-rtl-toggle').forEach(btn => btn.textContent = 'RTL');
+      }
+      localStorage.setItem('payroll_rtl', enabled ? 'enabled' : 'disabled');
+    }
+
+    applyDarkMode(isDark);
+    applyRTL(isRTL);
+
+    document.querySelectorAll('#dark-mode-toggle, .mobile-dark-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        isDark = !isDark;
+        applyDarkMode(isDark);
+      });
+    });
+
+    document.querySelectorAll('#rtl-toggle, .mobile-rtl-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        isRTL = !isRTL;
+        applyRTL(isRTL);
+      });
+    });
+
+    // Smooth Page Transitions & Scroll Reveal Animations
+    document.body.classList.add('page-loaded');
+
+    window.addEventListener('pageshow', () => {
+      document.body.classList.remove('page-fading-out');
+      document.body.classList.add('page-loaded');
+    });
+
+    // Intercept internal page link clicks for smooth fade-out
+    document.addEventListener('click', (e) => {
+      const link = e.target.closest('a');
+      if (!link) return;
+      const href = link.getAttribute('href');
+      if (!href) return;
+
+      if (
+        href.startsWith('#') ||
+        href.startsWith('javascript:') ||
+        href.startsWith('mailto:') ||
+        href.startsWith('tel:') ||
+        link.getAttribute('target') === '_blank' ||
+        link.hasAttribute('download') ||
+        href.startsWith('http://') ||
+        href.startsWith('https://')
+      ) {
+        return;
+      }
+
+      if (href.endsWith('.html') || (!href.includes(':') && !href.startsWith('#'))) {
+        e.preventDefault();
+        document.body.classList.remove('page-loaded');
+        document.body.classList.add('page-fading-out');
+        setTimeout(() => {
+          window.location.href = href;
+        }, 250);
+      }
+    });
+
+    // Scroll reveal for sections
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-revealed');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+      document.querySelectorAll('main > section, .reveal-on-scroll').forEach(sec => {
+        sec.classList.add('reveal-on-scroll');
+        observer.observe(sec);
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,1232 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PayrollPro - Next-Gen Enterprise Payroll & Compliance</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><path fill='%232563eb' d='M64 32C28.7 32 0 60.7 0 96v320c0 35.3 28.7 64 64 64h384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm96 192a48 48 0 1 1 0-96 48 48 0 1 1 0 96zm176-48a48 48 0 1 1-96 0 48 48 0 1 1 96 0zm-80 144a48 48 0 1 1 0-96 48 48 0 1 1 0 96zm176-48a48 48 0 1 1-96 0 48 48 0 1 1 96 0z'/></svg>" type="image/svg+xml">
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+          }
+        }
+      }
+    };
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    body { font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important; }
+    /* Dark Mode Global Styles */
+    html.dark body { background-color: #0b1120 !important; color: #f1f5f9 !important; }
+    html.dark header { background-color: rgba(15, 23, 42, 0.95) !important; border-color: #1e293b !important; }
+    html.dark .bg-white { background-color: #1e293b !important; color: #f1f5f9 !important; border-color: #334155 !important; }
+    html.dark [class*="bg-white/"] { background-color: rgba(15, 23, 42, 0.92) !important; border-color: #334155 !important; }
+    html.dark .border-white { border-color: #1e293b !important; }
+    html.dark .bg-slate-50 { background-color: #0f172a !important; }
+    html.dark .bg-slate-100 { background-color: #1e293b !important; }
+    html.dark .text-slate-900, html.dark .text-slate-800 { color: #f8fafc !important; }
+    html.dark .text-slate-700, html.dark .text-slate-600 { color: #cbd5e1 !important; }
+    html.dark .text-slate-500, html.dark .text-slate-400 { color: #94a3b8 !important; }
+    html.dark .border-slate-200, html.dark .border-slate-100, html.dark .border-slate-300 { border-color: #334155 !important; }
+    html.dark #mobile-menu { background-color: #0f172a !important; border-color: #3b82f6 !important; color: #f1f5f9 !important; }
+    html.dark .dropdown-menu .bg-white { background-color: #1e293b !important; border-color: #334155 !important; }
+    html.dark .dropdown-menu a { color: #e2e8f0 !important; }
+    html.dark .dropdown-menu a:hover { background-color: #2563eb !important; color: #ffffff !important; }
+    html.dark footer { background-color: #0f172a !important; border-color: #1e293b !important; }
+    html.dark input, html.dark select, html.dark textarea { background-color: #0f172a !important; color: #f8fafc !important; border-color: #334155 !important; }
+
+    /* RTL Direction Styles */
+    html[dir="rtl"] { direction: rtl; text-align: right; }
+    html[dir="rtl"] .dropdown-menu.left-0 { left: auto !important; right: 0 !important; }
+    html[dir="rtl"] .dropdown-menu.right-0 { right: auto !important; left: 0 !important; }
+    html[dir="rtl"] .mr-1, html[dir="rtl"] .mr-2, html[dir="rtl"] .mr-3 { margin-right: 0 !important; margin-left: 0.5rem !important; }
+    html[dir="rtl"] .ml-1, html[dir="rtl"] .ml-2, html[dir="rtl"] .ml-3 { margin-left: 0 !important; margin-right: 0.5rem !important; }
+
+    /* Smooth Page Transitions & Scroll Reveal */
+    html { scroll-behavior: smooth; }
+    body {
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out !important;
+    }
+    body.page-loaded {
+      opacity: 1 !important;
+    }
+    body.page-fading-out {
+      opacity: 0 !important;
+    }
+    .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+    .reveal-on-scroll.is-revealed {
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans flex flex-col min-h-screen dark">
+
+  <!-- Navbar -->
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
+      <a href="index.html" class="flex items-center gap-2 text-2xl font-bold text-blue-700 dark:text-blue-400">
+        <i class="fas fa-file-invoice-dollar text-blue-600 dark:text-blue-400"></i>
+        <span>PayrollPro</span>
+      </a>
+      
+      <!-- Desktop Nav -->
+      <nav class="hidden xl:flex items-center gap-1 font-medium text-sm">
+        <div class="relative group">
+          <button type="button" class="dropdown-btn px-3 py-2 rounded-full hover:bg-blue-50 hover:text-blue-700 transition flex items-center">Home <i class="fas fa-caret-down ml-1 text-xs"></i></button>
+          <div class="dropdown-menu absolute left-0 top-full pt-1.5 hidden group-hover:block w-40 z-50">
+            <div class="bg-white border border-slate-200 rounded-xl shadow-xl overflow-hidden py-1">
+              <a href="index.html" class="block px-4 py-2 hover:bg-blue-600 hover:text-white text-slate-700 transition text-sm">Home1</a>
+              <a href="home2.html" class="block px-4 py-2 hover:bg-blue-600 hover:text-white text-slate-700 transition text-sm">Home2</a>
+            </div>
+          </div>
+        </div>
+        <a href="about.html" class="px-3 py-2 rounded-full hover:bg-blue-50 hover:text-blue-700 transition">About</a>
+        <a href="service.html" class="px-3 py-2 rounded-full hover:bg-blue-50 hover:text-blue-700 transition">Service</a>
+        <a href="blog.html" class="px-3 py-2 rounded-full hover:bg-blue-50 hover:text-blue-700 transition">Blog</a>
+        <a href="pricing.html" class="px-3 py-2 rounded-full hover:bg-blue-50 hover:text-blue-700 transition">Pricing</a>
+        <a href="resources.html" class="px-3 py-2 rounded-full hover:bg-blue-50 hover:text-blue-700 transition">Resource</a>
+        <a href="faq.html" class="px-3 py-2 rounded-full hover:bg-blue-50 hover:text-blue-700 transition">FAQ</a>
+        <a href="contact.html" class="px-3 py-2 rounded-full hover:bg-blue-50 hover:text-blue-700 transition">Contact</a>
+        <div class="relative group">
+          <button type="button" class="dropdown-btn px-3 py-2 rounded-full hover:bg-blue-50 hover:text-blue-700 transition flex items-center">Dashboard <i class="fas fa-caret-down ml-1 text-xs"></i></button>
+          <div class="dropdown-menu absolute right-0 top-full pt-1.5 hidden group-hover:block w-44 z-50">
+            <div class="bg-white border border-slate-200 rounded-xl shadow-xl overflow-hidden py-1">
+              <a href="user.html" class="block px-4 py-2 hover:bg-blue-600 hover:text-white text-slate-700 transition text-sm">User Dashboard</a>
+              <a href="admin.html" class="block px-4 py-2 hover:bg-blue-600 hover:text-white text-slate-700 transition text-sm">Admin Dashboard</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Actions -->
+      <div class="flex items-center gap-3">
+        <button id="dark-mode-toggle" title="Toggle Dark/Light Mode" class="w-9 h-9 rounded-full flex items-center justify-center text-slate-600 hover:text-blue-700 hover:bg-blue-50 transition text-lg">
+          <i class="fas fa-sun text-amber-400"></i>
+        </button>
+        <button id="rtl-toggle" title="Toggle RTL/LTR" class="px-2.5 py-1 rounded-full border border-slate-300 text-slate-600 hover:text-blue-700 hover:border-blue-600 transition text-xs font-bold tracking-wider">
+          RTL
+        </button>
+        <a href="login.html" class="hidden sm:inline-flex items-center justify-center px-5 py-2 border-2 border-blue-600 text-blue-600 font-bold rounded-full hover:bg-blue-600 hover:text-white transition">Log in</a>
+        <button id="hamburger-btn" class="xl:hidden text-2xl text-slate-700 hover:text-blue-700 transition">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Hamburger Menu Overlay -->
+  <div id="mobile-menu" class="fixed inset-y-0 right-0 w-4/5 max-w-sm bg-white shadow-2xl z-[100] transform translate-x-full transition-transform duration-300 flex flex-col border-l-4 border-blue-600">
+    <div class="p-6 flex justify-between items-center border-b border-slate-100">
+      <a href="index.html" class="flex items-center gap-2 text-xl font-bold text-blue-700 dark:text-blue-400">
+        <i class="fas fa-file-invoice-dollar text-blue-600 dark:text-blue-400"></i>
+        <span>PayrollPro</span>
+      </a>
+      <button id="close-menu-btn" class="text-2xl text-slate-500 hover:text-red-500"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="p-6 overflow-y-auto flex-grow flex flex-col gap-2">
+      <!-- Mobile Appearance Controls -->
+      <div class="flex items-center justify-between pb-4 mb-2 border-b border-slate-100">
+        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Appearance</span>
+        <div class="flex items-center gap-2">
+          <button class="mobile-dark-toggle px-3 py-1.5 rounded-xl border border-slate-200 text-xs font-semibold text-slate-700 flex items-center gap-1.5 hover:bg-slate-50 transition">
+            <i class="fas fa-sun text-amber-400"></i> <span>Light</span>
+          </button>
+          <button class="mobile-rtl-toggle px-3 py-1.5 rounded-xl border border-slate-200 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition">
+            RTL
+          </button>
+        </div>
+      </div>
+      <a href="index.html" class="px-4 py-3 rounded-xl border-2 border-slate-100 font-semibold text-slate-700 hover:bg-blue-50 hover:border-blue-600 transition">Home1</a>
+      <a href="home2.html" class="px-4 py-3 rounded-xl bg-blue-50 border-2 border-blue-600 font-bold text-blue-700 transition">Home2</a>
+      <a href="about.html" class="px-4 py-3 rounded-xl border-2 border-slate-100 font-semibold text-slate-700 hover:bg-blue-50 hover:border-blue-600 transition">About</a>
+      <a href="service.html" class="px-4 py-3 rounded-xl border-2 border-slate-100 font-semibold text-slate-700 hover:bg-blue-50 hover:border-blue-600 transition">Service</a>
+      <a href="blog.html" class="px-4 py-3 rounded-xl border-2 border-slate-100 font-semibold text-slate-700 hover:bg-blue-50 hover:border-blue-600 transition">Blog</a>
+      <a href="pricing.html" class="px-4 py-3 rounded-xl border-2 border-slate-100 font-semibold text-slate-700 hover:bg-blue-50 hover:border-blue-600 transition">Pricing</a>
+      <a href="resources.html" class="px-4 py-3 rounded-xl border-2 border-slate-100 font-semibold text-slate-700 hover:bg-blue-50 hover:border-blue-600 transition">Resource</a>
+      <a href="faq.html" class="px-4 py-3 rounded-xl border-2 border-slate-100 font-semibold text-slate-700 hover:bg-blue-50 hover:border-blue-600 transition">FAQ</a>
+      <a href="contact.html" class="px-4 py-3 rounded-xl border-2 border-slate-100 font-semibold text-slate-700 hover:bg-blue-50 hover:border-blue-600 transition">Contact</a>
+      <div class="mt-2 pt-2 border-t border-slate-200 flex flex-col gap-1">
+        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider px-2 py-1">Dashboards</span>
+        <a href="user.html" class="px-4 py-3 rounded-xl border-2 border-slate-100 font-semibold text-slate-700 hover:bg-blue-50 hover:border-blue-600 transition">User Dashboard</a>
+        <a href="admin.html" class="px-4 py-3 rounded-xl border-2 border-slate-100 font-semibold text-slate-700 hover:bg-blue-50 hover:border-blue-600 transition">Admin Dashboard</a>
+      </div>
+      <a href="login.html" class="px-4 py-3 rounded-xl bg-blue-600 text-white font-bold mt-4 text-center hover:bg-blue-700 transition">Log In</a>
+    </div>
+  </div>
+  <div id="mobile-overlay" class="fixed inset-0 bg-black/60 z-[90] hidden opacity-0 transition-opacity duration-300"></div>
+
+  <!-- MAIN CONTENT -->
+  <main class="flex-grow">
+    
+    <!-- SECTION 1: Modern Split-Screen Hero with Live Interactive Simulation Card -->
+    <section class="relative overflow-hidden py-16 lg:py-24 bg-gradient-to-b from-blue-900/10 via-slate-50 to-white dark:from-slate-900 dark:via-slate-900/90 dark:to-slate-950 border-b border-slate-200 dark:border-slate-800">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          <!-- Hero Left Column -->
+          <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-700/60 font-semibold text-xs sm:text-sm">
+              <span class="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span>Next-Generation Automated Payroll Engine 2026</span>
+            </div>
+            
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white tracking-tight leading-[1.15]">
+              Run Complete Payroll in <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-500">25 Minutes</span> with 100% Tax Accuracy.
+            </h1>
+            
+            <p class="text-lg sm:text-xl text-slate-600 dark:text-slate-300 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+              Eliminate payroll chaos forever. Connect biometric clocks, automate gross-to-net calculations, generate PF/ESI/TDS tax challans, and disburse bank payments in 1 click.
+            </p>
+            
+            <!-- Hero CTA Buttons -->
+            <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+              <a href="pricing.html" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-full shadow-xl shadow-blue-600/30 transition transform hover:-translate-y-1 text-base">
+                <i class="fas fa-bolt mr-2"></i> Start 14-Day Free Trial
+              </a>
+              <a href="contact.html" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 bg-white dark:bg-slate-800 text-slate-800 dark:text-white font-bold rounded-full border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 transition transform hover:-translate-y-1 text-base shadow-sm">
+                <i class="fas fa-play-circle mr-2 text-blue-600 dark:text-blue-400"></i> Request Executive Demo
+              </a>
+            </div>
+
+            <!-- Trust proof badges -->
+            <div class="pt-4 flex flex-wrap items-center justify-center lg:justify-start gap-6 text-xs text-slate-500 dark:text-slate-400">
+              <span class="flex items-center gap-1.5"><i class="fas fa-check-circle text-emerald-500"></i> Zero Credit Card Required</span>
+              <span class="flex items-center gap-1.5"><i class="fas fa-check-circle text-emerald-500"></i> Instant 5-Minute Setup</span>
+              <span class="flex items-center gap-1.5"><i class="fas fa-check-circle text-emerald-500"></i> 100% Legal Tax Penalty Indemnity</span>
+            </div>
+          </div>
+
+          <!-- Hero Right Column: Interactive Live Simulation Box -->
+          <div class="lg:col-span-5 relative">
+            <!-- Glow background decor -->
+            <div class="absolute -top-10 -right-10 w-80 h-80 bg-blue-500/20 rounded-full blur-3xl pointer-events-none"></div>
+            
+            <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 shadow-2xl border border-slate-200 dark:border-slate-800 relative z-10 space-y-6">
+              
+              <!-- Header -->
+              <div class="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-xl bg-blue-600/10 dark:bg-blue-500/20 flex items-center justify-center text-blue-600 dark:text-blue-400 font-bold">
+                    <i class="fas fa-layer-group"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-extrabold text-slate-900 dark:text-white text-base">October Pay Run</h4>
+                    <p class="text-xs text-slate-500 dark:text-slate-400">Batch #PR-2026-10 · 142 Staff</p>
+                  </div>
+                </div>
+                <span class="px-3 py-1 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-400 font-bold text-xs uppercase tracking-wide">
+                  Ready
+                </span>
+              </div>
+
+              <!-- Real Employee Mini List -->
+              <div class="space-y-3">
+                <div class="flex items-center justify-between p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800">
+                  <div class="flex items-center gap-3">
+                    <img src="images/payroll (2).jpg" alt="Rahul Sharma" class="w-10 h-10 rounded-full object-cover border-2 border-white dark:border-slate-700 shadow-sm" />
+                    <div>
+                      <div class="text-sm font-bold text-slate-900 dark:text-white">Rahul Sharma</div>
+                      <div class="text-xs text-slate-500 dark:text-slate-400">Lead Tech Architect</div>
+                    </div>
+                  </div>
+                  <div class="text-right">
+                    <div class="text-sm font-black text-slate-900 dark:text-white">₹1,85,400</div>
+                    <div class="text-[11px] text-emerald-600 font-semibold">TDS Calculated</div>
+                  </div>
+                </div>
+
+                <div class="flex items-center justify-between p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800">
+                  <div class="flex items-center gap-3">
+                    <img src="images/payroll (3).jpg" alt="Priya Nair" class="w-10 h-10 rounded-full object-cover border-2 border-white dark:border-slate-700 shadow-sm" />
+                    <div>
+                      <div class="text-sm font-bold text-slate-900 dark:text-white">Priya Nair</div>
+                      <div class="text-xs text-slate-500 dark:text-slate-400">Head of Operations</div>
+                    </div>
+                  </div>
+                  <div class="text-right">
+                    <div class="text-sm font-black text-slate-900 dark:text-white">₹1,42,800</div>
+                    <div class="text-[11px] text-emerald-600 font-semibold">PF/ESI Matched</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Summary Metrics -->
+              <div class="grid grid-cols-2 gap-3 pt-2">
+                <div class="p-3.5 rounded-2xl bg-slate-100/70 dark:bg-slate-800/90 text-center">
+                  <div class="text-xs text-slate-500 dark:text-slate-400 font-medium">Total Gross Salary</div>
+                  <div class="text-xl font-black text-slate-900 dark:text-white mt-1">₹62.4 Lakhs</div>
+                </div>
+                <div class="p-3.5 rounded-2xl bg-blue-50 dark:bg-blue-900/30 text-center border border-blue-100 dark:border-blue-800/40">
+                  <div class="text-xs text-blue-600 dark:text-blue-300 font-medium">Net Disbursed</div>
+                  <div class="text-xl font-black text-blue-600 dark:text-blue-400 mt-1">₹54.8 Lakhs</div>
+                </div>
+              </div>
+
+              <!-- Interactive Trigger Button -->
+              <button id="sim-run-btn" class="w-full py-4 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-extrabold rounded-2xl shadow-lg shadow-blue-600/30 transition duration-300 flex items-center justify-center gap-2 text-base">
+                <i class="fas fa-paper-plane" id="sim-icon"></i> <span id="sim-text">Execute 1-Click Pay Run</span>
+              </button>
+              
+              <div id="sim-alert" class="hidden text-center text-xs font-bold text-emerald-600 dark:text-emerald-400 animate-bounce">
+                <i class="fas fa-check-circle mr-1"></i> Dispatched to HDFC / ICICI API Gateway! 142 Salary Slips Sent.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: Impact Numbers & Enterprise Live Metrics -->
+    <section class="py-12 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-y md:divide-y-0 md:divide-x divide-slate-200 dark:divide-slate-800">
+          <div class="pt-4 md:pt-0">
+            <div class="text-3xl sm:text-4xl font-black text-blue-600 dark:text-blue-400 mb-1">99.99%</div>
+            <p class="text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wide">Disbursement SLA</p>
+          </div>
+          <div class="pt-4 md:pt-0">
+            <div class="text-3xl sm:text-4xl font-black text-blue-600 dark:text-blue-400 mb-1">₹450 Cr+</div>
+            <p class="text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wide">Processed Monthly</p>
+          </div>
+          <div class="pt-4 md:pt-0">
+            <div class="text-3xl sm:text-4xl font-black text-emerald-500 mb-1">100% Zero</div>
+            <p class="text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wide">Tax Penalties Guaranteed</p>
+          </div>
+          <div class="pt-4 md:pt-0">
+            <div class="text-3xl sm:text-4xl font-black text-blue-600 dark:text-blue-400 mb-1">2,800+</div>
+            <p class="text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wide">Companies Automated</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: Tabbed Modern Solution Showcase -->
+    <section class="py-20 bg-slate-50 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-14">
+          <span class="text-blue-600 dark:text-blue-400 font-bold text-sm uppercase tracking-wider bg-blue-50 dark:bg-blue-900/40 px-4 py-1.5 rounded-full border border-blue-200 dark:border-blue-700/60 inline-block mb-3">
+            Tailored Workflows
+          </span>
+          <h2 class="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight mb-4">
+            Engineered for Every Stage of Organizational Growth
+          </h2>
+          <p class="text-slate-600 dark:text-slate-300 text-base sm:text-lg">
+            Whether you are 10 founders or 10,000 global personnel, PayrollPro configures to your custom policies instantly.
+          </p>
+
+          <!-- Interactive Tab Buttons -->
+          <div class="flex flex-wrap justify-center gap-2 mt-8">
+            <button class="tab-btn px-6 py-2.5 rounded-full font-bold text-sm transition bg-blue-600 text-white shadow-md shadow-blue-600/30" data-target="tab-startups">
+              Fast-Growing Startups (5-50)
+            </button>
+            <button class="tab-btn px-6 py-2.5 rounded-full font-bold text-sm transition bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:bg-slate-100" data-target="tab-scaleups">
+              Mid-Market Enterprises (50-500)
+            </button>
+            <button class="tab-btn px-6 py-2.5 rounded-full font-bold text-sm transition bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:bg-slate-100" data-target="tab-contractors">
+              Contractor & Gig Workforces
+            </button>
+          </div>
+        </div>
+
+        <!-- Tab 1: Startups -->
+        <div id="tab-startups" class="tab-content grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          <div class="lg:col-span-6 space-y-6">
+            <span class="px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 font-bold text-xs uppercase">Founder Friendly</span>
+            <h3 class="text-3xl font-extrabold text-slate-900 dark:text-white">Pay Your Seed-Stage Team in Under 3 Minutes</h3>
+            <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
+              No need to hire an expensive full-time Chartered Accountant. Get automated tax filings, zero-setup direct deposits, and instant salary slips delivered directly on WhatsApp.
+            </p>
+            <ul class="space-y-3 text-sm text-slate-700 dark:text-slate-300 font-medium">
+              <li class="flex items-center gap-3"><i class="fas fa-check-circle text-blue-600 dark:text-blue-400"></i> Free compliance registration (PF, ESI & PT)</li>
+              <li class="flex items-center gap-3"><i class="fas fa-check-circle text-blue-600 dark:text-blue-400"></i> Automatic Form 16 generator for all staff</li>
+              <li class="flex items-center gap-3"><i class="fas fa-check-circle text-blue-600 dark:text-blue-400"></i> Simple CSV employee roster imports</li>
+            </ul>
+            <div class="pt-2">
+              <a href="signup.html" class="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-full transition shadow-md shadow-blue-600/20">
+                <span>Start Startup Free Trial</span> <i class="fas fa-arrow-right text-xs"></i>
+              </a>
+            </div>
+          </div>
+          <div class="lg:col-span-6">
+            <div class="rounded-3xl overflow-hidden shadow-2xl border-4 border-white dark:border-slate-800">
+              <img src="images/payroll (6).jpg" alt="Startup Payroll Team" class="w-full h-80 sm:h-96 object-cover hover:scale-105 transition-transform duration-500" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 2: Scale-Ups (Hidden by default) -->
+        <div id="tab-scaleups" class="tab-content hidden grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          <div class="lg:col-span-6 space-y-6">
+            <span class="px-3 py-1 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-700 dark:text-indigo-300 font-bold text-xs uppercase">Multi-Branch Scale</span>
+            <h3 class="text-3xl font-extrabold text-slate-900 dark:text-white">Biometrics, Custom Shift Rosters & ERP Sync</h3>
+            <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
+              Consolidate 10+ factory and office locations under one clean dashboard. Push accounting records seamlessly into Tally, SAP, QuickBooks, or Zoho Books.
+            </p>
+            <ul class="space-y-3 text-sm text-slate-700 dark:text-slate-300 font-medium">
+              <li class="flex items-center gap-3"><i class="fas fa-check-circle text-indigo-600 dark:text-indigo-400"></i> Biometric fingerprint and facial recognition sync</li>
+              <li class="flex items-center gap-3"><i class="fas fa-check-circle text-indigo-600 dark:text-indigo-400"></i> Shift allowance, LOP and overtime computation</li>
+              <li class="flex items-center gap-3"><i class="fas fa-check-circle text-indigo-600 dark:text-indigo-400"></i> Multi-tier manager approval workflows</li>
+            </ul>
+            <div class="pt-2">
+              <a href="service.html" class="inline-flex items-center gap-2 px-6 py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-full transition shadow-md shadow-indigo-600/20">
+                <span>Explore Mid-Market Features</span> <i class="fas fa-arrow-right text-xs"></i>
+              </a>
+            </div>
+          </div>
+          <div class="lg:col-span-6">
+            <div class="rounded-3xl overflow-hidden shadow-2xl border-4 border-white dark:border-slate-800">
+              <img src="images/payroll (7).jpg" alt="Enterprise Payroll Management" class="w-full h-80 sm:h-96 object-cover hover:scale-105 transition-transform duration-500" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 3: Contractors (Hidden by default) -->
+        <div id="tab-contractors" class="tab-content hidden grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          <div class="lg:col-span-6 space-y-6">
+            <span class="px-3 py-1 rounded-full bg-cyan-100 dark:bg-cyan-900/50 text-cyan-700 dark:text-cyan-300 font-bold text-xs uppercase">Gig Economy Ready</span>
+            <h3 class="text-3xl font-extrabold text-slate-900 dark:text-white">Pay Freelancers & Vendors with Statutory TDS 194J</h3>
+            <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
+              Verify freelance invoices automatically, deduct required withholding tax, and disburse cross-border compensation without paper receipts.
+            </p>
+            <ul class="space-y-3 text-sm text-slate-700 dark:text-slate-300 font-medium">
+              <li class="flex items-center gap-3"><i class="fas fa-check-circle text-cyan-600 dark:text-cyan-400"></i> Instant vendor payment receipt generation</li>
+              <li class="flex items-center gap-3"><i class="fas fa-check-circle text-cyan-600 dark:text-cyan-400"></i> Automated Section 194C & 194J quarterly filings</li>
+              <li class="flex items-center gap-3"><i class="fas fa-check-circle text-cyan-600 dark:text-cyan-400"></i> Multi-currency payments for remote talent</li>
+            </ul>
+            <div class="pt-2">
+              <a href="pricing.html" class="inline-flex items-center gap-2 px-6 py-3 bg-cyan-600 hover:bg-cyan-500 text-white font-bold rounded-full transition shadow-md shadow-cyan-600/20">
+                <span>View Contractor Pricing</span> <i class="fas fa-arrow-right text-xs"></i>
+              </a>
+            </div>
+          </div>
+          <div class="lg:col-span-6">
+            <div class="rounded-3xl overflow-hidden shadow-2xl border-4 border-white dark:border-slate-800">
+              <img src="images/payroll (4).jpg" alt="Remote Contractor Payouts" class="w-full h-80 sm:h-96 object-cover hover:scale-105 transition-transform duration-500" />
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 4: 3-Step Automated Engine Flow -->
+    <section class="py-20 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <span class="text-blue-600 dark:text-blue-400 font-bold text-sm uppercase tracking-wider bg-blue-50 dark:bg-blue-900/40 px-4 py-1.5 rounded-full border border-blue-200 dark:border-blue-700/60 inline-block mb-3">
+            Streamlined Architecture
+          </span>
+          <h2 class="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight mb-4">
+            How Your Month-End Transforms Into 3 Simple Clicks
+          </h2>
+          <p class="text-slate-600 dark:text-slate-300 text-base sm:text-lg">
+            Say goodbye to endless spreadsheet reconciliations and midnight tax deadlines.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Step 1 -->
+          <div class="bg-slate-50 dark:bg-slate-800/60 rounded-3xl p-8 border border-slate-200 dark:border-slate-700 hover:shadow-xl transition-all duration-300 relative group">
+            <div class="text-5xl font-black text-blue-200 dark:text-blue-900/80 mb-4 group-hover:text-blue-600 transition">01</div>
+            <div class="w-14 h-14 rounded-2xl bg-blue-600 text-white flex items-center justify-center text-2xl mb-6 shadow-md shadow-blue-600/30">
+              <i class="fas fa-fingerprint"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">Automated Clock & Leave Sync</h3>
+            <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">
+              Biometric machine cloud punches, remote geolocation check-ins, and approved PTO leaves are synced directly into the monthly register.
+            </p>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="bg-slate-50 dark:bg-slate-800/60 rounded-3xl p-8 border border-slate-200 dark:border-slate-700 hover:shadow-xl transition-all duration-300 relative group">
+            <div class="text-5xl font-black text-blue-200 dark:text-blue-900/80 mb-4 group-hover:text-blue-600 transition">02</div>
+            <div class="w-14 h-14 rounded-2xl bg-indigo-600 text-white flex items-center justify-center text-2xl mb-6 shadow-md shadow-indigo-600/30">
+              <i class="fas fa-calculator"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">Gross-to-Net Pre-Flight Check</h3>
+            <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">
+              AI pre-flight anomaly scanner detects accidental duplicate payouts, missing tax declarations, and calculates statutory PF/ESI/TDS withholdings.
+            </p>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="bg-slate-50 dark:bg-slate-800/60 rounded-3xl p-8 border border-slate-200 dark:border-slate-700 hover:shadow-xl transition-all duration-300 relative group">
+            <div class="text-5xl font-black text-blue-200 dark:text-blue-900/80 mb-4 group-hover:text-blue-600 transition">03</div>
+            <div class="w-14 h-14 rounded-2xl bg-emerald-600 text-white flex items-center justify-center text-2xl mb-6 shadow-md shadow-emerald-600/30">
+              <i class="fas fa-money-bill-wave"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">Instant Batch Bank Disbursement</h3>
+            <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">
+              Approve with one click. Direct bank API routes money into employee accounts instantly while password-protected pay slips are emailed automatically.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: Interactive ROI & Payroll Cost-Savings Calculator (NEW) -->
+    <section class="py-20 bg-gradient-to-b from-slate-50 via-white to-slate-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 border-b border-slate-200 dark:border-slate-800">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-14">
+          <span class="text-blue-600 dark:text-blue-400 font-bold text-sm uppercase tracking-wider bg-blue-50 dark:bg-blue-900/40 px-4 py-1.5 rounded-full border border-blue-200 dark:border-blue-700/60 inline-block mb-3">
+            Instant ROI Estimator
+          </span>
+          <h2 class="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight mb-4">
+            See Exactly How Much Time & Capital You Will Reclaim
+          </h2>
+          <p class="text-slate-600 dark:text-slate-300 text-base sm:text-lg">
+            Drag the employee slider below to calculate your estimated annual operational savings and hours eliminated from monthly payroll runs.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <!-- Interactive Slider & Controls Card -->
+          <div class="lg:col-span-7 bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-slate-800 shadow-xl space-y-8">
+            
+            <!-- Employee Count Slider -->
+            <div class="space-y-4">
+              <div class="flex justify-between items-center">
+                <label for="emp-slider" class="font-extrabold text-slate-900 dark:text-white text-base sm:text-lg flex items-center gap-2">
+                  <i class="fas fa-users text-blue-600 dark:text-blue-400"></i>
+                  <span>Active Headcount:</span>
+                </label>
+                <div class="flex items-center gap-2">
+                  <span id="emp-count-val" class="text-2xl sm:text-3xl font-black text-blue-600 dark:text-blue-400">75</span>
+                  <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Employees</span>
+                </div>
+              </div>
+
+              <input 
+                type="range" 
+                id="emp-slider" 
+                min="10" 
+                max="500" 
+                step="5" 
+                value="75" 
+                class="w-full h-3 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-blue-600 focus:outline-none"
+              />
+              
+              <div class="flex justify-between text-xs text-slate-400 font-semibold">
+                <span>10 Team Members</span>
+                <span>100</span>
+                <span>250</span>
+                <span>500+ Enterprise</span>
+              </div>
+            </div>
+
+            <!-- Quick Preset Chips -->
+            <div class="pt-2">
+              <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-2">Quick Select Presets:</span>
+              <div class="flex flex-wrap gap-2">
+                <button type="button" class="preset-btn px-4 py-1.5 rounded-full text-xs font-bold border border-slate-200 dark:border-slate-700 hover:border-blue-600 dark:hover:border-blue-500 transition text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-slate-800/80" data-value="25">25 Staff</button>
+                <button type="button" class="preset-btn px-4 py-1.5 rounded-full text-xs font-bold border border-blue-600 dark:border-blue-500 bg-blue-50 dark:bg-blue-950 text-blue-700 dark:text-blue-300 transition" data-value="75">75 Staff</button>
+                <button type="button" class="preset-btn px-4 py-1.5 rounded-full text-xs font-bold border border-slate-200 dark:border-slate-700 hover:border-blue-600 dark:hover:border-blue-500 transition text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-slate-800/80" data-value="150">150 Staff</button>
+                <button type="button" class="preset-btn px-4 py-1.5 rounded-full text-xs font-bold border border-slate-200 dark:border-slate-700 hover:border-blue-600 dark:hover:border-blue-500 transition text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-slate-800/80" data-value="300">300 Staff</button>
+                <button type="button" class="preset-btn px-4 py-1.5 rounded-full text-xs font-bold border border-slate-200 dark:border-slate-700 hover:border-blue-600 dark:hover:border-blue-500 transition text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-slate-800/80" data-value="500">500+ Staff</button>
+              </div>
+            </div>
+
+            <!-- Dynamic Savings Metric Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-slate-100 dark:border-slate-800">
+              <div class="p-5 rounded-2xl bg-blue-50/70 dark:bg-blue-950/40 border border-blue-100 dark:border-blue-900/60">
+                <div class="text-xs text-blue-700 dark:text-blue-300 font-bold uppercase tracking-wide">Monthly Hours Saved</div>
+                <div id="calc-hours" class="text-3xl font-black text-blue-700 dark:text-blue-300 mt-1">34 Hours</div>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Reclaimed for strategic talent development</p>
+              </div>
+
+              <div class="p-5 rounded-2xl bg-emerald-50/70 dark:bg-emerald-950/40 border border-emerald-100 dark:border-emerald-900/60">
+                <div class="text-xs text-emerald-700 dark:text-emerald-300 font-bold uppercase tracking-wide">Est. Annual Cost Saved</div>
+                <div id="calc-savings" class="text-3xl font-black text-emerald-700 dark:text-emerald-300 mt-1">₹3.60 Lakhs</div>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Eliminating manual CA & admin overhead</p>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between pt-2 text-xs text-slate-500 dark:text-slate-400 flex-wrap gap-2">
+              <span class="flex items-center gap-1.5"><i class="fas fa-shield-alt text-emerald-500"></i> Zero-Penalty Statutory Tax Indemnity</span>
+              <span class="flex items-center gap-1.5"><i class="fas fa-bolt text-amber-500"></i> 100% Tax Formula Accuracy</span>
+            </div>
+          </div>
+
+          <!-- Visual Comparison Card & CTA -->
+          <div class="lg:col-span-5 space-y-6">
+            <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-xl relative overflow-hidden">
+              <div class="absolute -right-12 -top-12 w-40 h-40 bg-blue-600/10 rounded-full blur-2xl pointer-events-none"></div>
+              
+              <h4 class="font-extrabold text-slate-900 dark:text-white text-xl mb-4 flex items-center gap-2">
+                <span>Traditional vs PayrollPro</span>
+              </h4>
+
+              <div class="space-y-4">
+                <div class="p-4 rounded-2xl bg-rose-50 dark:bg-rose-950/30 border border-rose-100 dark:border-rose-900/40">
+                  <div class="flex items-center justify-between text-xs font-bold text-rose-700 dark:text-rose-400 uppercase">
+                    <span>Traditional Spreadsheets & CA</span>
+                    <i class="fas fa-times-circle"></i>
+                  </div>
+                  <div class="text-sm font-bold text-slate-800 dark:text-slate-200 mt-1">3 to 5 Working Days per cycle</div>
+                  <div class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">High risk of late filing interest (12% to 18% p.a.)</div>
+                </div>
+
+                <div class="p-4 rounded-2xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/60 shadow-sm">
+                  <div class="flex items-center justify-between text-xs font-bold text-emerald-700 dark:text-emerald-400 uppercase">
+                    <span>With PayrollPro Engine</span>
+                    <i class="fas fa-check-circle"></i>
+                  </div>
+                  <div class="text-sm font-black text-slate-900 dark:text-white mt-1">Under 25 Minutes per cycle</div>
+                  <div class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Automated PF/ESI/PT and direct bank disbursement</div>
+                </div>
+              </div>
+
+              <!-- Local Image Badge -->
+              <div class="mt-6 pt-6 border-t border-slate-100 dark:border-slate-800 flex items-center gap-4">
+                <img src="images/payroll (5).jpg" alt="Payroll Director" class="w-14 h-14 rounded-2xl object-cover border-2 border-blue-500 shadow-md flex-shrink-0" />
+                <div>
+                  <div class="text-sm font-extrabold text-slate-900 dark:text-white">"Paid for itself in month one."</div>
+                  <div class="text-xs text-slate-500 dark:text-slate-400">Head of People, 180-employee team</div>
+                </div>
+              </div>
+
+              <div class="mt-6">
+                <a href="signup.html" class="w-full inline-flex items-center justify-center py-3.5 px-6 bg-blue-600 hover:bg-blue-500 text-white font-extrabold rounded-full transition shadow-lg shadow-blue-600/30 text-sm">
+                  <span>Start Free Trial with <span id="cta-emp-count">75</span> Employees</span>
+                  <i class="fas fa-arrow-right ml-2 text-xs"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: Enterprise Integration Ecosystem & Banking Rails Hub (NEW) -->
+    <section class="py-20 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-14">
+          <span class="text-blue-600 dark:text-blue-400 font-bold text-sm uppercase tracking-wider bg-blue-50 dark:bg-blue-900/40 px-4 py-1.5 rounded-full border border-blue-200 dark:border-blue-700/60 inline-block mb-3">
+            Unified Ecosystem
+          </span>
+          <h2 class="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight mb-4">
+            Connects Directly to Your Banks, ERP & Biometric Devices
+          </h2>
+          <p class="text-slate-600 dark:text-slate-300 text-base sm:text-lg">
+            Zero file uploads or manual CSV exports. PayrollPro securely syncs with 45+ enterprise banking partners, accounting engines, and HR systems.
+          </p>
+
+          <!-- Integration Category Filter Pills -->
+          <div class="flex flex-wrap justify-center gap-2 mt-8">
+            <button class="integ-filter-btn px-5 py-2 rounded-full font-bold text-xs sm:text-sm transition bg-blue-600 text-white shadow-md shadow-blue-600/30" data-filter="all">
+              All Integrations
+            </button>
+            <button class="integ-filter-btn px-5 py-2 rounded-full font-bold text-xs sm:text-sm transition bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700" data-filter="bank">
+              <i class="fas fa-university mr-1.5 text-blue-600 dark:text-blue-400"></i> Direct Banking Rails
+            </button>
+            <button class="integ-filter-btn px-5 py-2 rounded-full font-bold text-xs sm:text-sm transition bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700" data-filter="accounting">
+              <i class="fas fa-calculator mr-1.5 text-indigo-600 dark:text-indigo-400"></i> Accounting & ERP
+            </button>
+            <button class="integ-filter-btn px-5 py-2 rounded-full font-bold text-xs sm:text-sm transition bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700" data-filter="hrms">
+              <i class="fas fa-id-badge mr-1.5 text-emerald-600 dark:text-emerald-400"></i> HRMS & Biometrics
+            </button>
+          </div>
+        </div>
+
+        <!-- Integration Grid Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="integ-grid">
+          
+          <!-- Integration 1: HDFC Bank -->
+          <div class="integ-card bank bg-slate-50 dark:bg-slate-800/60 rounded-3xl p-6 border border-slate-200 dark:border-slate-700 hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <div class="w-12 h-12 rounded-2xl bg-blue-600/10 dark:bg-blue-500/20 text-blue-600 dark:text-blue-400 flex items-center justify-center text-xl font-bold">
+                  <i class="fas fa-building-columns"></i>
+                </div>
+                <span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-400 flex items-center gap-1">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Live Bank API
+                </span>
+              </div>
+              <h3 class="text-lg font-extrabold text-slate-900 dark:text-white group-hover:text-blue-600 transition">HDFC Bank Direct Rails</h3>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-2 leading-relaxed">
+                Execute 1-click batch salary payouts directly from your corporate current account with automated 2-factor token authorization.
+              </p>
+            </div>
+            <div class="mt-4 pt-4 border-t border-slate-200 dark:border-slate-700/60 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
+              <span>Instant UTR Sync</span>
+              <span class="font-bold text-blue-600 dark:text-blue-400">256-bit AES</span>
+            </div>
+          </div>
+
+          <!-- Integration 2: ICICI Bank -->
+          <div class="integ-card bank bg-slate-50 dark:bg-slate-800/60 rounded-3xl p-6 border border-slate-200 dark:border-slate-700 hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <div class="w-12 h-12 rounded-2xl bg-orange-600/10 dark:bg-orange-500/20 text-orange-600 dark:text-orange-400 flex items-center justify-center text-xl font-bold">
+                  <i class="fas fa-university"></i>
+                </div>
+                <span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-400 flex items-center gap-1">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Live Bank API
+                </span>
+              </div>
+              <h3 class="text-lg font-extrabold text-slate-900 dark:text-white group-hover:text-blue-600 transition">ICICI Corporate Banking</h3>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-2 leading-relaxed">
+                Connect your Connected Banking gateway for real-time balance checks, batch IMPS/NEFT, and auto-generated debit advice statements.
+              </p>
+            </div>
+            <div class="mt-4 pt-4 border-t border-slate-200 dark:border-slate-700/60 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
+              <span>Auto Reconciliation</span>
+              <span class="font-bold text-blue-600 dark:text-blue-400">Connected</span>
+            </div>
+          </div>
+
+          <!-- Integration 3: Tally Prime & ERP 9 -->
+          <div class="integ-card accounting bg-slate-50 dark:bg-slate-800/60 rounded-3xl p-6 border border-slate-200 dark:border-slate-700 hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <div class="w-12 h-12 rounded-2xl bg-indigo-600/10 dark:bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 flex items-center justify-center text-xl font-bold">
+                  <i class="fas fa-file-invoice"></i>
+                </div>
+                <span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-blue-400 flex items-center gap-1">
+                  <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span> 2-Way Sync
+                </span>
+              </div>
+              <h3 class="text-lg font-extrabold text-slate-900 dark:text-white group-hover:text-blue-600 transition">Tally Prime & ERP</h3>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-2 leading-relaxed">
+                Push monthly journal entries, cost-center employee allocations, and tax liability ledgers straight into Tally with one keystroke.
+              </p>
+            </div>
+            <div class="mt-4 pt-4 border-t border-slate-200 dark:border-slate-700/60 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
+              <span>XML & Direct API</span>
+              <span class="font-bold text-indigo-600 dark:text-indigo-400">Automated</span>
+            </div>
+          </div>
+
+          <!-- Integration 4: Zoho Books & SAP -->
+          <div class="integ-card accounting bg-slate-50 dark:bg-slate-800/60 rounded-3xl p-6 border border-slate-200 dark:border-slate-700 hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <div class="w-12 h-12 rounded-2xl bg-emerald-600/10 dark:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-xl font-bold">
+                  <i class="fas fa-book-open"></i>
+                </div>
+                <span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-blue-400 flex items-center gap-1">
+                  <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span> ERP Certified
+                </span>
+              </div>
+              <h3 class="text-lg font-extrabold text-slate-900 dark:text-white group-hover:text-blue-600 transition">Zoho Books & SAP S/4</h3>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-2 leading-relaxed">
+                Real-time chart-of-accounts mapping, salary payable balancing, and instant contractor invoice payment synchronization.
+              </p>
+            </div>
+            <div class="mt-4 pt-4 border-t border-slate-200 dark:border-slate-700/60 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
+              <span>REST Webhooks</span>
+              <span class="font-bold text-emerald-600 dark:text-emerald-400">Plug & Play</span>
+            </div>
+          </div>
+
+          <!-- Integration 5: Biometrics (ZKTeco / eSSL) -->
+          <div class="integ-card hrms bg-slate-50 dark:bg-slate-800/60 rounded-3xl p-6 border border-slate-200 dark:border-slate-700 hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <div class="w-12 h-12 rounded-2xl bg-cyan-600/10 dark:bg-cyan-500/20 text-cyan-600 dark:text-cyan-400 flex items-center justify-center text-xl font-bold">
+                  <i class="fas fa-fingerprint"></i>
+                </div>
+                <span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-cyan-100 dark:bg-cyan-950 text-cyan-700 dark:text-cyan-400 flex items-center gap-1">
+                  <span class="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> Hardware Cloud
+                </span>
+              </div>
+              <h3 class="text-lg font-extrabold text-slate-900 dark:text-white group-hover:text-blue-600 transition">ZKTeco & eSSL Biometrics</h3>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-2 leading-relaxed">
+                Pulls real-time fingerprint, facial recognition, and RFID swipe logs directly from on-premise hardware machines into cloud pay registers.
+              </p>
+            </div>
+            <div class="mt-4 pt-4 border-t border-slate-200 dark:border-slate-700/60 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
+              <span>IoT Cloud Sync</span>
+              <span class="font-bold text-cyan-600 dark:text-cyan-400">Zero Manual Punch</span>
+            </div>
+          </div>
+
+          <!-- Integration 6: Slack & MS Teams ESS -->
+          <div class="integ-card hrms bg-slate-50 dark:bg-slate-800/60 rounded-3xl p-6 border border-slate-200 dark:border-slate-700 hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <div class="w-12 h-12 rounded-2xl bg-purple-600/10 dark:bg-purple-500/20 text-purple-600 dark:text-purple-400 flex items-center justify-center text-xl font-bold">
+                  <i class="fab fa-slack"></i>
+                </div>
+                <span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-400 flex items-center gap-1">
+                  <span class="w-1.5 h-1.5 rounded-full bg-purple-500"></span> Bot Assistant
+                </span>
+              </div>
+              <h3 class="text-lg font-extrabold text-slate-900 dark:text-white group-hover:text-blue-600 transition">Slack & Microsoft Teams</h3>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-2 leading-relaxed">
+                Employees can type `/payslip` or request PTO leaves directly in team channels without ever needing to log in to a separate portal.
+              </p>
+            </div>
+            <div class="mt-4 pt-4 border-t border-slate-200 dark:border-slate-700/60 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
+              <span>ChatOps Enabled</span>
+              <span class="font-bold text-purple-600 dark:text-purple-400">Self-Service</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Security & Bank-Grade Shield Banner -->
+        <div class="mt-12 bg-slate-50 dark:bg-slate-800/40 rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-slate-700 flex flex-col md:flex-row items-center justify-between gap-6">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-2xl bg-emerald-600 text-white flex items-center justify-center text-2xl flex-shrink-0 shadow-md shadow-emerald-600/30">
+              <i class="fas fa-lock"></i>
+            </div>
+            <div>
+              <h4 class="font-extrabold text-slate-900 dark:text-white text-base sm:text-lg">Bank-Grade 256-Bit TLS Encryption & ISO 27001 Certified</h4>
+              <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-0.5">Your banking credentials and employee PAN/Aadhaar data are tokenized and never stored in plain text.</p>
+            </div>
+          </div>
+          <a href="contact.html" class="px-6 py-3 rounded-full bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-white font-bold hover:bg-slate-100 dark:hover:bg-slate-800 text-xs sm:text-sm transition flex-shrink-0 shadow-sm">
+            Request Security Whitepaper
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 7: Real Customer Testimonials with Authentic Person Portraits -->
+    <section class="py-20 bg-slate-50 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <span class="text-blue-600 dark:text-blue-400 font-bold text-sm uppercase tracking-wider bg-blue-50 dark:bg-blue-900/40 px-4 py-1.5 rounded-full border border-blue-200 dark:border-blue-700/60 inline-block mb-3">
+            Real Impact Stories
+          </span>
+          <h2 class="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight mb-4">
+            Trusted by Leaders Who Value Accuracy & Time
+          </h2>
+          <p class="text-slate-600 dark:text-slate-300 text-base sm:text-lg">
+            Hear from operations leaders and CFOs who streamlined their payroll with PayrollPro.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          
+          <!-- Testimonial 1 -->
+          <div class="bg-white dark:bg-slate-900 rounded-3xl p-8 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+            <div class="space-y-4">
+              <div class="flex items-center text-amber-400 gap-1 text-sm">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+              </div>
+              <p class="text-slate-700 dark:text-slate-200 text-sm leading-relaxed italic">
+                "PayrollPro reduced our month-end processing from 4 full days to just 25 minutes. Zero compliance fines over the past 2 years. Absolutely indispensable for our finance team."
+              </p>
+            </div>
+            <div class="pt-6 border-t border-slate-100 dark:border-slate-800 flex items-center gap-4 mt-6">
+              <img src="images/about3.jpg" alt="Vikram Malhotra" class="w-12 h-12 rounded-full object-cover border-2 border-blue-500 shadow-md" />
+              <div>
+                <h4 class="font-bold text-slate-900 dark:text-white text-sm">Vikram Malhotra</h4>
+                <p class="text-xs text-slate-500 dark:text-slate-400">CFO, Nexus Cloud Technologies</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimonial 2 -->
+          <div class="bg-white dark:bg-slate-900 rounded-3xl p-8 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+            <div class="space-y-4">
+              <div class="flex items-center text-amber-400 gap-1 text-sm">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+              </div>
+              <p class="text-slate-700 dark:text-slate-200 text-sm leading-relaxed italic">
+                "Our employees love the mobile app. They can download their tax Form 16, view their salary breakdown, and claim travel reimbursements in seconds without emailing HR."
+              </p>
+            </div>
+            <div class="pt-6 border-t border-slate-100 dark:border-slate-800 flex items-center gap-4 mt-6">
+              <img src="images/about4.jpg" alt="Ananya Deshmukh" class="w-12 h-12 rounded-full object-cover border-2 border-indigo-500 shadow-md" />
+              <div>
+                <h4 class="font-bold text-slate-900 dark:text-white text-sm">Ananya Deshmukh</h4>
+                <p class="text-xs text-slate-500 dark:text-slate-400">VP People & Culture, Zenspark</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimonial 3 -->
+          <div class="bg-white dark:bg-slate-900 rounded-3xl p-8 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+            <div class="space-y-4">
+              <div class="flex items-center text-amber-400 gap-1 text-sm">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+              </div>
+              <p class="text-slate-700 dark:text-slate-200 text-sm leading-relaxed italic">
+                "The biometric hardware sync and Tally accounting push saved us hundreds of manual journal entries each month. Best software investment we made this year."
+              </p>
+            </div>
+            <div class="pt-6 border-t border-slate-100 dark:border-slate-800 flex items-center gap-4 mt-6">
+              <img src="images/about6.jpg" alt="Arjun Singhal" class="w-12 h-12 rounded-full object-cover border-2 border-emerald-500 shadow-md" />
+              <div>
+                <h4 class="font-bold text-slate-900 dark:text-white text-sm">Arjun Singhal</h4>
+                <p class="text-xs text-slate-500 dark:text-slate-400">Managing Director, Horizon Logistics</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 8: High-Conversion Call To Action Banner -->
+    <section class="py-20 bg-slate-900 text-white relative overflow-hidden">
+      <div class="absolute top-0 right-0 -mr-20 -mt-20 w-80 h-80 rounded-full bg-blue-600 opacity-20 blur-3xl pointer-events-none"></div>
+      <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-indigo-500 opacity-20 blur-3xl pointer-events-none"></div>
+      
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center space-y-8">
+        <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-900/60 border border-blue-500/30 text-blue-400 font-bold text-xs uppercase tracking-wide">
+          <i class="fas fa-award"></i> Guaranteed Compliance
+        </span>
+        <h2 class="text-3xl sm:text-5xl font-black tracking-tight text-white leading-tight">
+          Ready to Automate Your Entire Payroll Operation?
+        </h2>
+        <p class="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
+          Join over 2,800+ top enterprises that rely on PayrollPro for zero-error salaries and instant direct bank disbursements.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
+          <a href="signup.html" class="w-full sm:w-auto px-9 py-4 bg-blue-600 hover:bg-blue-500 text-white font-extrabold rounded-full shadow-xl shadow-blue-600/30 transition transform hover:-translate-y-1 text-base">
+            Start Free 14-Day Trial
+          </a>
+          <a href="contact.html" class="w-full sm:w-auto px-9 py-4 bg-transparent border-2 border-white text-white font-extrabold rounded-full hover:bg-white hover:text-slate-900 transition transform hover:-translate-y-1 text-base">
+            Schedule a Demo Call
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t border-slate-200 pt-16 pb-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+        <div>
+          <a href="index.html" class="flex items-center gap-2 text-2xl font-bold text-blue-700 dark:text-blue-400 mb-4">
+            <i class="fas fa-file-invoice-dollar text-blue-600 dark:text-blue-400"></i>
+            <span>PayrollPro</span>
+          </a>
+          <p class="text-slate-500 text-sm leading-relaxed">
+            Reliable and automated payroll processing service ensuring your team gets paid accurately and on time, every time.
+          </p>
+        </div>
+        <div>
+          <h4 class="font-bold text-slate-800 uppercase tracking-wide mb-4 border-b-2 border-blue-600 inline-block pb-1">Quick Links</h4>
+          <ul class="space-y-3 text-sm text-slate-500">
+            <li><a href="service.html" class="hover:text-blue-600 transition">Our Services</a></li>
+            <li><a href="pricing.html" class="hover:text-blue-600 transition">Pricing Plans</a></li>
+            <li><a href="about.html" class="hover:text-blue-600 transition">About Us</a></li>
+            <li><a href="contact.html" class="hover:text-blue-600 transition">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-bold text-slate-800 uppercase tracking-wide mb-4 border-b-2 border-blue-600 inline-block pb-1">Resources</h4>
+          <ul class="space-y-3 text-sm text-slate-500">
+            <li><a href="faq.html" class="hover:text-blue-600 transition">Help & FAQ</a></li>
+            <li><a href="blog.html" class="hover:text-blue-600 transition">Company Blog</a></li>
+            <li><a href="#" class="hover:text-blue-600 transition">Terms of Service</a></li>
+            <li><a href="#" class="hover:text-blue-600 transition">Privacy Policy</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-bold text-slate-800 uppercase tracking-wide mb-4 border-b-2 border-blue-600 inline-block pb-1">Connect</h4>
+          <ul class="space-y-3 text-sm text-slate-500">
+            <li><a href="#" class="hover:text-blue-600 transition"><i class="fab fa-linkedin mr-2"></i> LinkedIn</a></li>
+            <li><a href="#" class="hover:text-blue-600 transition"><i class="fa-brands fa-x-twitter mr-2"></i> X</a></li>
+            <li><a href="#" class="hover:text-blue-600 transition"><i class="fab fa-facebook-f mr-2"></i> Facebook</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="text-center pt-8 border-t border-slate-100 text-sm text-slate-400">
+        © 2026 Payroll Processing Service. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts: Mobile Hamburger, Dropdown, Tabs, Simulation & Dark Mode/RTL -->
+  <script>
+    // Mobile menu logic
+    const menuBtn = document.getElementById('hamburger-btn');
+    const closeBtn = document.getElementById('close-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const overlay = document.getElementById('mobile-overlay');
+
+    function openMenu() {
+      mobileMenu.classList.remove('translate-x-full');
+      overlay.classList.remove('hidden');
+      setTimeout(() => overlay.classList.remove('opacity-0'), 10);
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+      mobileMenu.classList.add('translate-x-full');
+      overlay.classList.add('opacity-0');
+      setTimeout(() => overlay.classList.add('hidden'), 300);
+      document.body.style.overflow = '';
+    }
+
+    menuBtn.addEventListener('click', openMenu);
+    closeBtn.addEventListener('click', closeMenu);
+    overlay.addEventListener('click', closeMenu);
+
+    // Dropdown toggle logic
+    document.querySelectorAll('.dropdown-btn').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const menu = this.nextElementSibling;
+        const isBlock = menu.classList.contains('!block');
+        document.querySelectorAll('.dropdown-menu').forEach(m => m.classList.remove('!block'));
+        if (!isBlock) {
+          menu.classList.add('!block');
+        }
+      });
+    });
+    document.addEventListener('click', function() {
+      document.querySelectorAll('.dropdown-menu').forEach(m => m.classList.remove('!block'));
+    });
+
+    // Dark Mode and RTL Toggle System
+    let isDark = localStorage.getItem('payroll_theme') !== 'light';
+    let isRTL = localStorage.getItem('payroll_rtl') === 'enabled';
+
+    function applyDarkMode(enabled) {
+      if (enabled) {
+        document.documentElement.classList.add('dark');
+        document.body.classList.add('dark');
+        document.querySelectorAll('#dark-mode-toggle i, .mobile-dark-toggle i').forEach(icon => {
+          icon.className = 'fas fa-sun text-amber-400';
+        });
+        document.querySelectorAll('.mobile-dark-toggle span').forEach(s => s.textContent = 'Light');
+      } else {
+        document.documentElement.classList.remove('dark');
+        document.body.classList.remove('dark');
+        document.querySelectorAll('#dark-mode-toggle i, .mobile-dark-toggle i').forEach(icon => {
+          icon.className = 'fas fa-moon';
+        });
+        document.querySelectorAll('.mobile-dark-toggle span').forEach(s => s.textContent = 'Dark');
+      }
+      localStorage.setItem('payroll_theme', enabled ? 'dark' : 'light');
+      localStorage.setItem('payroll_dark', enabled ? 'enabled' : 'disabled');
+    }
+
+    function applyRTL(enabled) {
+      if (enabled) {
+        document.documentElement.setAttribute('dir', 'rtl');
+        document.body.classList.add('rtl');
+        document.querySelectorAll('#rtl-toggle, .mobile-rtl-toggle').forEach(btn => btn.textContent = 'LTR');
+      } else {
+        document.documentElement.setAttribute('dir', 'ltr');
+        document.body.classList.remove('rtl');
+        document.querySelectorAll('#rtl-toggle, .mobile-rtl-toggle').forEach(btn => btn.textContent = 'RTL');
+      }
+      localStorage.setItem('payroll_rtl', enabled ? 'enabled' : 'disabled');
+    }
+
+    applyDarkMode(isDark);
+    applyRTL(isRTL);
+
+    document.querySelectorAll('#dark-mode-toggle, .mobile-dark-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        isDark = !isDark;
+        applyDarkMode(isDark);
+      });
+    });
+
+    document.querySelectorAll('#rtl-toggle, .mobile-rtl-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        isRTL = !isRTL;
+        applyRTL(isRTL);
+      });
+    });
+
+    // Interactive Tab Switching
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.tab-btn').forEach(b => {
+          b.className = 'tab-btn px-6 py-2.5 rounded-full font-bold text-sm transition bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:bg-slate-100';
+        });
+        this.className = 'tab-btn px-6 py-2.5 rounded-full font-bold text-sm transition bg-blue-600 text-white shadow-md shadow-blue-600/30';
+
+        const targetId = this.getAttribute('data-target');
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
+        const activeTab = document.getElementById(targetId);
+        if (activeTab) activeTab.classList.remove('hidden');
+      });
+    });
+
+    // Interactive Pay Run Simulation Button
+    const simBtn = document.getElementById('sim-run-btn');
+    const simIcon = document.getElementById('sim-icon');
+    const simText = document.getElementById('sim-text');
+    const simAlert = document.getElementById('sim-alert');
+
+    if (simBtn) {
+      simBtn.addEventListener('click', function() {
+        simIcon.className = 'fas fa-spinner fa-spin';
+        simText.textContent = 'Processing Direct Payouts...';
+        simBtn.disabled = true;
+
+        setTimeout(() => {
+          simIcon.className = 'fas fa-check-circle text-emerald-300';
+          simText.textContent = 'Pay Run Completed!';
+          simBtn.classList.remove('from-blue-600', 'to-indigo-600');
+          simBtn.classList.add('from-emerald-600', 'to-teal-600');
+          simAlert.classList.remove('hidden');
+
+          setTimeout(() => {
+            simIcon.className = 'fas fa-paper-plane';
+            simText.textContent = 'Execute 1-Click Pay Run';
+            simBtn.classList.add('from-blue-600', 'to-indigo-600');
+            simBtn.classList.remove('from-emerald-600', 'to-teal-600');
+            simBtn.disabled = false;
+            simAlert.classList.add('hidden');
+          }, 4000);
+        }, 1200);
+      });
+    }
+
+    // Interactive ROI Calculator Logic
+    const empSlider = document.getElementById('emp-slider');
+    const empCountVal = document.getElementById('emp-count-val');
+    const ctaEmpCount = document.getElementById('cta-emp-count');
+    const calcHours = document.getElementById('calc-hours');
+    const calcSavings = document.getElementById('calc-savings');
+
+    function formatINR(val) {
+      if (val >= 10000000) {
+        return '₹' + (val / 10000000).toFixed(2) + ' Cr';
+      } else if (val >= 100000) {
+        return '₹' + (val / 100000).toFixed(2) + ' Lakhs';
+      } else {
+        return '₹' + val.toLocaleString('en-IN');
+      }
+    }
+
+    function updateCalculator(employees) {
+      if (empCountVal) empCountVal.textContent = employees;
+      if (ctaEmpCount) ctaEmpCount.textContent = employees;
+      if (calcHours) {
+        const hours = Math.max(12, Math.round(employees * 0.45));
+        calcHours.textContent = hours + ' Hours';
+      }
+      if (calcSavings) {
+        const annualSavings = Math.round(employees * 4800);
+        calcSavings.textContent = formatINR(annualSavings);
+      }
+    }
+
+    if (empSlider) {
+      empSlider.addEventListener('input', function() {
+        const val = parseInt(this.value, 10);
+        updateCalculator(val);
+
+        document.querySelectorAll('.preset-btn').forEach(b => {
+          if (parseInt(b.getAttribute('data-value'), 10) === val) {
+            b.className = 'preset-btn px-4 py-1.5 rounded-full text-xs font-bold border border-blue-600 dark:border-blue-500 bg-blue-50 dark:bg-blue-950 text-blue-700 dark:text-blue-300 transition';
+          } else {
+            b.className = 'preset-btn px-4 py-1.5 rounded-full text-xs font-bold border border-slate-200 dark:border-slate-700 hover:border-blue-600 dark:hover:border-blue-500 transition text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-slate-800/80';
+          }
+        });
+      });
+    }
+
+    document.querySelectorAll('.preset-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const val = parseInt(this.getAttribute('data-value'), 10);
+        if (empSlider) empSlider.value = val;
+        updateCalculator(val);
+
+        document.querySelectorAll('.preset-btn').forEach(b => {
+          b.className = 'preset-btn px-4 py-1.5 rounded-full text-xs font-bold border border-slate-200 dark:border-slate-700 hover:border-blue-600 dark:hover:border-blue-500 transition text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-slate-800/80';
+        });
+        this.className = 'preset-btn px-4 py-1.5 rounded-full text-xs font-bold border border-blue-600 dark:border-blue-500 bg-blue-50 dark:bg-blue-950 text-blue-700 dark:text-blue-300 transition';
+      });
+    });
+
+    // Integration Filter Pills Logic
+    document.querySelectorAll('.integ-filter-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.integ-filter-btn').forEach(b => {
+          b.className = 'integ-filter-btn px-5 py-2 rounded-full font-bold text-xs sm:text-sm transition bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700';
+        });
+        this.className = 'integ-filter-btn px-5 py-2 rounded-full font-bold text-xs sm:text-sm transition bg-blue-600 text-white shadow-md shadow-blue-600/30';
+
+        const filter = this.getAttribute('data-filter');
+        document.querySelectorAll('.integ-card').forEach(card => {
+          if (filter === 'all' || card.classList.contains(filter)) {
+            card.classList.remove('hidden');
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+      });
+    });
+
+    // Smooth Page Transitions & Scroll Reveal Animations
+    document.body.classList.add('page-loaded');
+
+    window.addEventListener('pageshow', () => {
+      document.body.classList.remove('page-fading-out');
+      document.body.classList.add('page-loaded');
+    });
+
+    // Intercept internal page link clicks for smooth fade-out
+    document.addEventListener('click', (e) => {
+      const link = e.target.closest('a');
+      if (!link) return;
+      const href = link.getAttribute('href');
+      if (!href) return;
+
+      if (
+        href.startsWith('#') ||
+        href.startsWith('javascript:') ||
+        href.startsWith('mailto:') ||
+        href.startsWith('tel:') ||
+        link.getAttribute('target') === '_blank' ||
+        link.hasAttribute('download') ||
+        href.startsWith('http://') ||
+        href.startsWith('https://')
+      ) {
+        return;
+      }
+
+      if (href.endsWith('.html') || (!href.includes(':') && !href.startsWith('#'))) {
+        e.preventDefault();
+        document.body.classList.remove('page-loaded');
+        document.body.classList.add('page-fading-out');
+        setTimeout(() => {
+          window.location.href = href;
+        }, 250);
+      }
+    });
+
+    // Scroll reveal for sections
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-revealed');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+      document.querySelectorAll('main > section, .reveal-on-scroll').forEach(sec => {
+        sec.classList.add('reveal-on-scroll');
+        observer.observe(sec);
+      });
+    }
+  </script>
+</body>
+</html>
+

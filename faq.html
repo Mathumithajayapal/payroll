@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frequently Asked Questions - Payroll Processing Service</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><path fill='%232563eb' d='M64 32C28.7 32 0 60.7 0 96v320c0 35.3 28.7 64 64 64h384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm96 192a48 48 0 1 1 0-96 48 48 0 1 1 0 96zm176-48a48 48 0 1 1-96 0 48 48 0 1 1 96 0zm-80 144a48 48 0 1 1 0-96 48 48 0 1 1 0 96zm176-48a48 48 0 1 1-96 0 48 48 0 1 1 96 0z'/></svg>" type="image/svg+xml">
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+          }
+        }
+      }
+    };
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    body { font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important; }
+    /* Dark Mode Global Styles */
+    html.dark body { background-color: #0b1120 !important; color: #f1f5f9 !important; }
+    html.dark header { background-color: rgba(15, 23, 42, 0.95) !important; border-color: #1e293b !important; }
+    html.dark .bg-white { background-color: #1e293b !important; color: #f1f5f9 !important; border-color: #334155 !important; }
+    html.dark [class*="bg-white/"] { background-color: rgba(15, 23, 42, 0.92) !important; border-color: #334155 !important; }
+    html.dark .border-white { border-color: #1e293b !important; }
+    html.dark .bg-slate-50 { background-color: #0f172a !important; }
+    html.dark .bg-slate-100 { background-color: #1e293b !important; }
+    html.dark .text-slate-900, html.dark .text-slate-800 { color: #f8fafc !important; }
+    html.dark .text-slate-700, html.dark .text-slate-600 { color: #cbd5e1 !important; }
+    html.dark .text-slate-500, html.dark .text-slate-400 { color: #94a3b8 !important; }
+    html.dark .border-slate-200, html.dark .border-slate-100, html.dark .border-slate-300 { border-color: #334155 !important; }
+    html.dark #mobile-menu { background-color: #0f172a !important; border-color: #3b82f6 !important; color: #f1f5f9 !important; }
+    html.dark .dropdown-menu .bg-white { background-color: #1e293b !important; border-color: #334155 !important; }
+    html.dark .dropdown-menu a { color: #e2e8f0 !important; }
+    html.dark .dropdown-menu a:hover { background-color: #2563eb !important; color: #ffffff !important; }
+    html.dark footer { background-color: #0f172a !important; border-color: #1e293b !important; }
+    html.dark input, html.dark select, html.dark textarea { background-color: #0f172a !important; color: #f8fafc !important; border-color: #334155 !important; }
+
+    /* FAQ Category Filter Buttons (Hover & Active States) */
+    .faq-filter-btn {
+      transition: all 0.2s ease-in-out !important;
+      cursor: pointer;
+    }
+    /* Inactive State - Light Mode */
+    .faq-filter-btn:not(.active) {
+      background-color: #ffffff !important;
+      color: #334155 !important;
+      border: 1px solid #cbd5e1 !important;
+    }
+    /* Inactive Hover State - Light Mode: Clear vibrant text & background */
+    .faq-filter-btn:not(.active):hover {
+      background-color: #eff6ff !important;
+      color: #1d4ed8 !important;
+      border-color: #3b82f6 !important;
+      box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.15) !important;
+    }
+    /* Active State - Both Modes */
+    .faq-filter-btn.active {
+      background-color: #2563eb !important;
+      color: #ffffff !important;
+      border: 1px solid #2563eb !important;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35) !important;
+    }
+    .faq-filter-btn.active:hover {
+      background-color: #1d4ed8 !important;
+      color: #ffffff !important;
+      border-color: #1d4ed8 !important;
+    }
+    /* Inactive State - Dark Mode */
+    html.dark .faq-filter-btn:not(.active) {
+      background-color: #1e293b !important;
+      color: #e2e8f0 !important;
+      border: 1px solid #334155 !important;
+    }
+    /* Inactive Hover State - Dark Mode: High-contrast electric blue text on dark slate */
+    html.dark .faq-filter-btn:not(.active):hover {
+      background-color: #0f172a !important;
+      color: #60a5fa !important;
+      border-color: #3b82f6 !important;
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25) !important;
+    }
+
+    /* RTL Direction Styles */
+    html[dir="rtl"] { direction: rtl; text-align: right; }
+    html[dir="rtl"] .dropdown-menu.left-0 { left: auto !important; right: 0 !important; }
+    html[dir="rtl"] .dropdown-menu.right-0 { right: auto !important; left: 0 !important; }
+    html[dir="rtl"] .mr-1, html[dir="rtl"] .mr-2, html[dir="rtl"] .mr-3 { margin-right: 0 !important; margin-left: 0.5rem !important; }
+    html[dir="rtl"] .ml-1, html[dir="rtl"] .ml-2, html[dir="rtl"] .ml-3 { margin-left: 0 !important; margin-right: 0.5rem !important; }
+
+    /* Smooth Page Transitions & Scroll Reveal */
+    html { scroll-behavior: smooth; }
+    body {
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out !important;
+    }
+    body.page-loaded {
+      opacity: 1 !important;
+    }
+    body.page-fading-out {
+      opacity: 0 !important;
+    }
+    .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+    .reveal-on-scroll.is-revealed {
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans flex flex-col min-h-screen dark">
+
+  <!-- Navbar -->
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
+      <a href="index.html" class="flex items-center gap-2 text-2xl font-bold text-blue-700 dark:text-blue-400">
+        <i class="fas fa-file-invoice-dollar text-blue-600 dark:text-blue-400"></i>
+        <span>PayrollPro</span>
+      </a>
+      
+      <!-- Desktop Nav -->
+      <nav class="hidden xl:flex items-center gap-1 font-medium text-sm">
+        <div class="relative group">
+          <button type="button" class="dropdown-btn px-3 py-2 rounded-full hover:bg-blue-50 hover:text-blue-700 transition flex items-center">Home <i class="fas fa-caret-down ml-1 text-xs"></i></button>
+          <div class="dropdown-menu absolute left-0 top-full pt-1.5 hidden group-hover:block w-40 z-50">
+            <div class="bg-white border border-slate-200 rounded-xl shadow-xl overflow-hidden py-1">
+              <a href="index.html" class="block px-4 py-2 hover:bg-blue-600 hover:text-white text-slate-700 transition text-sm">Home1</a>
+              <a href="home2.html" class="block px-4 py-2 hover:bg-blue-600 hover:text-white text-slate-700 transition text-sm">Home2</a>
+            </div>
+          </div>
+        </div>
+        <a href="about.html" class="px-3 py-2 rounded-full hover:bg-blue-50 hover:text-blue-700 transition">About</a>
+        <a href="service.html" class="px-3 py-2 rounded-full hover:bg-blue-50 hover:text-blue-700 transition">Service</a>
+        <a href="Blog.html" class="px-3 py-2 rounded-full hover:bg-blue-50 hover:text-blue-700 transition">Blog</a>
+        <a href="pricing.html" class="px-3 py-2 rounded-full hover:bg-blue-50 hover:text-blue-700 transition">Pricing</a>
+        <a href="resources.html" class="px-3 py-2 rounded-full hover:bg-blue-50 hover:text-blue-700 transition">Resource</a>
+        <a href="faq.html" class="px-3 py-2 rounded-full bg-blue-50 text-blue-700 font-semibold transition">FAQ</a>
+        <a href="contact.html" class="px-3 py-2 rounded-full hover:bg-blue-50 hover:text-blue-700 transition">Contact</a>
+        <div class="relative group">
+          <button type="button" class="dropdown-btn px-3 py-2 rounded-full hover:bg-blue-50 hover:text-blue-700 transition flex items-center">Dashboard <i class="fas fa-caret-down ml-1 text-xs"></i></button>
+          <div class="dropdown-menu absolute right-0 top-full pt-1.5 hidden group-hover:block w-44 z-50">
+            <div class="bg-white border border-slate-200 rounded-xl shadow-xl overflow-hidden py-1">
+              <a href="user.html" class="block px-4 py-2 hover:bg-blue-600 hover:text-white text-slate-700 transition text-sm">User Dashboard</a>
+              <a href="admin.html" class="block px-4 py-2 hover:bg-blue-600 hover:text-white text-slate-700 transition text-sm">Admin Dashboard</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Actions -->
+      <div class="flex items-center gap-3">
+        <button id="dark-mode-toggle" title="Toggle Dark/Light Mode" class="w-9 h-9 rounded-full flex items-center justify-center text-slate-600 hover:text-blue-700 hover:bg-blue-50 transition text-lg">
+          <i class="fas fa-sun text-amber-400"></i>
+        </button>
+        <button id="rtl-toggle" title="Toggle RTL/LTR" class="px-2.5 py-1 rounded-full border border-slate-300 text-slate-600 hover:text-blue-700 hover:border-blue-600 transition text-xs font-bold tracking-wider">
+          RTL
+        </button>
+        <a href="signin.html" class="hidden sm:inline-flex items-center justify-center px-5 py-2 border-2 border-blue-600 text-blue-600 font-bold rounded-full hover:bg-blue-600 hover:text-white transition">Log in</a>
+        <button id="hamburger-btn" class="xl:hidden text-2xl text-slate-700 hover:text-blue-700 transition">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Hamburger Menu Overlay -->
+  <div id="mobile-menu" class="fixed inset-y-0 right-0 w-4/5 max-w-sm bg-white shadow-2xl z-[100] transform translate-x-full transition-transform duration-300 flex flex-col border-l-4 border-blue-600">
+    <div class="p-6 flex justify-between items-center border-b border-slate-100">
+      <a href="index.html" class="flex items-center gap-2 text-xl font-bold text-blue-700 dark:text-blue-400">
+        <i class="fas fa-file-invoice-dollar text-blue-600 dark:text-blue-400"></i>
+        <span>PayrollPro</span>
+      </a>
+      <button id="close-menu-btn" class="text-2xl text-slate-500 hover:text-red-500"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="p-6 overflow-y-auto flex-grow flex flex-col gap-2">
+      <!-- Mobile Appearance Controls -->
+      <div class="flex items-center justify-between pb-4 mb-2 border-b border-slate-100">
+        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Appearance</span>
+        <div class="flex items-center gap-2">
+          <button class="mobile-dark-toggle px-3 py-1.5 rounded-xl border border-slate-200 text-xs font-semibold text-slate-700 flex items-center gap-1.5 hover:bg-slate-50 transition">
+            <i class="fas fa-sun text-amber-400"></i> <span>Light</span>
+          </button>
+          <button class="mobile-rtl-toggle px-3 py-1.5 rounded-xl border border-slate-200 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition">
+            RTL
+          </button>
+        </div>
+      </div>
+      <a href="index.html" class="px-4 py-3 rounded-xl border-2 border-slate-100 font-semibold text-slate-700 hover:bg-blue-50 hover:border-blue-600 transition">Home1</a>
+      <a href="home2.html" class="px-4 py-3 rounded-xl border-2 border-slate-100 font-semibold text-slate-700 hover:bg-blue-50 hover:border-blue-600 transition">Home2</a>
+      <a href="about.html" class="px-4 py-3 rounded-xl border-2 border-slate-100 font-semibold text-slate-700 hover:bg-blue-50 hover:border-blue-600 transition">About</a>
+      <a href="service.html" class="px-4 py-3 rounded-xl border-2 border-slate-100 font-semibold text-slate-700 hover:bg-blue-50 hover:border-blue-600 transition">Service</a>
+      <a href="Blog.html" class="px-4 py-3 rounded-xl border-2 border-slate-100 font-semibold text-slate-700 hover:bg-blue-50 hover:border-blue-600 transition">Blog</a>
+      <a href="pricing.html" class="px-4 py-3 rounded-xl border-2 border-slate-100 font-semibold text-slate-700 hover:bg-blue-50 hover:border-blue-600 transition">Pricing</a>
+      <a href="resources.html" class="px-4 py-3 rounded-xl border-2 border-slate-100 font-semibold text-slate-700 hover:bg-blue-50 hover:border-blue-600 transition">Resource</a>
+      <a href="faq.html" class="px-4 py-3 rounded-xl bg-blue-50 border-2 border-blue-600 font-bold text-blue-700 transition">FAQ</a>
+      <a href="contact.html" class="px-4 py-3 rounded-xl border-2 border-slate-100 font-semibold text-slate-700 hover:bg-blue-50 hover:border-blue-600 transition">Contact</a>
+      <div class="mt-2 pt-2 border-t border-slate-200 flex flex-col gap-1">
+        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider px-2 py-1">Dashboards</span>
+        <a href="user.html" class="px-4 py-3 rounded-xl border-2 border-slate-100 font-semibold text-slate-700 hover:bg-blue-50 hover:border-blue-600 transition">User Dashboard</a>
+        <a href="admin.html" class="px-4 py-3 rounded-xl border-2 border-slate-100 font-semibold text-slate-700 hover:bg-blue-50 hover:border-blue-600 transition">Admin Dashboard</a>
+      </div>
+      <a href="signin.html" class="px-4 py-3 rounded-xl bg-blue-600 text-white font-bold mt-4 text-center hover:bg-blue-700 transition">Log In</a>
+    </div>
+  </div>
+  <div id="mobile-overlay" class="fixed inset-0 bg-black/60 z-[90] hidden opacity-0 transition-opacity duration-300"></div>
+
+  <!-- Hero Banner -->
+  <main class="flex-grow">
+    <section class="relative w-full min-h-[60vh] flex items-center bg-fixed bg-cover bg-center bg-no-repeat border-b-4 border-blue-600 py-20 sm:py-24 lg:py-28" style="background-image: url('images/payroll (1).jpg');">
+      <div class="absolute inset-0 bg-gradient-to-br from-blue-900/90 to-slate-900/90 z-10"></div>
+      <div class="relative z-20 max-w-4xl mx-auto text-center px-4 sm:px-6">
+        <span class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-blue-500/20 text-blue-200 border border-blue-400/30 font-bold text-sm mb-6 backdrop-blur-sm">
+          <i class="fas fa-question-circle"></i> Instant Help & Clear Answers
+        </span>
+        <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight mb-6 drop-shadow-lg">
+          Frequently Asked Questions
+        </h1>
+        <p class="text-lg md:text-xl text-blue-100 mb-10 leading-relaxed max-w-2xl mx-auto drop-shadow-md">
+          Explore answers to everything about automated salary runs, statutory tax filings, security protocols, and painless onboarding.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
+          <a href="#faq-accordion-section" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-3.5 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-full shadow-lg shadow-blue-600/30 transition transform hover:-translate-y-1">
+            <i class="fas fa-search mr-2"></i> Browse Questions
+          </a>
+          <a href="contact.html" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-3.5 bg-transparent border-2 border-white text-white font-bold rounded-full hover:bg-white hover:text-slate-900 transition transform hover:-translate-y-1">
+            <i class="fas fa-comments mr-2"></i> Talk to an Expert
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 1: Interactive Search & Categorized FAQ Accordion (UNIQUE DESIGN 1) -->
+    <section id="faq-accordion-section" class="py-20 bg-slate-50 border-b border-slate-200">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Section Header -->
+        <div class="text-center max-w-3xl mx-auto mb-12">
+          <span class="text-blue-600 font-bold text-sm uppercase tracking-wider bg-blue-50 px-4 py-1.5 rounded-full border border-blue-200 inline-block mb-3">
+            Knowledge Hub
+          </span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-4">
+            Find Quick Answers to Common Inquiries
+          </h2>
+          <p class="text-slate-600 text-base sm:text-lg">
+            Use the search bar or filter by category to locate the information you need in seconds.
+          </p>
+        </div>
+
+        <!-- Live Search Bar -->
+        <div class="relative max-w-2xl mx-auto mb-10">
+          <div class="relative">
+            <i class="fas fa-search absolute left-5 top-1/2 -translate-y-1/2 text-slate-400 text-lg"></i>
+            <input 
+              type="text" 
+              id="faq-search-input" 
+              placeholder="Search questions (e.g., TDS, direct deposit, Form 16, pricing)..." 
+              class="w-full pl-14 pr-12 py-4 rounded-2xl border-2 border-slate-200 bg-white text-slate-800 focus:outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-100 shadow-sm transition-all text-base"
+            />
+            <button id="clear-search-btn" class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 hidden">
+              <i class="fas fa-times-circle text-lg"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Category Filter Tabs -->
+        <div class="flex flex-wrap justify-center gap-2 sm:gap-3 mb-12">
+          <button class="faq-filter-btn active px-5 py-2.5 rounded-full font-bold text-sm transition-all" data-category="all">
+            All Questions
+          </button>
+          <button class="faq-filter-btn px-5 py-2.5 rounded-full font-bold text-sm transition-all" data-category="payroll">
+            Payroll & Direct Deposit
+          </button>
+          <button class="faq-filter-btn px-5 py-2.5 rounded-full font-bold text-sm transition-all" data-category="tax">
+            Taxes & Statutory Compliance
+          </button>
+          <button class="faq-filter-btn px-5 py-2.5 rounded-full font-bold text-sm transition-all" data-category="portal">
+            Employee Portal (ESS)
+          </button>
+          <button class="faq-filter-btn px-5 py-2.5 rounded-full font-bold text-sm transition-all" data-category="security">
+            Security & Onboarding
+          </button>
+        </div>
+
+        <!-- Accordion List -->
+        <div class="space-y-4" id="faq-list">
+          <!-- FAQ 1: Payroll -->
+          <div class="faq-item bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs hover:border-blue-300 transition duration-300" data-category="payroll">
+            <button class="faq-question-btn w-full px-6 py-5 text-left flex justify-between items-center gap-4 focus:outline-none">
+              <span class="font-bold text-slate-900 text-base sm:text-lg">How quickly are employee salaries credited to their bank accounts?</span>
+              <div class="w-8 h-8 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center flex-shrink-0 transition-transform duration-300">
+                <i class="fas fa-chevron-down text-xs"></i>
+              </div>
+            </button>
+            <div class="faq-answer-panel px-6 pb-6 text-slate-600 text-sm leading-relaxed hidden border-t border-slate-100 pt-4">
+              With our direct commercial banking integrations, salary batches are processed via instant NEFT and IMPS rails. Once authorized by your payroll admin, salary credits typically arrive in employee accounts within minutes, backed by immediate automated SMS and email notifications.
+            </div>
+          </div>
+
+          <!-- FAQ 2: Tax -->
+          <div class="faq-item bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs hover:border-blue-300 transition duration-300" data-category="tax">
+            <button class="faq-question-btn w-full px-6 py-5 text-left flex justify-between items-center gap-4 focus:outline-none">
+              <span class="font-bold text-slate-900 text-base sm:text-lg">Does PayrollPro automatically deduct Provident Fund (PF), ESI, and TDS?</span>
+              <div class="w-8 h-8 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center flex-shrink-0 transition-transform duration-300">
+                <i class="fas fa-chevron-down text-xs"></i>
+              </div>
+            </button>
+            <div class="faq-answer-panel px-6 pb-6 text-slate-600 text-sm leading-relaxed hidden border-t border-slate-100 pt-4">
+              Yes, 100%. Our compliance engine automatically computes statutory deductions including PF (Employee + Employer share), ESI, State Professional Tax (PT), and Income Tax TDS slabs. Pre-validated challans and ECR filing files are generated automatically each month.
+            </div>
+          </div>
+
+          <!-- FAQ 3: Portal -->
+          <div class="faq-item bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs hover:border-blue-300 transition duration-300" data-category="portal">
+            <button class="faq-question-btn w-full px-6 py-5 text-left flex justify-between items-center gap-4 focus:outline-none">
+              <span class="font-bold text-slate-900 text-base sm:text-lg">How do employees access their monthly payslips and tax declarations?</span>
+              <div class="w-8 h-8 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center flex-shrink-0 transition-transform duration-300">
+                <i class="fas fa-chevron-down text-xs"></i>
+              </div>
+            </button>
+            <div class="faq-answer-panel px-6 pb-6 text-slate-600 text-sm leading-relaxed hidden border-t border-slate-100 pt-4">
+              Employees can log in to the Employee Self-Service (ESS) web portal or native mobile app (iOS & Android) at any time. They can download password-protected PDF payslips, submit Section 80C/80D investment declarations, track leave balances, and upload medical/travel reimbursement receipts.
+            </div>
+          </div>
+
+          <!-- FAQ 4: Security -->
+          <div class="faq-item bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs hover:border-blue-300 transition duration-300" data-category="security">
+            <button class="faq-question-btn w-full px-6 py-5 text-left flex justify-between items-center gap-4 focus:outline-none">
+              <span class="font-bold text-slate-900 text-base sm:text-lg">How secure is our company financial and employee salary data?</span>
+              <div class="w-8 h-8 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center flex-shrink-0 transition-transform duration-300">
+                <i class="fas fa-chevron-down text-xs"></i>
+              </div>
+            </button>
+            <div class="faq-answer-panel px-6 pb-6 text-slate-600 text-sm leading-relaxed hidden border-t border-slate-100 pt-4">
+              We employ bank-grade 256-bit AES encryption for all data at rest and TLS 1.3 encryption for data in transit. We are certified compliant with SOC-2 Type II and ISO/IEC 27001 standards. Strict role-based permissions ensure that sensitive salary information is only accessible by designated executives.
+            </div>
+          </div>
+
+          <!-- FAQ 5: Payroll -->
+          <div class="faq-item bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs hover:border-blue-300 transition duration-300" data-category="payroll">
+            <button class="faq-question-btn w-full px-6 py-5 text-left flex justify-between items-center gap-4 focus:outline-none">
+              <span class="font-bold text-slate-900 text-base sm:text-lg">Can PayrollPro integrate with our biometric attendance machine?</span>
+              <div class="w-8 h-8 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center flex-shrink-0 transition-transform duration-300">
+                <i class="fas fa-chevron-down text-xs"></i>
+              </div>
+            </button>
+            <div class="faq-answer-panel px-6 pb-6 text-slate-600 text-sm leading-relaxed hidden border-t border-slate-100 pt-4">
+              Yes. We provide native API integrations with leading biometric clock brands including ZKTeco, Matrix, Realtime, and eSSL. Punch times, shift rosters, half-days, and unpaid leaves sync automatically into monthly payroll without requiring manual CSV uploads.
+            </div>
+          </div>
+
+          <!-- FAQ 6: Security -->
+          <div class="faq-item bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs hover:border-blue-300 transition duration-300" data-category="security">
+            <button class="faq-question-btn w-full px-6 py-5 text-left flex justify-between items-center gap-4 focus:outline-none">
+              <span class="font-bold text-slate-900 text-base sm:text-lg">How long does it take to migrate our existing data from spreadsheets or old software?</span>
+              <div class="w-8 h-8 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center flex-shrink-0 transition-transform duration-300">
+                <i class="fas fa-chevron-down text-xs"></i>
+              </div>
+            </button>
+            <div class="faq-answer-panel px-6 pb-6 text-slate-600 text-sm leading-relaxed hidden border-t border-slate-100 pt-4">
+              Most businesses complete full onboarding within 2 to 4 business days. Our dedicated onboarding specialist imports your historical salary registers, runs a parallel test pay run alongside your current system, and ensures 100% calculation parity before you go live.
+            </div>
+          </div>
+        </div>
+
+        <div id="no-faq-results" class="hidden text-center py-12">
+          <i class="fas fa-search text-slate-300 text-4xl mb-3"></i>
+          <p class="text-slate-600 font-bold">No questions found matching your search.</p>
+          <p class="text-slate-400 text-xs mt-1">Try another keyword or reach out directly to our live support team.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: 24/7 Priority Support & Help Desk (IMAGE FIXING SECTION 1) -->
+    <section class="py-20 bg-white border-b border-slate-200 overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <!-- Image Column on Left -->
+          <div class="lg:col-span-5 relative">
+            <div class="relative mx-auto rounded-3xl overflow-hidden shadow-2xl border-4 border-slate-100 group">
+              <!-- High-resolution customer support & human assistance image -->
+              <img 
+                src="images/about3.jpg" 
+                alt="Payroll Support Specialist" 
+                class="w-full h-[460px] object-cover group-hover:scale-105 transition-transform duration-700"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950/75 via-transparent to-transparent"></div>
+
+              <!-- Floating Live Support Badge -->
+              <div class="absolute bottom-6 left-6 right-6 bg-white/95 backdrop-blur-md p-4 rounded-2xl shadow-xl border border-slate-100 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-full bg-emerald-500 text-white flex items-center justify-center font-bold">
+                    <i class="fas fa-headset"></i>
+                  </div>
+                  <div>
+                    <div class="text-xs text-slate-400 font-semibold uppercase">Dedicated Specialist</div>
+                    <div class="text-sm font-extrabold text-slate-900">&lt; 15 Min Response SLA</div>
+                  </div>
+                </div>
+                <span class="w-3 h-3 rounded-full bg-emerald-500 animate-ping"></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Content on Right -->
+          <div class="lg:col-span-7 space-y-6">
+            <span class="text-blue-600 font-bold text-sm uppercase tracking-wider bg-blue-50 px-4 py-1.5 rounded-full border border-blue-200 inline-block">
+              Always by Your Side
+            </span>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
+              Real Payroll Experts, Not Endless Chatbots
+            </h2>
+            <p class="text-slate-600 text-base sm:text-lg leading-relaxed">
+              When it comes to payroll, you can't afford to wait 48 hours for an automated email reply. Every PayrollPro customer is backed by a certified payroll and tax accountant ready to assist over phone, email, and live Slack connect.
+            </p>
+
+            <div class="space-y-4 pt-2">
+              <div class="flex items-start gap-4 p-4 rounded-2xl bg-slate-50 border border-slate-100">
+                <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <i class="fas fa-phone-volume"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-slate-900 text-base">Direct Emergency Hotline</h4>
+                  <p class="text-slate-500 text-xs leading-relaxed">Dedicated phone line during salary disbursement days to resolve any urgent bank rejections instantly.</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-4 p-4 rounded-2xl bg-slate-50 border border-slate-100">
+                <div class="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <i class="fas fa-file-invoice"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-slate-900 text-base">Annual Tax Filing Support</h4>
+                  <p class="text-slate-500 text-xs leading-relaxed">Complete guidance for generating Form 16 Part A and Part B for all full-time and contractual employees.</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-4 p-4 rounded-2xl bg-slate-50 border border-slate-100">
+                <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <i class="fas fa-user-check"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-slate-900 text-base">Quarterly Labor Law Briefings</h4>
+                  <p class="text-slate-500 text-xs leading-relaxed">Our legal team sends proactive summaries whenever minimum wage, PF thresholds, or state tax slabs change.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: 100% Tax Accuracy Guarantee & Security Audit (IMAGE FIXING SECTION 2) -->
+    <section class="py-20 bg-slate-900 text-white relative overflow-hidden">
+      <div class="absolute top-0 right-0 -mr-20 -mt-20 w-80 h-80 rounded-full bg-blue-600 opacity-20 blur-3xl pointer-events-none"></div>
+      <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-indigo-500 opacity-20 blur-3xl pointer-events-none"></div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <!-- Text on Left -->
+          <div class="lg:col-span-7 space-y-6">
+            <span class="text-blue-400 font-bold text-sm uppercase tracking-wider bg-blue-900/60 border border-blue-500/30 px-4 py-1.5 rounded-full inline-block">
+              Zero-Penalty Indemnity
+            </span>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight leading-tight">
+              Our 100% Statutory Compliance & Accuracy Guarantee
+            </h2>
+            <p class="text-slate-300 text-base sm:text-lg leading-relaxed">
+              We stand behind every single calculation. If your organization incurs any government fine or penalty due to an error generated by our platform, we reimburse 100% of the penalty cost.
+            </p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4">
+              <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700/60 text-center">
+                <i class="fas fa-shield-alt text-2xl text-blue-400 mb-2 block"></i>
+                <div class="font-bold text-white text-base">Full Indemnity</div>
+                <div class="text-xs text-slate-400 mt-1">Written penalty coverage</div>
+              </div>
+
+              <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700/60 text-center">
+                <i class="fas fa-robot text-2xl text-indigo-400 mb-2 block"></i>
+                <div class="font-bold text-white text-base">AI Pre-Audit</div>
+                <div class="text-xs text-slate-400 mt-1">Discrepancy alerts</div>
+              </div>
+
+              <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700/60 text-center">
+                <i class="fas fa-certificate text-2xl text-emerald-400 mb-2 block"></i>
+                <div class="font-bold text-white text-base">ISO 27001</div>
+                <div class="text-xs text-slate-400 mt-1">Certified cloud protocols</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Image on Right -->
+          <div class="lg:col-span-5 relative">
+            <div class="relative mx-auto rounded-3xl overflow-hidden shadow-2xl border-4 border-slate-700/60 group">
+              <!-- High-resolution audit & verification photo -->
+              <img 
+                src="images/payroll (11).jpg" 
+                alt="Audit and Tax Verification" 
+                class="w-full h-[440px] object-cover group-hover:scale-105 transition-transform duration-700"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
+
+              <!-- Verified Badge -->
+              <div class="absolute bottom-6 left-6 right-6 p-4 rounded-2xl bg-slate-900/90 backdrop-blur-md border border-slate-700 flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold">
+                  <i class="fas fa-check-circle"></i>
+                </div>
+                <div>
+                  <div class="text-xs text-slate-400 uppercase font-bold">Compliance Status</div>
+                  <div class="text-sm font-extrabold text-white">100% Tax Compliant Guaranteed</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: Downloadable Guides & Knowledge Base Bento Grid (UNIQUE DESIGN 4) -->
+    <section class="py-20 bg-slate-50 border-b border-slate-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Section Header -->
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <span class="text-blue-600 font-bold text-sm uppercase tracking-wider bg-blue-50 px-4 py-1.5 rounded-full border border-blue-200 inline-block mb-3">
+            Self-Service Resources
+          </span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-4">
+            Free Guides, Checklists & Policy Templates
+          </h2>
+          <p class="text-slate-600 text-base sm:text-lg">
+            Download our curated payroll guides to educate your HR team and optimize company compliance.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Guide Card 1 -->
+          <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm hover:shadow-lg hover:border-blue-300 transition group flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl mb-4 group-hover:bg-blue-600 group-hover:text-white transition">
+                <i class="fas fa-file-pdf"></i>
+              </div>
+              <span class="px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-700 text-xs font-bold uppercase">PDF Guide</span>
+              <h3 class="text-lg font-bold text-slate-900 mt-2 mb-2 group-hover:text-blue-600 transition">Annual Form 16 Preparation Checklist</h3>
+              <p class="text-slate-500 text-xs leading-relaxed mb-4">
+                A step-by-step master checklist for HR teams to verify employee tax deductions, investment proofs, and Form 24Q submissions.
+              </p>
+            </div>
+            <a href="contact.html" class="inline-flex items-center text-xs font-bold text-blue-600 hover:text-blue-800 gap-1 pt-3 border-t border-slate-100">
+              Download Free Guide <i class="fas fa-arrow-down ml-1"></i>
+            </a>
+          </div>
+
+          <!-- Guide Card 2 -->
+          <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm hover:shadow-lg hover:border-blue-300 transition group flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-xl mb-4 group-hover:bg-indigo-600 group-hover:text-white transition">
+                <i class="fas fa-clock"></i>
+              </div>
+              <span class="px-2.5 py-0.5 rounded-full bg-indigo-100 text-indigo-700 text-xs font-bold uppercase">Template</span>
+              <h3 class="text-lg font-bold text-slate-900 mt-2 mb-2 group-hover:text-indigo-600 transition">Overtime & Shift Policy Framework</h3>
+              <p class="text-slate-500 text-xs leading-relaxed mb-4">
+                Customizable policy templates outlining night shift differentials, weekend multipliers, and holiday bonus allowances.
+              </p>
+            </div>
+            <a href="contact.html" class="inline-flex items-center text-xs font-bold text-indigo-600 hover:text-indigo-800 gap-1 pt-3 border-t border-slate-100">
+              Download Template <i class="fas fa-arrow-down ml-1"></i>
+            </a>
+          </div>
+
+          <!-- Guide Card 3 -->
+          <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm hover:shadow-lg hover:border-blue-300 transition group flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl mb-4 group-hover:bg-emerald-600 group-hover:text-white transition">
+                <i class="fas fa-calculator"></i>
+              </div>
+              <span class="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-700 text-xs font-bold uppercase">Spreadsheet</span>
+              <h3 class="text-lg font-bold text-slate-900 mt-2 mb-2 group-hover:text-emerald-600 transition">Gross vs. Net Salary Simulator</h3>
+              <p class="text-slate-500 text-xs leading-relaxed mb-4">
+                Interactive compensation planner to calculate exact employee take-home pay under both new and old tax regimes.
+              </p>
+            </div>
+            <a href="contact.html" class="inline-flex items-center text-xs font-bold text-emerald-600 hover:text-emerald-800 gap-1 pt-3 border-t border-slate-100">
+              Download Simulator <i class="fas fa-arrow-down ml-1"></i>
+            </a>
+          </div>
+
+          <!-- Guide Card 4 -->
+          <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm hover:shadow-lg hover:border-blue-300 transition group flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-2xl bg-cyan-50 text-cyan-600 flex items-center justify-center text-xl mb-4 group-hover:bg-cyan-600 group-hover:text-white transition">
+                <i class="fas fa-fingerprint"></i>
+              </div>
+              <span class="px-2.5 py-0.5 rounded-full bg-cyan-100 text-cyan-700 text-xs font-bold uppercase">Manual</span>
+              <h3 class="text-lg font-bold text-slate-900 mt-2 mb-2 group-hover:text-cyan-600 transition">Biometric Attendance Hardware Setup</h3>
+              <p class="text-slate-500 text-xs leading-relaxed mb-4">
+                Technical setup documentation for connecting ZKTeco, Matrix, and facial recognition clocks to PayrollPro via webhooks.
+              </p>
+            </div>
+            <a href="contact.html" class="inline-flex items-center text-xs font-bold text-cyan-600 hover:text-cyan-800 gap-1 pt-3 border-t border-slate-100">
+              Download Manual <i class="fas fa-arrow-down ml-1"></i>
+            </a>
+          </div>
+
+          <!-- Guide Card 5 -->
+          <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm hover:shadow-lg hover:border-blue-300 transition group flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center text-xl mb-4 group-hover:bg-amber-600 group-hover:text-white transition">
+                <i class="fas fa-receipt"></i>
+              </div>
+              <span class="px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-700 text-xs font-bold uppercase">Policy Doc</span>
+              <h3 class="text-lg font-bold text-slate-900 mt-2 mb-2 group-hover:text-amber-600 transition">Travel & Expense Reimbursement Policy</h3>
+              <p class="text-slate-500 text-xs leading-relaxed mb-4">
+                Clear rules and per-diem guidelines for employee travel, meals, lodging, and fuel claims with zero tax ambiguities.
+              </p>
+            </div>
+            <a href="contact.html" class="inline-flex items-center text-xs font-bold text-amber-600 hover:text-amber-800 gap-1 pt-3 border-t border-slate-100">
+              Download Policy <i class="fas fa-arrow-down ml-1"></i>
+            </a>
+          </div>
+
+          <!-- Guide Card 6 -->
+          <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm hover:shadow-lg hover:border-blue-300 transition group flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center text-xl mb-4 group-hover:bg-rose-600 group-hover:text-white transition">
+                <i class="fas fa-clipboard-check"></i>
+              </div>
+              <span class="px-2.5 py-0.5 rounded-full bg-rose-100 text-rose-700 text-xs font-bold uppercase">Audit Tool</span>
+              <h3 class="text-lg font-bold text-slate-900 mt-2 mb-2 group-hover:text-rose-600 transition">Quarterly Statutory Audit Readiness Tool</h3>
+              <p class="text-slate-500 text-xs leading-relaxed mb-4">
+                Verify PF, ESI, and PT remittance receipts against bank transaction registers to maintain 100% clean audit books.
+              </p>
+            </div>
+            <a href="contact.html" class="inline-flex items-center text-xs font-bold text-rose-600 hover:text-rose-800 gap-1 pt-3 border-t border-slate-100">
+              Download Tool <i class="fas fa-arrow-down ml-1"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: Multi-Channel Assistance & High-Conversion Contact CTA (UNIQUE DESIGN 5) -->
+    <section class="py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <span class="text-blue-600 font-bold text-sm uppercase tracking-wider bg-blue-50 px-4 py-1.5 rounded-full border border-blue-200 inline-block mb-3">
+            Still Have Questions?
+          </span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-4">
+            We are Here to Help You Every Step of the Way
+          </h2>
+          <p class="text-slate-600 text-base sm:text-lg">
+            Choose your preferred communication channel and speak directly with our payroll support team.
+          </p>
+        </div>
+
+        <!-- 3 Contact Channels -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+          <!-- Channel 1 -->
+          <div class="bg-slate-50 rounded-3xl p-8 border border-slate-200 text-center hover:shadow-lg transition">
+            <div class="w-14 h-14 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-2xl mx-auto mb-4">
+              <i class="fas fa-phone-alt"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 mb-2">Phone Consultation</h3>
+            <p class="text-slate-500 text-xs mb-4">Available Monday – Friday, 9:00 AM – 7:00 PM IST</p>
+            <a href="tel:+9118001234567" class="inline-block px-6 py-2.5 bg-blue-600 text-white font-bold rounded-full text-sm hover:bg-blue-700 transition">
+              +91 1800 123 4567
+            </a>
+          </div>
+
+          <!-- Channel 2 -->
+          <div class="bg-slate-50 rounded-3xl p-8 border border-slate-200 text-center hover:shadow-lg transition">
+            <div class="w-14 h-14 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-2xl mx-auto mb-4">
+              <i class="fas fa-comments"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 mb-2">Live Chat & WhatsApp</h3>
+            <p class="text-slate-500 text-xs mb-4">Fastest response for urgent payroll questions</p>
+            <a href="contact.html" class="inline-block px-6 py-2.5 bg-emerald-600 text-white font-bold rounded-full text-sm hover:bg-emerald-700 transition">
+              Chat With an Expert
+            </a>
+          </div>
+
+          <!-- Channel 3 -->
+          <div class="bg-slate-50 rounded-3xl p-8 border border-slate-200 text-center hover:shadow-lg transition">
+            <div class="w-14 h-14 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center text-2xl mx-auto mb-4">
+              <i class="fas fa-envelope-open-text"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 mb-2">Email Helpdesk</h3>
+            <p class="text-slate-500 text-xs mb-4">Detailed answers to custom compliance inquiries</p>
+            <a href="mailto:support@payrollpro.in" class="inline-block px-6 py-2.5 bg-indigo-600 text-white font-bold rounded-full text-sm hover:bg-indigo-700 transition">
+              support@payrollpro.in
+            </a>
+          </div>
+        </div>
+
+        <!-- High Conversion Call to Action Banner -->
+        <div class="relative bg-gradient-to-r from-blue-700 to-indigo-800 rounded-3xl p-8 sm:p-14 text-white text-center overflow-hidden shadow-2xl">
+          <div class="absolute -top-10 -right-10 w-64 h-64 bg-white/10 rounded-full blur-2xl pointer-events-none"></div>
+          <div class="absolute -bottom-10 -left-10 w-64 h-64 bg-blue-500/20 rounded-full blur-2xl pointer-events-none"></div>
+
+          <div class="relative z-10 max-w-2xl mx-auto space-y-6">
+            <h3 class="text-3xl sm:text-4xl font-extrabold tracking-tight">
+              Ready to See PayrollPro in Action?
+            </h3>
+            <p class="text-blue-100 text-base sm:text-lg">
+              Book an interactive product walk-through or start your free 14-day trial today.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4 pt-2">
+              <a href="signup.html" class="px-8 py-3.5 bg-white text-blue-700 font-extrabold rounded-full shadow-lg hover:bg-blue-50 transition transform hover:-translate-y-0.5">
+                Start Free Trial
+              </a>
+              <a href="contact.html" class="px-8 py-3.5 bg-blue-600/40 border-2 border-white/80 text-white font-extrabold rounded-full hover:bg-white hover:text-blue-700 transition transform hover:-translate-y-0.5">
+                Book a Demo
+              </a>
+            </div>
+            <div class="text-xs text-blue-200 flex flex-wrap justify-center items-center gap-6 pt-3">
+              <span><i class="fas fa-check-circle mr-1"></i> No credit card required</span>
+              <span><i class="fas fa-check-circle mr-1"></i> Quick 5-minute setup</span>
+              <span><i class="fas fa-check-circle mr-1"></i> Free data migration</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t border-slate-200 pt-16 pb-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+        <div>
+          <a href="index.html" class="flex items-center gap-2 text-2xl font-bold text-blue-700 dark:text-blue-400 mb-4">
+            <i class="fas fa-file-invoice-dollar text-blue-600 dark:text-blue-400"></i>
+            <span>PayrollPro</span>
+          </a>
+          <p class="text-slate-500 text-sm leading-relaxed">
+            Reliable and automated payroll processing service ensuring your team gets paid accurately and on time, every time.
+          </p>
+        </div>
+        <div>
+          <h4 class="font-bold text-slate-800 uppercase tracking-wide mb-4 border-b-2 border-blue-600 inline-block pb-1">Quick Links</h4>
+          <ul class="space-y-3 text-sm text-slate-500">
+            <li><a href="service.html" class="hover:text-blue-600 transition">Our Services</a></li>
+            <li><a href="pricing.html" class="hover:text-blue-600 transition">Pricing Plans</a></li>
+            <li><a href="about.html" class="hover:text-blue-600 transition">About Us</a></li>
+            <li><a href="contact.html" class="hover:text-blue-600 transition">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-bold text-slate-800 uppercase tracking-wide mb-4 border-b-2 border-blue-600 inline-block pb-1">Resources</h4>
+          <ul class="space-y-3 text-sm text-slate-500">
+            <li><a href="faq.html" class="hover:text-blue-600 transition">Help & FAQ</a></li>
+            <li><a href="Blog.html" class="hover:text-blue-600 transition">Company Blog</a></li>
+            <li><a href="#" class="hover:text-blue-600 transition">Terms of Service</a></li>
+            <li><a href="#" class="hover:text-blue-600 transition">Privacy Policy</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-bold text-slate-800 uppercase tracking-wide mb-4 border-b-2 border-blue-600 inline-block pb-1">Connect</h4>
+          <ul class="space-y-3 text-sm text-slate-500">
+            <li><a href="#" class="hover:text-blue-600 transition"><i class="fab fa-linkedin mr-2"></i> LinkedIn</a></li>
+            <li><a href="#" class="hover:text-blue-600 transition"><i class="fa-brands fa-x-twitter mr-2"></i> X</a></li>
+            <li><a href="#" class="hover:text-blue-600 transition"><i class="fab fa-facebook-f mr-2"></i> Facebook</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="text-center pt-8 border-t border-slate-100 text-sm text-slate-400">
+        © 2026 Payroll Processing Service. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <!-- JS for Hamburger Menu & FAQ Accordion / Search / Filter -->
+  <script>
+    // Hamburger Menu Logic
+    const menuBtn = document.getElementById('hamburger-btn');
+    const closeBtn = document.getElementById('close-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const overlay = document.getElementById('mobile-overlay');
+
+    function openMenu() {
+      mobileMenu.classList.remove('translate-x-full');
+      overlay.classList.remove('hidden');
+      setTimeout(() => overlay.classList.remove('opacity-0'), 10);
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+      mobileMenu.classList.add('translate-x-full');
+      overlay.classList.add('opacity-0');
+      setTimeout(() => overlay.classList.add('hidden'), 300);
+      document.body.style.overflow = '';
+    }
+
+    menuBtn.addEventListener('click', openMenu);
+    closeBtn.addEventListener('click', closeMenu);
+    overlay.addEventListener('click', closeMenu);
+
+    // Dropdown toggle logic
+    document.querySelectorAll('.dropdown-btn').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const menu = this.nextElementSibling;
+        const isBlock = menu.classList.contains('!block');
+        document.querySelectorAll('.dropdown-menu').forEach(m => m.classList.remove('!block'));
+        if (!isBlock) {
+          menu.classList.add('!block');
+        }
+      });
+    });
+    document.addEventListener('click', function() {
+      document.querySelectorAll('.dropdown-menu').forEach(m => m.classList.remove('!block'));
+    });
+
+    // Dark Mode and RTL Toggle System
+    let isDark = localStorage.getItem('payroll_theme') !== 'light';
+    let isRTL = localStorage.getItem('payroll_rtl') === 'enabled';
+
+    function applyDarkMode(enabled) {
+      if (enabled) {
+        document.documentElement.classList.add('dark');
+        document.body.classList.add('dark');
+        document.querySelectorAll('#dark-mode-toggle i, .mobile-dark-toggle i').forEach(icon => {
+          icon.className = 'fas fa-sun text-amber-400';
+        });
+        document.querySelectorAll('.mobile-dark-toggle span').forEach(s => s.textContent = 'Light');
+      } else {
+        document.documentElement.classList.remove('dark');
+        document.body.classList.remove('dark');
+        document.querySelectorAll('#dark-mode-toggle i, .mobile-dark-toggle i').forEach(icon => {
+          icon.className = 'fas fa-moon';
+        });
+        document.querySelectorAll('.mobile-dark-toggle span').forEach(s => s.textContent = 'Dark');
+      }
+      localStorage.setItem('payroll_theme', enabled ? 'dark' : 'light');
+      localStorage.setItem('payroll_dark', enabled ? 'enabled' : 'disabled');
+    }
+
+    function applyRTL(enabled) {
+      if (enabled) {
+        document.documentElement.setAttribute('dir', 'rtl');
+        document.body.classList.add('rtl');
+        document.querySelectorAll('#rtl-toggle, .mobile-rtl-toggle').forEach(btn => btn.textContent = 'LTR');
+      } else {
+        document.documentElement.setAttribute('dir', 'ltr');
+        document.body.classList.remove('rtl');
+        document.querySelectorAll('#rtl-toggle, .mobile-rtl-toggle').forEach(btn => btn.textContent = 'RTL');
+      }
+      localStorage.setItem('payroll_rtl', enabled ? 'enabled' : 'disabled');
+    }
+
+    applyDarkMode(isDark);
+    applyRTL(isRTL);
+
+    document.querySelectorAll('#dark-mode-toggle, .mobile-dark-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        isDark = !isDark;
+        applyDarkMode(isDark);
+      });
+    });
+
+    document.querySelectorAll('#rtl-toggle, .mobile-rtl-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        isRTL = !isRTL;
+        applyRTL(isRTL);
+      });
+    });
+
+    // Accordion Expand/Collapse Logic
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+      const btn = item.querySelector('.faq-question-btn');
+      const panel = item.querySelector('.faq-answer-panel');
+      const icon = item.querySelector('i');
+
+      btn.addEventListener('click', () => {
+        const isClosed = panel.classList.contains('hidden');
+        
+        // Close others
+        faqItems.forEach(other => {
+          other.querySelector('.faq-answer-panel').classList.add('hidden');
+          const otherIcon = other.querySelector('.faq-question-btn i');
+          otherIcon.classList.remove('fa-chevron-up');
+          otherIcon.classList.add('fa-chevron-down');
+        });
+
+        if (isClosed) {
+          panel.classList.remove('hidden');
+          icon.classList.remove('fa-chevron-down');
+          icon.classList.add('fa-chevron-up');
+        }
+      });
+    });
+
+    // Category Filter Logic
+    const filterBtns = document.querySelectorAll('.faq-filter-btn');
+    let currentCategory = 'all';
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => {
+          b.classList.remove('active');
+        });
+        btn.classList.add('active');
+
+        currentCategory = btn.getAttribute('data-category');
+        applyFaqFilters();
+      });
+    });
+
+    // Live Search Filter Logic
+    const searchInput = document.getElementById('faq-search-input');
+    const clearBtn = document.getElementById('clear-search-btn');
+    const noResults = document.getElementById('no-faq-results');
+
+    function applyFaqFilters() {
+      const query = (searchInput.value || '').toLowerCase().trim();
+      let matchCount = 0;
+
+      faqItems.forEach(item => {
+        const itemCategory = item.getAttribute('data-category');
+        const text = item.textContent.toLowerCase();
+
+        const matchesCat = (currentCategory === 'all' || itemCategory === currentCategory);
+        const matchesQuery = (!query || text.includes(query));
+
+        if (matchesCat && matchesQuery) {
+          item.classList.remove('hidden');
+          matchCount++;
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+
+      if (query.length > 0) {
+        clearBtn.classList.remove('hidden');
+      } else {
+        clearBtn.classList.add('hidden');
+      }
+
+      if (matchCount === 0) {
+        noResults.classList.remove('hidden');
+      } else {
+        noResults.classList.add('hidden');
+      }
+    }
+
+    if (searchInput) {
+      searchInput.addEventListener('input', applyFaqFilters);
+    }
+
+    if (clearBtn) {
+      clearBtn.addEventListener('click', () => {
+        searchInput.value = '';
+        applyFaqFilters();
+        searchInput.focus();
+      });
+    }
+
+    // Smooth Page Transitions & Scroll Reveal Animations
+    document.body.classList.add('page-loaded');
+
+    window.addEventListener('pageshow', () => {
+      document.body.classList.remove('page-fading-out');
+      document.body.classList.add('page-loaded');
+    });
+
+    // Intercept internal page link clicks for smooth fade-out
+    document.addEventListener('click', (e) => {
+      const link = e.target.closest('a');
+      if (!link) return;
+      const href = link.getAttribute('href');
+      if (!href) return;
+
+      if (
+        href.startsWith('#') ||
+        href.startsWith('javascript:') ||
+        href.startsWith('mailto:') ||
+        href.startsWith('tel:') ||
+        link.getAttribute('target') === '_blank' ||
+        link.hasAttribute('download') ||
+        href.startsWith('http://') ||
+        href.startsWith('https://')
+      ) {
+        return;
+      }
+
+      if (href.endsWith('.html') || (!href.includes(':') && !href.startsWith('#'))) {
+        e.preventDefault();
+        document.body.classList.remove('page-loaded');
+        document.body.classList.add('page-fading-out');
+        setTimeout(() => {
+          window.location.href = href;
+        }, 250);
+      }
+    });
+
+    // Scroll reveal for sections
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-revealed');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+      document.querySelectorAll('main > section, .reveal-on-scroll').forEach(sec => {
+        sec.classList.add('reveal-on-scroll');
+        observer.observe(sec);
+      });
+    }
+  </script>
+</body>
+</html>

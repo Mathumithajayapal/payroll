@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>PayrollPro Admin | Dashboard</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><path fill='%232563eb' d='M64 32C28.7 32 0 60.7 0 96v320c0 35.3 28.7 64 64 64h384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm96 192a48 48 0 1 1 0-96 48 48 0 1 1 0 96zm176-48a48 48 0 1 1-96 0 48 48 0 1 1 96 0zm-80 144a48 48 0 1 1 0-96 48 48 0 1 1 0 96zm176-48a48 48 0 1 1-96 0 48 48 0 1 1 96 0z'/></svg>" type="image/svg+xml">
+    <!-- Google Fonts + Font Awesome 6 -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Branding Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Smooth Page Transitions */
+        body {
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out !important;
+        }
+        body.page-loaded {
+            opacity: 1 !important;
+        }
+        body.page-fading-out {
+            opacity: 0 !important;
+        }
+
+        /* Variables extracted from template for perfect matching */
+        :root {
+            --text-main: #2C2A28; 
+            --accent-color: #2563eb; /* Updated to Blue for PayrollPro */
+            --border-color: #eef2f6; 
+            --sidebar-bg: #ffffff;
+            --sidebar-text: #64748b;
+            --sidebar-text-hover: #2563eb;
+            --sidebar-bg-hover: rgba(37, 99, 235, 0.08);
+            --sidebar-active-bg: #2563eb;
+            --sidebar-active-text: #ffffff;
+            --badge-bg: #f8fafc;
+            --badge-border: #eef2f6;
+            --badge-text-main: #1a1f2e;
+        }
+
+        /* Dark mode overrides */
+        body.dark {
+            --text-main: #EAE6DF; 
+            --accent-color: #3b82f6;
+            --border-color: #2d2d3a;
+            --sidebar-bg: #1e1e2a;
+            --sidebar-text: #cbd5e6;
+            --sidebar-text-hover: #ffffff;
+            --sidebar-bg-hover: rgba(59, 130, 246, 0.2);
+            --sidebar-active-bg: #3b82f6;
+            --sidebar-active-text: #ffffff;
+            --badge-bg: rgba(59, 130, 246, 0.18);
+            --badge-border: rgba(59, 130, 246, 0.25);
+            --badge-text-main: #ffffff;
+        }
+
+        /* Logo Utility Classes */
+        .text-2xl { font-size: 1.5rem; line-height: 2rem; }
+        .brand-logo { font-family: 'Inter', sans-serif; }
+        .tracking-widest { letter-spacing: 0.1em; }
+        .uppercase { text-transform: uppercase; }
+        .flex { display: flex; }
+        .items-center { align-items: center; }
+        .whitespace-nowrap { white-space: nowrap; }
+
+        body {
+            background: #f0f2f8;
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+            color: #1a1f2e;
+            line-height: 1.4;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        /* Dark Mode */
+        body.dark {
+            background: #0f0f1a;
+            color: #e2e8f0;
+        }
+
+        body.dark .stat-card,
+        body.dark .data-card,
+        body.dark .quick-actions,
+        body.dark .top-bar {
+            background: #1e1e2a;
+            border-color: #2d2d3a;
+        }
+
+        body.dark .stat-title,
+        body.dark .data-table th,
+        body.dark .data-table td {
+            color: #cbd5e1;
+        }
+
+        body.dark .data-table th {
+            background: #2a2a35;
+        }
+
+        body.dark .data-table td {
+            border-bottom-color: #2d2d3a;
+        }
+
+        body.dark .stat-number {
+            color: #93c5fd;
+        }
+
+        body.dark .quick-btn {
+            background: #2a2a35;
+            border-color: #3a3a4a;
+            color: #e2e8f0;
+        }
+
+        body.dark .action-icons .action-icon-btn {
+            color: #94a3b8;
+            background: #2a2a35;
+        }
+
+        body.dark .main-footer {
+            border-top-color: #2d2d3a;
+            color: #94a3b8;
+        }
+
+        body.dark .toast-msg {
+            background: #1e293b;
+        }
+
+        body.dark .hamburger-btn {
+            background: #2a2a35;
+            border-color: #3a3a4a;
+            color: #e2e8f0;
+        }
+
+        body.dark .hamburger-btn:hover {
+            background: var(--accent-color); 
+            color: white;
+            border-color: var(--accent-color);
+        }
+
+        body.dark .page-heading h1 {
+            background: linear-gradient(135deg, #e2e8f0, var(--accent-color)); 
+            -webkit-background-clip: text;
+            background-clip: text;
+        }
+
+        /* RTL Support */
+        body.rtl { direction: rtl; }
+        body.rtl .nav-item { justify-content: flex-end; }
+        body.rtl .nav-item i { margin-left: 8px; margin-right: 0; }
+        body.rtl .stat-icon { float: left; }
+        body.rtl .quick-btn i { margin-left: 8px; margin-right: 0; }
+        body.rtl .main-footer { flex-direction: row-reverse; }
+        body.rtl .data-table th, body.rtl .data-table td { text-align: right; }
+        body.rtl .toast-msg { right: auto; left: 24px; }
+        body.rtl .top-bar { flex-direction: row; }
+        body.rtl .left-top-group { order: 0; }
+        body.rtl .action-icons { order: 1; flex-direction: row; }
+
+        .dashboard {
+            display: flex;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* ========= SIDEBAR ========= */
+        .sidebar {
+            width: 320px;
+            background: var(--sidebar-bg); 
+            border-right: 1px solid var(--border-color); 
+            flex-shrink: 0;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 28px 20px;
+            transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1), background-color 0.2s ease, border-color 0.2s ease;
+            overflow-y: auto;
+            z-index: 1000;
+        }
+
+        @media (max-width: 900px) {
+            .sidebar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                transform: translateX(-100%);
+                width: 320px;
+                height: 100%;
+                z-index: 1050;
+                box-shadow: 0 0 30px rgba(0, 0, 0, 0.15);
+            }
+            body.dark .sidebar { box-shadow: 0 0 30px rgba(0, 0, 0, 0.6); }
+            body.rtl .sidebar { transform: translateX(100%); left: auto; right: 0; }
+            .sidebar.open { transform: translateX(0) !important; }
+            .sidebar-overlay { display: none; }
+            .sidebar-overlay.active { display: block; }
+        }
+
+        @media (min-width: 901px) { .sidebar-overlay { display: none !important; } }
+
+        .hamburger-btn {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: white;
+            border: 1px solid #eef2f6;
+            border-radius: 40px;
+            padding: 10px 18px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #1a1f2e;
+            transition: 0.2s;
+            white-space: nowrap;
+            width: fit-content;
+        }
+
+        @media (max-width: 900px) { .hamburger-btn { display: flex; } }
+
+        .hamburger-btn i { font-size: 1.1rem; }
+        .hamburger-btn:hover { background: var(--accent-color); color: white; border-color: var(--accent-color); }
+
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(2px);
+            z-index: 1040;
+        }
+
+        .sidebar::-webkit-scrollbar { width: 4px; }
+        .sidebar::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.03); }
+        body.dark .sidebar::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.05); }
+        .sidebar::-webkit-scrollbar-thumb { background: rgba(37, 99, 235, 0.4); border-radius: 4px; }
+
+        .logo-container {
+            margin-bottom: 32px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .admin-badge {
+            background: var(--badge-bg);
+            border-radius: 16px;
+            padding: 12px 16px;
+            margin-bottom: 28px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border: 1px solid var(--badge-border); 
+            transition: all 0.2s ease;
+        }
+
+        .admin-avatar {
+            background: var(--accent-color); 
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 700;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .admin-info h4 { font-size: 15px; font-weight: 700; margin-bottom: 2px; color: var(--badge-text-main); transition: color 0.2s ease; }
+        .admin-info span { font-size: 11px; color: #64748b; transition: color 0.2s ease; }
+        body.dark .admin-info span { color: #cbd5e1; }
+
+        .nav-menu {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 12px 16px;
+            border-radius: 14px;
+            font-weight: 500;
+            font-size: 14px;
+            transition: all 0.2s;
+            color: var(--sidebar-text);
+            cursor: pointer;
+        }
+
+        .nav-item i { width: 24px; font-size: 1.15rem; }
+        .nav-item.active { background: var(--sidebar-active-bg); color: var(--sidebar-active-text); box-shadow: 0 6px 14px rgba(37, 99, 235, 0.25); }
+        .nav-item:not(.active):hover { background: var(--sidebar-bg-hover); color: var(--sidebar-text-hover); }
+
+        .sidebar-footer {
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            transition: border-color 0.2s ease;
+        }
+
+        .weather-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--badge-bg);
+            border: 1px solid var(--badge-border);
+            color: var(--badge-text-main);
+            padding: 10px 14px;
+            border-radius: 40px;
+            font-size: 12px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .weather-info i { color: #eab308; font-size: 14px; }
+
+        .logout-btn-sidebar {
+            background: rgba(220, 38, 38, 0.08);
+            color: #dc2626;
+            padding: 12px 16px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid rgba(220, 38, 38, 0.15);
+            width: 100%;
+            text-decoration: none;
+            justify-content: center;
+        }
+
+        body.dark .logout-btn-sidebar { background: rgba(220, 38, 38, 0.15); color: #fca5a5; border-color: rgba(220, 38, 38, 0.3); }
+        .logout-btn-sidebar:hover { background: #dc2626; color: white; border-color: #dc2626; }
+
+        /* ========= MAIN CONTENT ========= */
+        .main-content {
+            flex: 1;
+            padding: 24px 28px;
+            overflow-y: auto;
+            min-height: 100vh;
+        }
+
+        .top-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: white;
+            border-radius: 60px;
+            padding: 8px 24px;
+            border: 1px solid #eef2f6;
+            margin-bottom: 28px;
+            transition: background 0.2s;
+            gap: 16px;
+            flex-wrap: nowrap;
+        }
+
+        .left-top-group { display: flex; align-items: center; gap: 14px; flex-shrink: 0; }
+
+        .page-heading h1 {
+            font-size: 22px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1f2b3c, var(--accent-color)); 
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin: 0;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .action-icons { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+
+        .action-icon-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: rgba(37, 99, 235, 0.08); 
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #3b4b62;
+            font-size: 1.2rem;
+        }
+
+        .action-icon-btn:hover { background: rgba(37, 99, 235, 0.15); color: var(--accent-color); transform: scale(1.02); }
+
+        .rtl-text-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 56px;
+            padding: 0 16px;
+            height: 42px;
+            border-radius: 42px;
+            background: rgba(37, 99, 235, 0.08); 
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 0.3px;
+            color: #3b4b62;
+        }
+
+        .rtl-text-btn:hover { background: rgba(37, 99, 235, 0.15); color: var(--accent-color); }
+        body.dark .rtl-text-btn { background: #2a2a35; color: #cbd5e1; }
+        body.dark .rtl-text-btn:hover { background: #3a3a4a; color: var(--accent-color); }
+
+        @media (max-width: 900px) {
+            .main-content { padding: 16px; }
+            .top-bar { padding: 8px 18px; flex-wrap: nowrap; }
+            .page-heading h1 { font-size: 18px; white-space: nowrap; }
+            .action-icon-btn { width: 38px; height: 38px; font-size: 1rem; }
+            .rtl-text-btn { height: 38px; min-width: 52px; padding: 0 14px; font-size: 0.8rem; }
+            .left-top-group { gap: 10px; }
+        }
+
+        @media (max-width: 550px) {
+            .top-bar { flex-wrap: nowrap; justify-content: space-between; }
+            .page-heading h1 { font-size: 14px; white-space: nowrap; }
+            .hamburger-btn { padding: 6px 10px; }
+            .hamburger-btn span { display: none; }
+            .action-icon-btn { width: 34px; height: 34px; font-size: 0.9rem; }
+            .rtl-text-btn { height: 34px; min-width: 46px; padding: 0 10px; font-size: 0.75rem; }
+        }
+
+        .page-section { display: none; animation: fadeIn 0.3s ease; }
+        .page-section.active-section { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Stats Cards */
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 22px; margin-bottom: 36px; }
+        .stat-card { background: white; border-radius: 28px; padding: 20px 18px; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.02); border: 1px solid #eef2f6; transition: transform 0.2s; }
+        .stat-card:hover { transform: translateY(-3px); border-color: var(--accent-color); } 
+        .stat-title { font-size: 14px; font-weight: 500; color: #5b6e8c; margin-bottom: 12px; }
+        .stat-number { font-size: 40px; font-weight: 800; color: #0b2b26; line-height: 1; }
+        .stat-icon { float: right; font-size: 2rem; color: #d4dfed; }
+
+        .data-card { background: white; border-radius: 28px; padding: 28px; border: 1px solid #eef2f6; margin-bottom: 28px; overflow-x: auto; }
+        .data-card h3 { font-size: 1.35rem; font-weight: 700; margin-bottom: 24px; display: flex; align-items: center; gap: 12px; color: #1e293b; border-left: 4px solid var(--accent-color); padding-left: 16px; }
+        body.dark .data-card h3 { color: #f1f5f9; }
+        .data-card h3 i { font-size: 1.4rem; color: var(--accent-color); } 
+
+        .data-table { width: 100%; border-collapse: collapse; min-width: 500px; }
+        .data-table th, .data-table td { padding: 14px 16px; text-align: left; border-bottom: 1px solid #edf2f7; }
+        .data-table th { font-weight: 600; color: #475569; background: #f8fafc; font-size: 0.85rem; }
+        body.dark .data-table th { background: #252530; color: #cbd5e1; }
+        
+        .badge { padding: 5px 12px; border-radius: 40px; font-size: 12px; font-weight: 600; display: inline-block; }
+        .badge-active { background: #e0f2fe; color: #0369a1; }
+        body.dark .badge-active { background: #0c4a6e; color: #bae6fd; }
+        .badge-full { background: #ffe4e2; color: #b91c1c; }
+        body.dark .badge-full { background: #7f1d1d; color: #fecaca; }
+        .badge-warning { background: #fff3e3; color: #b45309; }
+        body.dark .badge-warning { background: #78350f; color: #fde68a; }
+
+        .quick-actions { background: white; border-radius: 28px; padding: 24px 28px; margin-top: 8px; border: 1px solid #eef2f6; }
+        .quick-actions h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+        .quick-grid { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 8px; }
+        .quick-btn {
+            background: #f8fafd;
+            padding: 12px 22px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid #e2e8f0;
+            color: #1e293b;
+        }
+        .quick-btn i { color: var(--accent-color); } 
+        .quick-btn:hover { background: var(--accent-color); color: white; border-color: var(--accent-color); transform: translateY(-2px); } 
+        .quick-btn:hover i { color: white; }
+
+        .main-footer {
+            margin-top: 44px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: #6c7a91;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 24px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        @media (max-width: 900px) {
+            .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+            .data-card { padding: 20px; }
+        }
+        @media (max-width: 500px) {
+            .stats-grid { grid-template-columns: 1fr; }
+            .quick-grid { flex-direction: column; }
+            .quick-btn { justify-content: center; }
+            .main-footer { flex-direction: column; text-align: center; }
+        }
+
+        .toast-msg {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: #1e293b;
+            color: white;
+            padding: 10px 22px;
+            border-radius: 40px;
+            font-size: 13px;
+            z-index: 1100;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        body.rtl .toast-msg { right: auto; left: 24px; }
+    </style>
+</head>
+<body class="dark">
+    <div class="dashboard">
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
+        <aside class="sidebar" id="mainSidebar">
+            
+            <!-- BRAND LOGO -->
+            <div class="logo-container">
+                <a href="index.html" class="flex items-center gap-2 text-2xl font-bold text-blue-700 dark:text-blue-400 whitespace-nowrap" style="text-decoration: none;">
+                    <i class="fas fa-file-invoice-dollar text-blue-600 dark:text-blue-400"></i>
+                    <span>PayrollPro</span>
+                </a>
+            </div>
+
+            <div class="admin-badge">
+                <div class="admin-avatar"><i class="fas fa-user-tie"></i></div>
+                <div class="admin-info"><h4>HR Admin</h4><span>full access • director</span></div>
+            </div>
+            <div class="nav-menu">
+                <div class="nav-item active" data-page="dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</div>
+                <div class="nav-item" data-page="employees"><i class="fas fa-users"></i> Employees</div>
+                <div class="nav-item" data-page="payroll"><i class="fas fa-money-check-alt"></i> Payroll Runs</div>
+                <div class="nav-item" data-page="taxes"><i class="fas fa-file-signature"></i> Tax & Compliance</div>
+                <div class="nav-item" data-page="reports"><i class="fas fa-chart-line"></i> Analytics & Reports</div>
+                <div class="nav-item" data-page="settings"><i class="fas fa-cog"></i> System Settings</div>
+            </div>
+            <div class="sidebar-footer">
+                <div class="weather-info"><i class="fas fa-sun"></i><span>28°C Sunny</span></div>
+                <a href="login.html" class="logout-btn-sidebar" id="sidebarLogoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="top-bar">
+                <div class="left-top-group">
+                    <div class="hamburger-btn" id="hamburgerBtn"><i class="fas fa-bars"></i><span>Menu</span></div>
+                    <div class="page-heading">
+                        <h1 id="pageHeading"><i class="fas fa-tachometer-alt" style="color:var(--accent-color);"></i> Dashboard</h1>
+                    </div>
+                </div>
+                <div class="action-icons">
+                    <!-- Dark mode: pure icon button -->
+                    <div class="action-icon-btn" id="darkModeIcon" title="Dark Mode">
+                        <i class="fas fa-moon"></i>
+                    </div>
+                    <!-- RTL toggle: TEXT ONLY -->
+                    <div id="rtlToggleBtn" class="rtl-text-btn">
+                        <span id="rtlToggleText">LTR</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DASHBOARD SECTION -->
+            <div id="dashboard-section" class="page-section active-section">
+                <div class="stats-grid">
+                    <div class="stat-card"><div class="stat-title"><i class="fas fa-users"></i> Total Employees</div><div class="stat-number">142</div><div class="stat-icon"><i class="fas fa-id-badge"></i></div></div>
+                    <div class="stat-card"><div class="stat-title"><i class="fas fa-money-check-alt"></i> Last Payroll</div><div class="stat-number">$124K</div><div class="stat-icon"><i class="fas fa-hand-holding-dollar"></i></div></div>
+                    <div class="stat-card"><div class="stat-title"><i class="fas fa-file-invoice"></i> Pending Taxes</div><div class="stat-number">2</div><div class="stat-icon"><i class="fas fa-file-signature"></i></div></div>
+                    <div class="stat-card"><div class="stat-title"><i class="fas fa-calendar-alt"></i> Next Pay Date</div><div class="stat-number">Oct 31</div><div class="stat-icon"><i class="fas fa-calendar-check"></i></div></div>
+                </div>
+                <div class="data-card">
+                    <h3><i class="fas fa-clock"></i> Recent Payroll Activity</h3>
+                    <div class="table-wrapper">
+                        <table class="data-table">
+                            <thead><tr><th>Transaction ID</th><th>Employee</th><th>Department</th><th>Status</th><th>Amount</th><th>Date</th></tr></thead>
+                            <tbody>
+                                <tr><td>PRL-2026-081</td><td>John Carter</td><td>Engineering</td><td><span class="badge badge-active">Processed</span></td><td>$4,250.00</td><td>2 hours ago</td></tr>
+                                <tr><td>PRL-2026-082</td><td>Sarah Williams</td><td>Marketing</td><td><span class="badge" style="background:#fff3e3;color:#b45309;">Pending</span></td><td>$3,800.00</td><td>Yesterday</td></tr>
+                                <tr><td>PRL-2026-083</td><td>Michael Chen</td><td>Sales</td><td><span class="badge" style="background:#ffe4e2;color:#b91c1c;">Failed</span></td><td>$4,100.00</td><td>3 days ago</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div style="margin-top:20px; font-size:13px;"><i class="fas fa-database"></i> Showing 3 of 142 transactions</div>
+                </div>
+                <div class="quick-actions"><h3><i class="fas fa-bolt"></i> Quick Actions</h3><div class="quick-grid">
+                    <div class="quick-btn" id="quickRunBtn"><i class="fas fa-play-circle"></i> Run Payroll</div>
+                    <div class="quick-btn" id="quickAddEmpBtn"><i class="fas fa-user-plus"></i> Add Employee</div>
+                    <div class="quick-btn" id="quickTaxBtn"><i class="fas fa-file-invoice-dollar"></i> File Tax Form</div>
+                    <div class="quick-btn" id="quickReportBtn"><i class="fas fa-chart-bar"></i> View Ledger</div>
+                </div></div>
+            </div>
+
+            <!-- EMPLOYEES SECTION -->
+            <div id="employees-section" class="page-section">
+                <div class="data-card">
+                    <h3><i class="fas fa-users"></i> Employee Directory</h3>
+                    <div class="table-wrapper">
+                        <table class="data-table">
+                            <thead><tr><th>Employee ID</th><th>Name</th><th>Role</th><th>Status</th><th>Type</th><th>Joined</th></tr></thead>
+                            <tbody>
+                                <tr><td>EMP-001</td><td>John Carter</td><td>Senior Dev</td><td><span class="badge badge-active">Active</span></td><td>Full-Time</td><td>2024</td></tr>
+                                <tr><td>EMP-002</td><td>Sarah Williams</td><td>Marketing Lead</td><td><span class="badge badge-active">Active</span></td><td>Full-Time</td><td>2025</td></tr>
+                                <tr><td>EMP-003</td><td>Michael Chen</td><td>Sales Rep</td><td><span class="badge badge-warning">On Leave</span></td><td>Contractor</td><td>2023</td></tr>
+                                <tr><td>EMP-004</td><td>Emma Rossi</td><td>HR Specialist</td><td><span class="badge badge-active">Active</span></td><td>Full-Time</td><td>2022</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div style="margin-top:28px;"><div class="quick-btn" id="addClientSectionBtn"><i class="fas fa-user-plus"></i> Onboard New Employee</div></div>
+                </div>
+            </div>
+
+            <!-- PAYROLL SECTION -->
+            <div id="payroll-section" class="page-section">
+                <div class="data-card">
+                    <h3><i class="fas fa-money-check-alt"></i> Payroll History</h3>
+                    <div class="table-wrapper">
+                        <table class="data-table">
+                            <thead><tr><th>Batch ID</th><th>Period</th><th>Total Paid</th><th>Status</th><th>Run By</th></tr></thead>
+                            <tbody>
+                                <tr><td>BCH-10-2026</td><td>Oct 1 - Oct 15</td><td>$124,500</td><td><span class="badge badge-active">Completed</span></td><td>HR Admin</td></tr>
+                                <tr><td>BCH-09-2026-B</td><td>Sep 16 - Sep 30</td><td>$122,100</td><td><span class="badge badge-active">Completed</span></td><td>System Auto</td></tr>
+                                <tr><td>BCH-09-2026-A</td><td>Sep 1 - Sep 15</td><td>$119,800</td><td><span class="badge badge-active">Completed</span></td><td>HR Admin</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAXES SECTION -->
+            <div id="taxes-section" class="page-section">
+                <div class="data-card">
+                    <h3><i class="fas fa-file-signature"></i> Tax & Compliance</h3>
+                    <div class="table-wrapper">
+                        <table class="data-table">
+                            <thead><tr><th>Form Type</th><th>Jurisdiction</th><th>Filing Deadline</th><th>Status</th><th>Action</th></tr></thead>
+                            <tbody>
+                                <tr><td>State Income Tax</td><td>California</td><td>Oct 31, 2026</td><td><span class="badge badge-warning">Pending</span></td><td><i class="fas fa-edit" style="color:var(--accent-color); cursor:pointer;"></i></td></tr>
+                                <tr><td>Federal W-2s</td><td>Federal</td><td>Jan 31, 2027</td><td><span class="badge" style="background:#f1f5f9; color:#64748b;">Not Started</span></td><td><i class="fas fa-eye" style="color:#64748b; cursor:pointer;"></i></td></tr>
+                                <tr><td>Quarterly 941</td><td>Federal</td><td>Jul 31, 2026</td><td><span class="badge badge-active">Filed</span></td><td><i class="fas fa-download" style="color:var(--accent-color); cursor:pointer;"></i></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- REPORTS SECTION -->
+            <div id="reports-section" class="page-section">
+                <div class="stats-grid" style="margin-bottom:28px;">
+                    <div class="stat-card"><div class="stat-title">YTD Payroll Spend</div><div class="stat-number">$1.8M</div></div>
+                    <div class="stat-card"><div class="stat-title">YTD Tax Withheld</div><div class="stat-number">$450K</div></div>
+                </div>
+                <div class="data-card">
+                    <h3><i class="fas fa-chart-line"></i> Recent Analytics Reports</h3>
+                    <div class="table-wrapper">
+                        <table class="data-table">
+                            <thead><tr><th>Report Name</th><th>Type</th><th>Generated</th><th>Download</th></tr></thead>
+                            <tbody>
+                                <tr><td>Q3 Department Cost Breakdown</td><td>PDF</td><td>Oct 10, 2026</td><td><i class="fas fa-download" style="color:var(--accent-color); cursor:pointer;"></i></td></tr>
+                                <tr><td>Annual Contractor 1099 Summary</td><td>Excel</td><td>Oct 05, 2026</td><td><i class="fas fa-download" style="color:var(--accent-color); cursor:pointer;"></i></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div style="margin-top:28px;"><div class="quick-btn" id="genReportBtn"><i class="fas fa-chart-bar"></i> Generate New Report</div></div>
+                </div>
+            </div>
+
+            <!-- SETTINGS SECTION -->
+            <div id="settings-section" class="page-section">
+                <div class="data-card">
+                    <h3><i class="fas fa-cog"></i> System Preferences</h3>
+                    <div style="margin-top:24px; display:flex; flex-direction:column; gap:24px;">
+                        <div><label style="display:flex; align-items:center; gap:12px;"><input type="checkbox" checked> Enable Two-Factor Authentication for Admin</label></div>
+                        <div><label style="display:flex; align-items:center; gap:12px;"><input type="checkbox" checked> Auto-send Pay Stubs via Email</label></div>
+                        <div><label style="display:flex; align-items:center; gap:12px;"><input type="checkbox"> Require Manager Approval for Overtime</label></div>
+                        <div><button class="quick-btn" id="saveSettingsBtn" style="width:fit-content;">Save Settings</button></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-footer">
+                <div style="display:flex; align-items:center; gap:6px;"><i class="fas fa-file-invoice-dollar" style="color:var(--accent-color);"></i> <strong>PayrollPro</strong> · Secure Admin Panel</div>
+                <div><i class="fas fa-shield-alt"></i> Encrypted Connection · <span id="liveClock"></span></div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        let isDark = localStorage.getItem('payroll_theme') !== 'light';
+        let isRTL = localStorage.getItem('payroll_rtl') === 'enabled';
+
+        function applyDarkMode(enabled) {
+            if (enabled) {
+                document.documentElement.classList.add('dark');
+                document.body.classList.add('dark');
+                const darkBtn = document.getElementById('darkModeIcon');
+                if(darkBtn) darkBtn.innerHTML = '<i class="fas fa-sun" style="color:#f59e0b;"></i>';
+            } else {
+                document.documentElement.classList.remove('dark');
+                document.body.classList.remove('dark');
+                const darkBtn = document.getElementById('darkModeIcon');
+                if(darkBtn) darkBtn.innerHTML = '<i class="fas fa-moon"></i>';
+            }
+            localStorage.setItem('payroll_theme', enabled ? 'dark' : 'light');
+            localStorage.setItem('payroll_dark', enabled ? 'enabled' : 'disabled');
+        }
+        
+        function applyRTL(enabled) {
+            if (enabled) {
+                document.body.classList.add('rtl');
+                document.documentElement.setAttribute('dir', 'rtl');
+                document.getElementById('rtlToggleText').innerText = 'RTL';
+            } else {
+                document.body.classList.remove('rtl');
+                document.documentElement.setAttribute('dir', 'ltr');
+                document.getElementById('rtlToggleText').innerText = 'LTR';
+            }
+            localStorage.setItem('payroll_rtl', enabled ? 'enabled' : 'disabled');
+        }
+        
+        applyDarkMode(isDark);
+        applyRTL(isRTL);
+
+        document.getElementById('darkModeIcon').onclick = () => { 
+            isDark = !isDark; 
+            applyDarkMode(isDark); 
+            showToast(isDark ? "Dark mode enabled" : "Light mode enabled"); 
+        };
+        
+        const rtlBtn = document.getElementById('rtlToggleBtn');
+        rtlBtn.onclick = () => { 
+            isRTL = !isRTL; 
+            applyRTL(isRTL); 
+            showToast(isRTL ? "RTL (Right-to-Left) layout active" : "LTR (Left-to-Right) layout active"); 
+        };
+
+        function closeSidebar() { document.getElementById('mainSidebar')?.classList.remove('open'); document.getElementById('sidebarOverlay')?.classList.remove('active'); }
+        function openSidebar() { document.getElementById('mainSidebar')?.classList.add('open'); document.getElementById('sidebarOverlay')?.classList.add('active'); }
+        document.getElementById('hamburgerBtn')?.addEventListener('click', openSidebar);
+        document.getElementById('sidebarOverlay')?.addEventListener('click', closeSidebar);
+
+        function showToast(msg, icon = "info-circle") { 
+            const old = document.querySelector('.toast-msg'); 
+            if (old) old.remove(); 
+            const toast = document.createElement('div'); 
+            toast.className = 'toast-msg'; 
+            toast.innerHTML = `<i class="fas fa-${icon}" style="margin-right:8px;"></i> ${msg}`; 
+            document.body.appendChild(toast); 
+            setTimeout(() => toast.remove(), 2500); 
+        }
+
+        function showPage(pageId, pageTitle) {
+            document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active-section'));
+            document.getElementById(`${pageId}-section`).classList.add('active-section');
+            const icons = { dashboard: 'tachometer-alt', employees: 'users', payroll: 'money-check-alt', taxes: 'file-signature', reports: 'chart-line', settings: 'cog' };
+            document.getElementById('pageHeading').innerHTML = `<i class="fas fa-${icons[pageId]}" style="color:var(--accent-color);"></i> ${pageTitle}`;
+            document.querySelectorAll('.nav-item').forEach(item => { item.classList.remove('active'); if (item.getAttribute('data-page') === pageId) item.classList.add('active'); });
+            if (window.innerWidth <= 900) closeSidebar();
+            showToast(`Switched to ${pageTitle}`, "check-circle");
+        }
+        
+        document.querySelectorAll('.nav-item').forEach(btn => { 
+            btn.addEventListener('click', () => { 
+                const page = btn.getAttribute('data-page'); 
+                const titles = { dashboard: 'Dashboard', employees: 'Employees', payroll: 'Payroll Runs', taxes: 'Tax & Compliance', reports: 'Analytics & Reports', settings: 'System Settings' }; 
+                showPage(page, titles[page]); 
+            }); 
+        });
+
+        document.getElementById('quickRunBtn')?.addEventListener('click', () => showToast("Initiating payroll sequence...", "play-circle"));
+        document.getElementById('quickAddEmpBtn')?.addEventListener('click', () => showToast("Opening employee onboarding...", "user-plus"));
+        document.getElementById('quickTaxBtn')?.addEventListener('click', () => showToast("Tax filing module opened", "file-invoice-dollar"));
+        document.getElementById('quickReportBtn')?.addEventListener('click', () => showToast("Loading financial ledger...", "chart-bar"));
+        document.getElementById('addClientSectionBtn')?.addEventListener('click', () => showToast("Employee registration form", "user-plus"));
+        document.getElementById('genReportBtn')?.addEventListener('click', () => showToast("New analytics report generated", "file-pdf"));
+        document.getElementById('saveSettingsBtn')?.addEventListener('click', () => showToast("Settings saved successfully", "check-circle"));
+        document.getElementById('sidebarLogoutBtn')?.addEventListener('click', () => { showToast("Ending session...", "sign-out-alt"); setTimeout(() => window.location.href="login.html", 600); });
+
+        function updateClock() { 
+            const now = new Date(); 
+            const clockSpan = document.getElementById('liveClock'); 
+            if (clockSpan) clockSpan.innerText = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' }); 
+        }
+        setInterval(updateClock, 1000); updateClock();
+        window.addEventListener('resize', () => { if (window.innerWidth > 900) closeSidebar(); });
+        window.addEventListener('load', () => setTimeout(() => showToast("Welcome back, HR Admin", "check-circle"), 500));
+
+        // Smooth Page Transitions
+        document.body.classList.add('page-loaded');
+
+        window.addEventListener('pageshow', () => {
+          document.body.classList.remove('page-fading-out');
+          document.body.classList.add('page-loaded');
+        });
+
+        document.addEventListener('click', (e) => {
+          const link = e.target.closest('a');
+          if (!link) return;
+          const href = link.getAttribute('href');
+          if (!href) return;
+
+          if (
+            href.startsWith('#') ||
+            href.startsWith('javascript:') ||
+            href.startsWith('mailto:') ||
+            href.startsWith('tel:') ||
+            link.getAttribute('target') === '_blank' ||
+            link.hasAttribute('download') ||
+            href.startsWith('http://') ||
+            href.startsWith('https://')
+          ) {
+            return;
+          }
+
+          if (href.endsWith('.html') || (!href.includes(':') && !href.startsWith('#'))) {
+            e.preventDefault();
+            document.body.classList.remove('page-loaded');
+            document.body.classList.add('page-fading-out');
+            setTimeout(() => {
+              window.location.href = href;
+            }, 250);
+          }
+        });
+    </script>
+</body>
+</html>
